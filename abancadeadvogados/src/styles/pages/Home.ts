@@ -210,4 +210,136 @@ export const ServicesCards = styled.section`
 	}
 `
 
+export const OurTeam = styled.section`
+  background: url("./assets/images/our_team.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+	display: flex;
+	flex-direction: column;
+	padding: 24px;
+	align-items: center;
+  width: 100vw;
+	
+	h4 {
+    font: 800 40px Abhaya Libre, sans-serif;
+    color: ${props => props.theme.colors.secondary};
+  }
+	
+	p {
+		padding: 16px 0;
+    font: 400 16px Poppins, sans-serif;
+	}
+	
+	.partner-row{
+    display: grid;
+    width: 90%;
+    padding: 5%;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 6vw;
+    row-gap: 1vh;
+		
+		div {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		div img {
+			height: 400px;
+		}
+		
+		div h6 {
+      font: 800 24px Poppins, sans-serif;
+      color: ${props => props.theme.colors.secondary};
+		}
+		
+		div p {
+      padding: 4px 0;
+      font: 400 16px Poppins, sans-serif;
+		}
+  }
+`
+
+export const Posts = styled.section`
+	background: rgba(255,255,255,0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 2% 10%;
+  align-items: center;
+  width: 100vw;
+  margin-top: 100px;
+	
+	.header-area {
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		
+		h3 {
+      font: 800 42px Poppins, sans-serif;
+      color: ${props => props.theme.colors.secondary};
+		}
+		a {
+			text-decoration: none;
+		}
+		p {
+      font: 800 16px Poppins, sans-serif;
+      color: ${props => props.theme.colors.secondary};
+		}
+	}
+	
+	.post-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 6vw;
+    row-gap: 1vh;
+		margin-top: 48px;
+		
+		a {
+			text-decoration: none;
+		}
+
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    div img {
+      width: 400px;
+      height: 300px;
+    }
+
+    div h6 {
+      font: 800 24px Poppins, sans-serif;
+      color: ${props => props.theme.colors.secondary};
+    }
+
+    div p {
+      padding: 4px 0;
+      font: 400 16px Poppins, sans-serif;
+      color: ${props => props.theme.colors.text};
+    }
+	}
+
+`
+
+export const ProductsHome = styled.section`
+	background: ${props => props.theme.colors.secondary};
+  display: flex;
+  flex-direction: row;
+	height: 320px;
+  align-items: center;
+  width: 100vw;
+  margin-top: 100px;
+	
+	img {
+		opacity: 0.1;
+		position: absolute;
+	}
+`
 

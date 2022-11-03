@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import {BackgroundImage, Header, BannerArea, AboutCompany, OurOffice, ServicesHeader, ServicesCards} from '../styles/pages/Home'
+import {BackgroundImage, Header, BannerArea, AboutCompany, OurOffice, ServicesHeader, ServicesCards, OurTeam, Posts, ProductsHome} from '../styles/pages/Home'
 
 const Home: React.FC = () => {
   return (
@@ -111,8 +111,77 @@ const Home: React.FC = () => {
                   <span>Pendampingan hukum keluarga dalam sengketa harta bersama, hak asuh anak, perwalian, waris, hibah, dan perceraian.</span>
                   <a href={""}><span>{'Ver mais >>'}</span></a>
               </div>
-              
           </ServicesCards>
+          <OurTeam>
+            <h4>Equipe</h4>
+            <p>Equipe formada pelos sócios fundadores e demais contribuintes.</p>
+            <div className="partner-row">
+                <div>
+                    <picture>
+                        <img src='./assets/images/partner01.png' alt="Sócio Fundador"/>
+                    </picture>
+                    <h6>Melkis Cardoso</h6>
+                    <p>OAB/SC - 00.000</p>
+                    <p>Sócio Fundador</p>
+                </div>
+                <div>
+                    <picture>
+                        <img src='./assets/images/partner01.png' alt="Sócio Fundador"/>
+                    </picture>
+                    <h6>Felipe André Dani</h6>
+                    <p>OAB/SC - 00.000</p>
+                    <p>Sócio Fundador</p>
+                </div>
+                <div>
+                    <picture>
+                        <img src='./assets/images/partner01.png' alt="Sócio Fundador"/>
+                    </picture>
+                    <h6>João Pedro Felisberto</h6>
+                    <p>OAB/SC - 00.000</p>
+                    <p>Sócio Fundador</p>
+                </div>
+            </div>
+          </OurTeam>
+          <Posts>
+              <div className="header-area">
+                  <h3>Publicações</h3>
+                  <a href="">
+                    <p>{`Ver mais ->`}</p>
+                  </a>
+              </div>
+              <div className="post-row">
+                  <a href="">
+                    <div>
+                      <picture>
+                          <img src='./assets/images/post_photo.png' alt="Sócio Fundador"/>
+                      </picture>
+                      <h6>Lorem Ipsum</h6>
+                      <p>Baln. Camboriú, 03 de outubro de 2022.</p>
+                    </div>
+                  </a>
+                  <a href="">
+                      <div>
+                          <picture>
+                              <img src='./assets/images/post_photo.png' alt="Sócio Fundador"/>
+                          </picture>
+                          <h6>Lorem Ipsum</h6>
+                          <p>Baln. Camboriú, 03 de outubro de 2022.</p>
+                      </div>
+                  </a>
+                  <a href="">
+                      <div>
+                          <picture>
+                              <img src='./assets/images/post_photo.png' alt="Sócio Fundador"/>
+                          </picture>
+                          <h6>Lorem Ipsum</h6>
+                          <p>Baln. Camboriú, 03 de outubro de 2022.</p>
+                      </div>
+                  </a>
+              </div>
+          </Posts>
+          <ProductsHome>
+            <img src={"./assets/images/products-background.png"} alt="Products section background image"/>
+          </ProductsHome>
           </main>
     </div>
   )
