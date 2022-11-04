@@ -64,6 +64,9 @@ export const BannerArea = styled.div`
   h3 {
     font-size: 32px;
   }
+	p {
+		width: 40vw;
+	}
 `
 
 export const AboutCompany = styled.section`
@@ -179,7 +182,7 @@ export const ServicesCards = styled.section`
 		margin-left: 5%;
 				
     grid-template-columns: 1fr 1fr 1fr 1fr;
-		column-gap: 6vw;
+		column-gap: 2vw;
 		row-gap: 1vh;
 		margin-bottom: 90px;
 	
@@ -198,12 +201,14 @@ export const ServicesCards = styled.section`
       font: 400 20px Poppins, sans-serif;
       color: ${props => props.theme.colors.dark};
 			text-align: left;
+			
 		}
 		div span{
 			margin: 24px 0;
       font: 400 12px Poppins, sans-serif;
       color: ${props => props.theme.colors.dark};
-		}
+			text-align: justify-all;
+    }
 	
 	div a {
 		text-decoration: none;
@@ -239,10 +244,11 @@ export const OurTeam = styled.section`
     column-gap: 6vw;
     row-gap: 1vh;
 		
+		
 		div {
 			display: flex;
 			flex-direction: column;
-			justify-content: center;
+			justify-content: flex-start;
 			align-items: center;
 		}
 		
@@ -258,6 +264,12 @@ export const OurTeam = styled.section`
 		div p {
       padding: 4px 0;
       font: 400 16px Poppins, sans-serif;
+		}
+		
+		div span {
+      padding: 4px 0;
+      font: 400 12px Poppins, sans-serif;
+			text-align: justify;
 		}
   }
 `
@@ -330,16 +342,156 @@ export const Posts = styled.section`
 
 export const ProductsHome = styled.section`
 	background: ${props => props.theme.colors.secondary};
-  display: flex;
-  flex-direction: row;
-	height: 320px;
-  align-items: center;
   width: 100vw;
   margin-top: 100px;
 	
-	img {
+	div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+	}
+	
+	.background-image-product-area {
 		opacity: 0.1;
+		flex: 1;
 		position: absolute;
+	}
+	
+	button {
+		outline: 0;
+		background: transparent;
+		border: none;
+		padding: 24px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+    cursor: pointer;
+	}
+	
+	.product-area {
+		display: flex;
+    width: 80vw;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-evenly;
+		padding: 24px;
+		
+		.product-text {
+			width: 40vw;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			
+			p {
+        font: 400 16px Poppins, sans-serif;
+        color: ${props => props.theme.colors.primary};
+			}
+   
+			h6 {
+        font: 800 24px Poppins, sans-serif;
+        color: ${props => props.theme.colors.primary};
+        margin-top: 24px;
+      }
+			
+		}
+	}
+	
+	.product-photo-div {
+	  z-index: 10;
+		
+	}
+	
+	.product-photo {
+		width: 450px;
+		height: 300px;
+    z-index: 10;
 	}
 `
 
+export const ContactArea = styled.section`
+	width: 80vw;
+	margin: 100px auto 0;
+	display: flex;
+	flex-direction: row;
+	background: ${props => props.theme.colors.secondary};
+	
+	iframe {
+		flex: 1;
+	}
+	
+	.contact-form {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		padding: 24px 60px;
+	}
+	
+	h2 {
+    font: 800 40px Poppins, sans-serif;
+    color: ${props => props.theme.colors.primary};
+	}
+	
+	form label {
+    font: 400 14px Poppins, sans-serif;
+    color: ${props => props.theme.colors.primary};
+	}
+	
+	form input, textarea {
+		background: #D9D9D95E;
+		width: 60vw;
+		height: 40px;
+		color: ${props => props.theme.colors.primary};
+		outline: 0;
+		border: 0;
+	}
+	
+	form textarea {
+		height: 80px;
+	}
+	
+	form button {
+    width: 10vw;
+    height: 40px;
+		background: ${props => props.theme.colors.dark};
+		
+		outline: 0;
+		border: 0;
+		
+    font: 800 16px Poppins, sans-serif;
+		color: ${props => props.theme.colors.secondary};
+		
+    margin-top: 24px;
+		margin-right: 16px;
+	}
+`
+
+export const Footer = styled.footer`
+	width: 100vw;
+	margin-top: 100px;
+	display: flex;
+	flex-direction: column;
+	
+	.footer-logo-area {
+		display: flex;
+		flex: 1;
+    width: 100%;
+    background: rgba(255,255,255,0.1);
+		align-items: center;
+		justify-content: center;
+		padding: 40px;
+		
+	}
+	
+	.logo-footer {
+		width: 30vw;
+	}
+	
+	.footer-info {
+    display: flex;
+		flex: 1;
+		align-items: center;
+		justify-content: center;
+		padding: 16px;
+	}
+`
