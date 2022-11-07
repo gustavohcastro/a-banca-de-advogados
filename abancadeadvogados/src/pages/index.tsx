@@ -1,44 +1,55 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Head from 'next/head'
-import {BackgroundImage, Header, BannerArea, AboutCompany, OurOffice, ServicesHeader, ServicesCards, OurTeam, Posts, ProductsHome, ContactArea, Footer} from '../styles/pages/Home'
-import {FiChevronLeft, FiChevronRight} from "react-icons/fi";
+import {BackgroundImage, Header, BannerArea, AboutCompany, OurOffice, ServicesHeader, ServicesCards, OurTeam, Posts, ProductsHome, ContactArea, Footer, StyledBurger, Nav, Ul} from '../styles/pages/Home'
+import {FiChevronLeft, FiChevronRight, FiMenu, FiX} from "react-icons/fi";
 import theme from "../styles/theme";
+import Link from "next/link";
 
 const Home: React.FC = () => {
+    const [open, setOpen] = useState(false)
+    
   return (
-    <div>
+    <>
       <Head>
         <title>A Banca de Advogados</title>
-        <link rel="icon" type="image/x-icon" href="./assets/images/favicon.png"/>
+        <link rel="icon" type="image/x-icon" href={"./assets/images/favicon.png"}/>
       </Head>
       <main>
           <BackgroundImage>
           <Header>
-              <picture>
-                  <img src='./assets/images/logo.svg' className='logo'/>
-              </picture>
-              <div>
-                  <a href=""><p>Home</p></a>
-                  <a href=""><p>Escritório</p></a>
-                  <a href=""><p>Áreas de atuação</p></a>
-                  <a href=""><p>Equipe</p></a>
-                  <a href=""><p>Publicações</p></a>
-                  <a href=""><p>Contato</p></a>
+              <div className="main-menu">
+                  <Link href="/">
+                      <picture>
+                          <img src={'./assets/images/logo.svg'} className='logo' alt="Logo"/>
+                      </picture>
+                  </Link>
+                  <StyledBurger open={open} onClick={() => setOpen(!open)}>
+                      {open ? <FiX color="#fff"/> : <FiMenu color="#fff"/>}
+                  </StyledBurger>
+                  <Nav>
+                      <Ul open={open}>
+                          <li><Link href={'/'}><a>Início</a></Link></li>
+                          <li><Link href="/escritorio">Escritório</Link></li>
+                          <li><Link href="/areasdeatuacao">Áreas de atuação</Link></li>
+                          <li><Link href="/equipe">Equipe</Link></li>
+                          <li><Link href="/publicacoes">Publicações</Link></li>
+                          <li><Link href="/contato">Contato</Link></li>
+                          <li><Link href="/areadoassociado">Área do associado</Link></li>
+                      </Ul>
+                  </Nav>
               </div>
-              <a href=""><p>Área do associado</p></a>
           </Header>
           <BannerArea>
             <h2>A banca de <br/>advogados</h2>
               <br/>
+            <h3>Cardoso, Dani e Felisberto.</h3>
               <br/>
-            <h3>Cardoso, Dani e Felisberto</h3>
-              <br/>
-             <p>A UNIÃO DE FORÇAS DISTINTAS, MAS AO MESMO TEMPO COMPLEMENTARES, É O QUE DETERMINA O SUCESSO DE UM PROJETO DE LONGO PRAZO. NASCE, ASSIM, A BANCA DE ADVOGADOS.</p>
+             <p>A união de forças distintas, mas ao mesmo tempo complementares, é o que determina o sucesso de um projeto de longo prazo. Nasce, assim, a banca de advogados.</p>
           </BannerArea>
           </BackgroundImage>
           <AboutCompany>
               <picture>
-                  <img src='./assets/images/logo.svg' className='logo' alt="Quem somos"/>
+                  <img src={'./assets/images/logo.svg'} className='logo' alt="Quem somos"/>
               </picture>
               <div>
                 <p>Quem somos?</p>
@@ -48,7 +59,7 @@ const Home: React.FC = () => {
           </AboutCompany>
           <OurOffice>
               <picture>
-                  <img src='./assets/images/ouroffice.png' className='logo' alt="Nosso escritório"/>
+                  <img src={'./assets/images/ouroffice.png'} className='logo' alt="Nosso escritório"/>
               </picture>
               <div>
                   <p>Nosso escritório</p>
@@ -111,7 +122,7 @@ const Home: React.FC = () => {
             <div className="partner-row">
                 <div>
                     <picture>
-                        <img src='./assets/images/melkis.jpg' alt="Sócio Fundador"/>
+                        <img src={'./assets/images/melkis.jpg'} alt="Sócio Fundador"/>
                     </picture>
                     <h6>Melkis Cardoso</h6>
                     <p>Sócio Fundador</p>
@@ -119,7 +130,7 @@ const Home: React.FC = () => {
                 </div>
                 <div>
                     <picture>
-                        <img src='./assets/images/dani.jpg' alt="Sócio Fundador"/>
+                        <img src={'./assets/images/dani.jpg'} alt="Sócio Fundador"/>
                     </picture>
                     <h6>Felipe André Dani</h6>
                     <p>Sócio Fundador</p>
@@ -127,11 +138,11 @@ const Home: React.FC = () => {
                 </div>
                 <div>
                     <picture>
-                        <img src='./assets/images/felisberto.jpg' alt="Sócio Fundador"/>
+                        <img src={'./assets/images/felisberto.jpg'} alt="Sócio Fundador"/>
                     </picture>
                     <h6>João Pedro Felisberto</h6>
                     <p>Sócio Fundador</p>
-                    <span>Advogado inscrito na OAB/SC sob nº 61.001. Graduado em Direito pela Universidade do Vale do Itajaí - UNIVALI e Pós-Graduando em Direito Digital e Compliance pela Damásio Educacional. Técnico em Informática pelo Instituto Federal Catarinense. Possui atuação nas áreas de Direito Digital e segurança na Internet, vazamento de dados, Crimes Virtuais, Compliance Digital Empresarial, Direito do Consumidor, Responsabilidade Civil, Contratos e Cobranças Judiciais/Execuções; Membro da Comissão de Direito Digital da OAB - Subseção Balneário Camboriú/SC;</span>
+                    <span>Advogado inscrito na OAB/SC sob nº 61.001. Graduado em Direito pela Universidade do Vale do Itajaí - UNIVALI e Pós-Graduando em Direito Digital e Compliance pela Damásio Educacional. Técnico em Informática pelo Instituto Federal Catarinense. Possui atuação nas áreas de Direito Digital e segurança na Internet, vazamento de dados, Crimes Virtuais, Compliance Digital Empresarial, Direito do Consumidor, Responsabilidade Civil, Contratos e Cobranças Judiciais/Execuções; Membro da Comissão de Direito Digital da OAB - Subseção Balneário Camboriú/SC.</span>
                 </div>
             </div>
           </OurTeam>
@@ -146,7 +157,7 @@ const Home: React.FC = () => {
                   <a href="">
                     <div>
                       <picture>
-                          <img src='./assets/images/post_photo.png' alt="Sócio Fundador"/>
+                          <img src={'./assets/images/post_photo.png'} alt="Sócio Fundador"/>
                       </picture>
                       <h6>Lorem Ipsum</h6>
                       <p>Baln. Camboriú, 03 de outubro de 2022.</p>
@@ -155,7 +166,7 @@ const Home: React.FC = () => {
                   <a href="">
                       <div>
                           <picture>
-                              <img src='./assets/images/post_photo.png' alt="Sócio Fundador"/>
+                              <img src={'./assets/images/post_photo.png'} alt="Sócio Fundador"/>
                           </picture>
                           <h6>Lorem Ipsum</h6>
                           <p>Baln. Camboriú, 03 de outubro de 2022.</p>
@@ -164,7 +175,7 @@ const Home: React.FC = () => {
                   <a href="">
                       <div>
                           <picture>
-                              <img src='./assets/images/post_photo.png' alt="Sócio Fundador"/>
+                              <img src={'./assets/images/post_photo.png'} alt="Sócio Fundador"/>
                           </picture>
                           <h6>Lorem Ipsum</h6>
                           <p>Baln. Camboriú, 03 de outubro de 2022.</p>
@@ -173,13 +184,14 @@ const Home: React.FC = () => {
               </div>
           </Posts>
           <ProductsHome>
-            <img className="background-image-product-area" src={"./assets/images/products-background.png"} alt="Products section background image"/>
               <div>
                 <button>
                     <FiChevronLeft style={{width: 48, height:48}} color={theme.colors.dark}/>
                 </button>
                 <div className="product-area">
-                    <img className="product-photo" src='./assets/images/post_photo.png' alt="Product"/>
+                    <picture>
+                        <img className="product-photo" src={'./assets/images/post_photo.png'} alt="Product"/>
+                    </picture>
                     <div className="product-text">
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
                         <h6>Produtos e Serviços</h6>
@@ -222,7 +234,7 @@ const Home: React.FC = () => {
           <Footer>
               <div className="footer-logo-area">
                   <picture>
-                      <img src='./assets/images/logo.svg' className="logo-footer"/>
+                      <img src={'./assets/images/logo.svg'} className="logo-footer" alt="logo rodapé"/>
                   </picture>
               </div>
               <div className="footer-info">
@@ -230,7 +242,7 @@ const Home: React.FC = () => {
               </div>
           </Footer>
           </main>
-    </div>
+    </>
   )
 }
 

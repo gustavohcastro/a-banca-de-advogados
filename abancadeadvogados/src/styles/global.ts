@@ -12,5 +12,13 @@ export default createGlobalStyle`
       background: ${props => props.theme.colors.background};
       color: ${props => props.theme.colors.text};
       font: 400 14px Poppins, sans-serif;
+      
+      @media (min-width: 768px){
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      button, a{
+          cursor: pointer;
+      }
     }
     `
