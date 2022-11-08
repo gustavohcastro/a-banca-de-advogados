@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
 import Head from 'next/head'
 import {BackgroundImage, Header, BannerArea, AboutCompany, OurOffice, ServicesHeader, ServicesCards, OurTeam, Posts, ProductsHome, ContactArea, Footer, StyledBurger, Nav, Ul} from '../styles/pages/Home'
-import {FiChevronLeft, FiChevronRight, FiMenu, FiX} from "react-icons/fi";
+import {FiArrowDownCircle, FiBox, FiChevronLeft, FiChevronRight, FiMenu, FiX} from "react-icons/fi";
+import { GrFingerPrint } from "react-icons/gr"
 import theme from "../styles/theme";
 import Link from "next/link";
 
 const Home: React.FC = () => {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
+    const [isTouched, setIsTouched] = useState(false);
     
   return (
     <>
@@ -41,19 +43,24 @@ const Home: React.FC = () => {
           </Header>
           <BannerArea>
             <h2>A banca de <br/>advogados</h2>
-              <br/>
+            <br/>
             <h3>Cardoso, Dani e Felisberto.</h3>
-              <br/>
-             <p>A união de forças distintas, mas ao mesmo tempo complementares, é o que determina o sucesso de um projeto de longo prazo. Nasce, assim, a banca de advogados.</p>
+            <br/>
+            <p>A união de forças distintas, mas ao mesmo tempo complementares, é o que determina o sucesso de um projeto de longo prazo. Nasce, assim, a banca de advogados.</p>
+            <br/>
+            <button onClick={() => document.getElementById('home-about-company').scrollIntoView()}>
+                <p>Toque e descubra mais sobre nós.</p>
+                <FiArrowDownCircle className='bounce'/>
+            </button>
           </BannerArea>
           </BackgroundImage>
-          <AboutCompany>
+          <AboutCompany id='home-about-company'>
               <picture>
                   <img src={'./assets/images/logo.svg'} className='logo' alt="Quem somos"/>
               </picture>
               <div>
                 <p>Quem somos?</p>
-                  <br/>
+                <br/>
                 <span>A banca de advogados surgiu da união de três advogados especializados em suas áreas, com o intuito de atender, com excelência, empresas e empresários que buscam se diferenciar no mercado, trazendo soluções eficientes, seguras, inteligentes e inovadoras, com apoio jurídico integral e permanente, atuando de forma judicial, extrajudicial e em negociações, buscando sempre a satisfação do cliente.</span>
               </div>
           </AboutCompany>
@@ -68,9 +75,7 @@ const Home: React.FC = () => {
                   <br/>
                   <br/>
                   <br/>
-                  <a href="">
-                      <p>Ver mais {'>>'}</p>
-                  </a>
+                  <Link href="/">Ver mais &gt;&gt;</Link>
               </div>
           </OurOffice>
           <ServicesHeader>
@@ -88,32 +93,32 @@ const Home: React.FC = () => {
               <div>
                   <p>Direto Empresarial</p>
                   <span>Atuação voltada a prestar assessoria jurídica na área empresarial, societária, estruturação e planejamento de negócios e revisão contratual.</span>
-                  <a href={""}><span>{'Ver mais >>'}</span></a>
+                  <Link href={""}>Ver mais &gt;&gt;</Link>
               </div>
               <div>
                   <p>Direito Civil</p>
                   <span>O enfoque de atuação da esfera cível é voltado à ações de indenização por dano material e moral, responsabilidade civil, cobranças, execuções, obrigações de fazer e direito imobiliário.</span>
-                  <a href={""}><span>{'Ver mais >>'}</span></a>
+                  <Link href={""}>Ver mais &gt;&gt;</Link>
               </div>
               <div>
                   <p>Direito do Consumidor</p>
                   <span>Especialidade de atuação em ações de indenização por negativação indevida, ações revisionais por juros abusivos, reparação de danos ao consumidor, golpes sofridos de forma física ou virtual pelo consumidor.</span>
-                  <a href={""}><span>{'Ver mais >>'}</span></a>
+                  <Link href={""}>Ver mais &gt;&gt;</Link>
               </div>
               <div>
                   <p>Direito Penal</p>
                   <span>Atuação especializada em direito penal econômico, crimes financeiros, tráfico de entorpecentes, tribunal do Júri, acompanhamento da execução penal e revisão criminal.</span>
-                  <a href={""}><span>{'Ver mais >>'}</span></a>
+                  <Link href={""}>Ver mais &gt;&gt;</Link>
               </div>
               <div>
                   <p>Direito Bancário</p>
                   <span>Enfoque de atuação na revisão de financiamentos, defesas em busca e apreensão de bens, defesas em execuções de título extrajudicial e cobranças.</span>
-                  <a href={""}><span>{'Ver mais >>'}</span></a>
+                  <Link href={""}>Ver mais &gt;&gt;</Link>
               </div>
               <div>
                   <p>Direito Contratual</p>
-                  <span>Especialidade de atuação na elaboração de contratos de prestação de serviços, contratos sociais empresariais, contratos imobiliários, contratos de parceria com influenciadores digitais, contratos de investimento, revisão contratual e análise de contratos abusivos.</span>
-                  <a href={""}><span>{'Ver mais >>'}</span></a>
+                  <span>Especialidade de atuação na elaboração de contratos de prestação de serviços, contratos sociais empresariais, contratos imobiliários, contratos de parceria com influenciadores digitais.</span>
+                  <Link href={""}>Ver mais &gt;&gt;</Link>
               </div>
           </ServicesCards>
           <OurTeam>
@@ -160,7 +165,7 @@ const Home: React.FC = () => {
                           <img src={'./assets/images/post_photo.png'} alt="Sócio Fundador"/>
                       </picture>
                       <h6>Lorem Ipsum</h6>
-                      <p>Baln. Camboriú, 03 de outubro de 2022.</p>
+                      <p>03 de outubro de 2022.</p>
                     </div>
                   </a>
                   <a href="">
@@ -169,7 +174,7 @@ const Home: React.FC = () => {
                               <img src={'./assets/images/post_photo.png'} alt="Sócio Fundador"/>
                           </picture>
                           <h6>Lorem Ipsum</h6>
-                          <p>Baln. Camboriú, 03 de outubro de 2022.</p>
+                          <p>03 de outubro de 2022.</p>
                       </div>
                   </a>
                   <a href="">
@@ -178,7 +183,16 @@ const Home: React.FC = () => {
                               <img src={'./assets/images/post_photo.png'} alt="Sócio Fundador"/>
                           </picture>
                           <h6>Lorem Ipsum</h6>
-                          <p>Baln. Camboriú, 03 de outubro de 2022.</p>
+                          <p>03 de outubro de 2022.</p>
+                      </div>
+                  </a>
+                  <a href="">
+                      <div>
+                          <picture>
+                              <img src={'./assets/images/post_photo.png'} alt="Sócio Fundador"/>
+                          </picture>
+                          <h6>Lorem Ipsum</h6>
+                          <p>03 de outubro de 2022.</p>
                       </div>
                   </a>
               </div>
@@ -196,6 +210,9 @@ const Home: React.FC = () => {
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
                         <h6>Produtos e Serviços</h6>
                         <p>Autor: Lorem Ipsum</p>
+                        <button>
+                            Ver detalhes
+                        </button>
                     </div>
                 </div>
                 <button>

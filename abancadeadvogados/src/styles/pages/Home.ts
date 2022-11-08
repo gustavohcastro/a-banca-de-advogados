@@ -7,7 +7,7 @@ interface PropsOpen {
 export const BackgroundImage = styled.div`
   position: relative;
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   background-image: url("./assets/images/background_image.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -111,8 +111,18 @@ export const Ul = styled.ul<PropsOpen>`
 		
     a{
       font: 400 14px Poppins, sans-serif;
+      cursor: pointer;
+      padding: 8px 10px;
     }
   }
+
+  li a:hover{
+      color: ${props => props.theme.colors.secondary};
+      background-color: rgba(0,0,0,0.1);
+      border-radius: 99px;
+  }
+  
+
   @media (min-width: 769px) {
     .hidden-desktop {
       display: none;
@@ -157,7 +167,10 @@ export const Ul = styled.ul<PropsOpen>`
 
 export const BannerArea = styled.div`
   padding: 36px;
-  width: 50vw;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+
 	
   h2 {
     color: ${props => props.theme.colors.secondary};
@@ -173,6 +186,47 @@ export const BannerArea = styled.div`
   p {
     width: 40vw;
   }
+  
+  button {
+    margin-top: 5vh;
+    outline: 0;
+    border: none;
+    background-color: transparent;
+    align-self: center;
+
+    p {
+      margin-bottom: 16px;
+      color: ${props => props.theme.colors.secondary};
+      font-family: Poppins, sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+  }
+
+  svg {
+    color: ${props => props.theme.colors.secondary};
+    width: 48px;
+    height: 48px;
+    transition: 0.5s;
+    transform: rotate(360deg);
+  }
+ 
+  @keyframes bounceIn {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    40% {
+      transform: translateY(-30px);
+    }
+    60% {
+      transform: translateY(-15px);
+    }
+  }
+
+  .bounce {
+    animation: bounceIn 2s infinite 2s;
+  }
 
   @media (max-width: 768px) {
     width: 100vw;
@@ -187,13 +241,16 @@ export const BannerArea = styled.div`
 	  p {
 		  width: 80vw;
 	  }
+    button {
+      margin-top: 10vh;
+    }
   }
 `
 
 export const AboutCompany = styled.section`
   display: flex;
   width: 100vw;
-  padding: 50px 8vw;
+  padding: 12vh 8vw;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
@@ -220,7 +277,7 @@ export const AboutCompany = styled.section`
 
   div span {
     word-wrap: anywhere;
-    font-size: 18px;
+    font-size: 1rem;
   }
 
   div a {
@@ -263,7 +320,6 @@ export const AboutCompany = styled.section`
       font-family: Poppins, sans-serif;
       font-size: 0.8rem;
       font-weight: 400;
-      text-align: justify;
     }
   
   }
@@ -273,7 +329,7 @@ export const OurOffice = styled.section`
   display: flex;
   width: 100vw;
   background: rgba(255, 255, 255, 0.1);
-  padding: 50px 8vw;
+  padding: 12vh 8vw;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -283,12 +339,14 @@ export const OurOffice = styled.section`
     flex: 1;
       
     img {
-        width: 80%;
+        width: 90%;
     }
   } 
 
   div {
     width: 50vw;
+    padding-bottom: 20px;
+    overflow-y: hidden;
   }
 
   div p {
@@ -303,11 +361,22 @@ export const OurOffice = styled.section`
 
   div a {
     text-decoration: none;
+    padding: 12px;
+    font-family: Abhaya Libre, sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: ${props => props.theme.colors.secondary};
+  }
+
+  div a:hover {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 99px;
   }
 
   div a p {
     font: 800 24px Abhaya Libre, sans-serif;
   }
+
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
@@ -420,43 +489,56 @@ export const ServicesHeader = styled.section`
 `
 
 export const ServicesCards = styled.section`
-		margin-top: -60px;
-		display: grid;
-		width: 90%;
-		margin-left: 5%;
-				
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-		column-gap: 2vw;
-		row-gap: 1vh;
-		margin-bottom: 90px;
-	
-		
-		div {
-			display: flex;
-			flex-direction: column;
-      height: 250px;
-			padding: 8px 16px;
-			justify-content: center;
-			
-			background: #D9D9D9;
-		}
-		
-		div p {
-      font: 400 20px Poppins, sans-serif;
-      color: ${props => props.theme.colors.dark};
-			text-align: left;
-			
-		}
-		div span{
-			margin: 24px 0;
-      font: 400 12px Poppins, sans-serif;
-      color: ${props => props.theme.colors.dark};
-			text-align: justify-all;
-    }
-	
+  margin-top: -60px;
+  display: grid;
+  width: 90%;
+  margin-left: 5%;
+      
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 2vw;
+  row-gap: 1vh;
+  margin-bottom: 90px;
+
+  
+  div {
+    display: flex;
+    flex-direction: column;
+    height: 260px;
+    padding: 8px 16px;
+    justify-content: center;
+  
+    background: #D9D9D9;
+  }
+  
+  div p {
+    font: 400 20px Poppins, sans-serif;
+    color: ${props => props.theme.colors.dark};
+    text-align: left;  
+  }
+  
+  div span{
+    padding: 16px 0;
+    font-family: Poppins, sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: ${props => props.theme.colors.dark};
+    text-align: justify-all;
+  }
+
 	div a {
 		text-decoration: none;
+    cursor: pointer;
+    padding: 16px 0;
+    font-family: Poppins, sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: ${props => props.theme.colors.dark};
+    text-align: left;
 	}
+  
+  div a:hover {
+    color: ${props => props.theme.colors.primary};
+  }
 
   @media (max-width: 768px) {
     margin-top: 24px;
@@ -533,8 +615,8 @@ export const OurTeam = styled.section`
   @media (max-width: 768px) {
     .partner-row{
       display: grid;
-      width: 90%;
-      padding: 5%;
+      width: 100%;
+      padding: 5vw;
 
       grid-template-columns: 1fr;
       column-gap: 6vw;
@@ -547,7 +629,7 @@ export const Posts = styled.section`
 	background: rgba(255,255,255,0.1);
   display: flex;
   flex-direction: column;
-  padding: 2% 10%;
+  padding: 2% 5%;
   align-items: center;
   width: 100vw;
   margin-top: 100px;
@@ -567,7 +649,12 @@ export const Posts = styled.section`
 		}
 		a {
 			text-decoration: none;
+      padding: 10px;
 		}
+    a:hover {
+      background: rgba(0,0,0,0.1);
+      border-radius: 99px;
+    }
 		p {
       font-family: Poppins, sans-serif;
       font-size: 1rem;
@@ -578,14 +665,18 @@ export const Posts = styled.section`
 	
 	.post-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: 6vw;
     row-gap: 1vh;
 		margin-top: 48px;
 		
 		a {
 			text-decoration: none;
+      padding: 16px;
 		}
+    a:hover {
+      background: rgba(0,0,0,0.1);
+    }
 
     div {
       display: flex;
@@ -595,12 +686,12 @@ export const Posts = styled.section`
     }
 
     div img {
-      width: 28vw;
+      width: 15vw;
     }
 
     div h6 {
       font-family: Poppins, sans-serif;
-      font-size: 1.6rem;
+      font-size: 1rem;
       font-weight: 800;
       color: ${props => props.theme.colors.secondary};
     }
@@ -608,39 +699,41 @@ export const Posts = styled.section`
     div p {
       padding: 4px 0;
       font-family: Poppins, sans-serif;
-      font-size: 1rem;
+      font-size: 0.8rem;
       font-weight: 300;
       color: ${props => props.theme.colors.text};
     }
 	}
 
   @media (max-width: 768px) {
+    /* padding: 10%; */
     .header-area {    
       h3 {
         font-family: Poppins, sans-serif;
-        font-size: 2rem;
+        font-size: 1.6rem;
         font-weight: 800;
         color: ${props => props.theme.colors.secondary};
       }
       
       p {
         font-family: Poppins, sans-serif;
-        font-size: 0.6rem;
+        font-size: 0.8rem;
         font-weight: 800;
         color: ${props => props.theme.colors.text};
       }
    }
    .post-row {
+    grid-template-columns: 1fr 1fr;
     column-gap: 2vw;
     margin-top: 2vh;
     
     div img {
-      width: 28vw;
+      width: 38vw;
     }
     
     div h6 {
       font-family: Poppins, sans-serif;
-      font-size: 0.6rem;
+      font-size: 1rem;
       font-weight: 800;
       color: ${props => props.theme.colors.secondary};
     }
@@ -648,7 +741,7 @@ export const Posts = styled.section`
     div p {
       padding: 4px 0;
       font-family: Poppins, sans-serif;
-      font-size: 0.2rem;
+      font-size: 0.5rem;
       font-weight: 400;
       color: ${props => props.theme.colors.text};
     }
@@ -692,6 +785,11 @@ export const ProductsHome = styled.section`
 		align-items: center;
 		justify-content: center;
 	}
+
+  button:hover {    
+    background: rgba(0,0,0,0.1);
+    border-radius: 99px;
+  }
 	
 	.product-area {
 		display: flex;
@@ -716,6 +814,17 @@ export const ProductsHome = styled.section`
         font: 800 24px Poppins, sans-serif;
         color: ${props => props.theme.colors.primary};
         margin-top: 24px;
+      }
+
+      button {
+        margin-top: 24px;
+        background-color: ${props => props.theme.colors.primary};
+        border-radius: 16px;
+        padding: 8px 16px;
+        color: ${props => props.theme.colors.secondary};
+        font-family: Poppins, sans-serif;
+        font-size: 1rem;
+        font-weight: 400;
       }
 			
 		}
@@ -743,6 +852,7 @@ export const ProductsHome = styled.section`
 
       .product-text {
         width: 100%;
+        margin-top: 16px;
         p {
           font-family: Poppins, sans-serif;
           font-size: 0.6rem;
@@ -757,6 +867,9 @@ export const ProductsHome = styled.section`
           color: ${props => props.theme.colors.primary};
           margin-top: 8px;
         }	
+        button {
+          align-self: center;
+        }
 		  }
     }
     

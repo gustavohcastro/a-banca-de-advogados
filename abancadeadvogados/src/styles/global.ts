@@ -6,6 +6,7 @@ export default createGlobalStyle`
       padding: 0;
       box-sizing: border-box;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
     
     body {
