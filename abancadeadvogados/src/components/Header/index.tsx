@@ -20,7 +20,7 @@ const HeaderComponent: React.FC = () => {
                     <Ul open={open}>
                         <li><Link href={'/'}><a>Início</a></Link></li>
                         <li><Link href="/escritorio">Escritório</Link></li>
-                        <li><Link href="/areasdeatuacao">Áreas de atuação</Link></li>
+                        <li><Link href="/areas-de-atuacao">Áreas de atuação</Link></li>
                         <li><Link href="/equipe">Equipe</Link></li>
                         <li><Link href="/publicacoes">Publicações</Link></li>
                         <li><Link href="/contato">Contato</Link></li>
