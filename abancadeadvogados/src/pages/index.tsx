@@ -1,15 +1,14 @@
 import React, {useState} from 'react'
 import Head from 'next/head'
-import {BackgroundImage, Header, BannerArea, AboutCompany, OurOffice, ServicesHeader, ServicesCards, OurTeam, Posts, ProductsHome, ContactArea, Footer, StyledBurger, Nav, Ul} from '../styles/pages/Home'
+import {BackgroundImage, BannerArea, AboutCompany, OurOffice, ServicesHeader, ServicesCards, OurTeam, Posts, ProductsHome, ContactArea} from '../styles/pages/Home'
 import {FiArrowDownCircle, FiBox, FiChevronLeft, FiChevronRight, FiMenu, FiX} from "react-icons/fi";
 import { GrFingerPrint } from "react-icons/gr"
 import theme from "../styles/theme";
 import Link from "next/link";
+import Header from '../components/Header';
+import FooterComponent from '../components/Footer';
 
 const Home: React.FC = () => {
-    const [open, setOpen] = useState(false);
-    const [isTouched, setIsTouched] = useState(false);
-    
   return (
     <>
       <Head>
@@ -18,29 +17,7 @@ const Home: React.FC = () => {
       </Head>
       <main>
           <BackgroundImage>
-          <Header>
-              <div className="main-menu">
-                  <Link href="/">
-                      <picture>
-                          <img src={'./assets/images/logo.svg'} className='logo' alt="Logo"/>
-                      </picture>
-                  </Link>
-                  <StyledBurger open={open} onClick={() => setOpen(!open)}>
-                      {open ? <FiX color="#fff"/> : <FiMenu color="#fff"/>}
-                  </StyledBurger>
-                  <Nav>
-                      <Ul open={open}>
-                          <li><Link href={'/'}><a>Início</a></Link></li>
-                          <li><Link href="/escritorio">Escritório</Link></li>
-                          <li><Link href="/areasdeatuacao">Áreas de atuação</Link></li>
-                          <li><Link href="/equipe">Equipe</Link></li>
-                          <li><Link href="/publicacoes">Publicações</Link></li>
-                          <li><Link href="/contato">Contato</Link></li>
-                          <li><Link href="/areadoassociado">Área do associado</Link></li>
-                      </Ul>
-                  </Nav>
-              </div>
-          </Header>
+          <Header/>
           <BannerArea>
             <h2>A banca de <br/>advogados</h2>
             <br/>
@@ -248,16 +225,7 @@ const Home: React.FC = () => {
                   </form>
               </div>
           </ContactArea>
-          <Footer>
-              <div className="footer-logo-area">
-                  <picture>
-                      <img src={'./assets/images/logo.svg'} className="logo-footer" alt="logo rodapé"/>
-                  </picture>
-              </div>
-              <div className="footer-info">
-                <p>Endereço: Avenida do Estado, n 100, Ed XXXXXXX - Sala 500 - Telefone : (47) 99999-99999 - E-mail: contato@abancadeadvogados.com.br</p>
-              </div>
-          </Footer>
+          <FooterComponent/> 
           </main>
     </>
   )
