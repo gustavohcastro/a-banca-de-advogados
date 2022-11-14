@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Carousel() {
   const buttons = document.querySelectorAll("[data-carousel-button]")
 
