@@ -6,7 +6,7 @@ const FooterComponent: React.FC = () => {
         <Footer>
         <div className="footer-logo-area">
             <picture>
-                <img src={'./assets/images/logo.svg'} className="logo-footer" alt="logo rodapé"/>
+                <img src={'../assets/images/logo.svg'} className="logo-footer" alt="logo rodapé"/>
             </picture>
         </div>
         <div className="footer-info">

@@ -10,7 +10,7 @@ const HeaderComponent: React.FC = () => {
             <div className="main-menu">
                 <Link href="/">
                     <picture>
-                        <img src={'./assets/images/logo.svg'} className='logo' alt="Logo"/>
+                        <img src={'../assets/images/logo.svg'} className='logo' alt="Logo"/>
                     </picture>
                 </Link>
                 <StyledBurger open={open} onClick={() => setOpen(!open)}>
