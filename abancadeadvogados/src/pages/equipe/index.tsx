@@ -1,7 +1,8 @@
 import Head from "next/head";
 import FooterComponent from "../../components/Footer";
 import HeaderComponent from "../../components/Header";
-import { BackgroundImage, BannerArea, OurTeam } from "./styles";
+import { BackgroundImage, BannerArea, OurTeam } from "../../styles/pages/Equipe";
+import React from 'react';
 
 const Equipe: React.FC = () => {
 

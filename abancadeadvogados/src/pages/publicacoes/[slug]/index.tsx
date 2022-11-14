@@ -1,7 +1,8 @@
 import Head from "next/head";
 import FooterComponent from "../../../components/Footer";
 import HeaderComponent from "../../../components/Header";
-import { BackgroundImage, BannerArea, PostArea } from "./styles";
+import { BackgroundImage, BannerArea, PostArea } from "../../../styles/pages/PublicacaoDetalhe";
+import React from 'react';
 
 const Post: React.FC = () => {
     return (

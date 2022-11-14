@@ -3,22 +3,42 @@ import React from "react"
 import { FiArrowDownCircle, FiArrowLeft, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import HeaderComponent from "../../components/Header";
 import { BackgroundImage } from "../../styles/pages/Home";
-import { BannerArea, CarouselArea, OfficeDescription, Picture } from "./styles";
-import dynamic from 'next/dynamic'
+import { BannerArea, CarouselArea, OfficeDescription, Picture } from "../../styles/pages/Escritorio";
+// import dynamic from 'next/dynamic'
 import FooterComponent from "../../components/Footer";
 
-const DynamicComponentWithNoSSR = dynamic(
-  () => import('./carousel'),
-  { ssr: false}
-)
+// const DynamicComponentWithNoSSR = dynamic(
+//   () => import('./Carousel') as any,
+//   { ssr: false}
+// )
 
 
 
 const Escritorio: React.FC = () => {
+
+    React.useEffect(() => {
+        const buttons: any = document.querySelectorAll("[data-carousel-button]")
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+            const offset = button.dataset.carouselButton === "next" ? 1 : -1
+            const slides = button
+                .closest("[data-carousel]")
+                .querySelector("[data-slides]")
+
+            const activeSlide = slides.querySelector("[data-active]")
+            let newIndex = [...slides.children].indexOf(activeSlide) + offset
+            if (newIndex < 0) newIndex = slides.children.length - 1
+            if (newIndex >= slides.children.length) newIndex = 0
+
+            slides.children[newIndex].dataset.active = true
+            delete activeSlide.dataset.active
+            })
+        })
+    },[])
     
     return (
         <>
-            <DynamicComponentWithNoSSR />
+            {/* <DynamicComponentWithNoSSR /> */}
             <Head>
                 <title>Escritório</title>
                 <link rel="icon" type="image/x-icon" href={"./assets/images/favicon.png"}/>

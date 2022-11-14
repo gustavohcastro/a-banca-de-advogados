@@ -1,5 +1,5 @@
 import styled from "styled-components"
-
+import React from 'react';
 export const BackgroundImage = styled.div`
   position: relative;
   width: 100vw;

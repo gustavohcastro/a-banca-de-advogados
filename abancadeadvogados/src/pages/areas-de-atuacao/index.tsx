@@ -2,7 +2,8 @@ import Head from "next/head";
 import Link from "next/link";
 import FooterComponent from "../../components/Footer";
 import HeaderComponent from "../../components/Header";
-import { BackgroundImage, BannerArea, ServicesCards, ServicesHeader } from "./styles";
+import { BackgroundImage, BannerArea, ServicesCards, ServicesHeader } from "../../styles/pages/AreasDeAtuacao";
+import React from 'react';
 
 const AreasDeAtuacao: React.FC = () => {
     return (

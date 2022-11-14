@@ -1,7 +1,8 @@
 import Head from "next/head";
 import FooterComponent from "../../components/Footer";
 import HeaderComponent from "../../components/Header";
-import { BackgroundImage, BannerArea, ContactArea } from "./styles";
+import { BackgroundImage, BannerArea, ContactArea } from "../../styles/pages/Contato";
+import React from 'react';
 
 const Contato: React.FC = () => {
     return (

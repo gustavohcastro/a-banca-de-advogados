@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/pages/escritorio/carousel.js"  ],
+, "src/pages/escritorio/Carousel.jsx"  ],
   "exclude": [
     "node_modules"
   ]

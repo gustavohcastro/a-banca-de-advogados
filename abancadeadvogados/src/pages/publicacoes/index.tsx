@@ -1,11 +1,14 @@
 import Head from "next/head";
 import Link from "next/link";
+import React from "react";
 import { FormEvent, useState } from "react";
 import { FiArrowLeftCircle, FiArrowRight, FiArrowRightCircle } from "react-icons/fi";
 import { FilterForm } from "../../components/FilterForm";
 import FooterComponent from "../../components/Footer";
 import HeaderComponent from "../../components/Header";
-import { BackgroundImage, BannerArea, Container, ContainerForm, LastPosts, PostGrid, PostsResult, SearchArea } from "./styles";
+import api from "../../services/api";
+import { Post } from "../api/posts/interface";
+import { BackgroundImage, BannerArea, Container, ContainerForm, LastPosts, PostGrid, PostsResult, SearchArea } from "../../styles/pages/Publicacoes";
 
 enum FILTER_FORM_ENUM {
     SUBJECT = 'assunto',
@@ -27,6 +30,8 @@ interface FILTER_FORM_TYPE {
 
 const Publicacoes = () => {
 
+    const [lasPosts, setLastPosts] = React.useState<Post[]>([])
+
     const initialValues = {
         [FILTER_FORM_ENUM.SUBJECT]: '',
         [FILTER_FORM_ENUM.AUTHOR]: '',
@@ -45,6 +50,18 @@ const Publicacoes = () => {
         setFormData(initialValues);
         // modal.current?.openModal();
     }
+
+    const getPosts = async() => {
+        const res = await api.get('/api/posts/ultimos-posts');
+        if (res.status === 200) {
+            setLastPosts(res.data)
+        }
+
+    }
+
+    React.useEffect(() => {
+        getPosts();
+    },[])
 
 
     return (
@@ -67,62 +84,44 @@ const Publicacoes = () => {
                     <h2>Últimas publicações</h2>
                     <br/>
                     <PostGrid>
-                        <div className="post-line">
-                            <picture>
-                                <img src={'./assets/images/post01.png'} />
-                            </picture>
-                            <div className="text-area">
-                                <div className="text-row">
-                                    <span>Dr. Felipe André Dani · <span className="text-grey">1 semana atrás </span></span>
+                        {lasPosts.map((post) => (
+                            <div className="post-line" key={post.id}>
+                                {post.id % 2 == 1 ? (
+                                    <picture>
+                                        <img src={'./assets/images/post01.png'} />
+                                    </picture>
+                                ): null}
+                                <div className="text-area">
+                                    <div className="text-row">
+                                        <span>{post.author} · <span className="text-grey">{post.created}</span></span>
+                                    </div>
+                                    <br/>
+                                    <div className="text-row">
+                                        <p>{post.title}</p>
+                                    </div>
+                                    <div>
+                                        <span className="text-grey">
+                                            {post.body}
+                                        </span>
+                                    </div>
+                                    <br/>
+                                    <div className="text-row">
+                                        <span className="text-grey">
+                                            {post.timeToRead}
+                                        </span>
+                                        <Link href="/publicacoes/contratos-em-2022">
+                                            <h6>Publicação completa -&gt;</h6>
+                                        </Link>
+                                    </div>
                                 </div>
-                                <br/>
-                                <div className="text-row">
-                                    <p>Contratos em 2022</p>
-                                </div>
-                                <div>
-                                    <span className="text-grey">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor ligula, dapibus vitae vulputate nec. 
-                                    </span>
-                                </div>
-                                <br/>
-                                <div className="text-row">
-                                    <span className="text-grey">
-                                        12 minutos de leitura.
-                                    </span>
-                                    <Link href="/publicacoes/contratos-em-2022">
-                                        <h6>Publicação completa -&gt;</h6>
-                                    </Link>
-                                </div>
-                            </div>
+                                {post.id % 2 == 0 ? (
+                                    <picture>
+                                        <img src={'./assets/images/post01.png'} />
+                                    </picture>
+                                ): null}
                         </div>
-                        <div className="post-line">
-                            <div className="text-area">
-                                <div className="text-row">
-                                    <span>Dr. Melkis Cardoso · <span className="text-grey">1 semana atrás </span></span>
-                                </div>
-                                <br/>
-                                <div className="text-row">
-                                    <p>Assessoria Jurídica</p>
-                                </div>
-                                <div>
-                                    <span className="text-grey">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor ligula, dapibus vitae vulputate nec. 
-                                    </span>
-                                </div>
-                                <br/>
-                                <div className="text-row">
-                                    <span className="text-grey">
-                                        20 minutos de leitura.
-                                    </span>
-                                    <Link href="/publicacoes/assessoria-juridica">
-                                        <h6>Publicação completa -&gt;</h6>
-                                    </Link>
-                                </div>
-                            </div>
-                            <picture>
-                                <img src={'./assets/images/post02.png'} />
-                            </picture>
-                        </div>
+                        ))}
+                        
                     </PostGrid>
                 </LastPosts>
                 <SearchArea>
