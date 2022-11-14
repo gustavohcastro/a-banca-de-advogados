@@ -1,5 +1,4 @@
-module.exports = () => {
-
+function Carousel() {
   const buttons = document.querySelectorAll("[data-carousel-button]")
 
   buttons.forEach(button => {
@@ -18,4 +17,6 @@ module.exports = () => {
       delete activeSlide.dataset.active
     })
   })
+  return null
 }
+export default Carousel;

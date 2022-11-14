@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic'
 import FooterComponent from "../../components/Footer";
 
 const DynamicComponentWithNoSSR = dynamic(
-  () => import('./carousel') as any,
+  () => import('./carousel'),
   { ssr: false}
 )
 
