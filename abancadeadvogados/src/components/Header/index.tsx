@@ -24,7 +24,7 @@ const HeaderComponent: React.FC = () => {
                         <li><Link href="/equipe">Equipe</Link></li>
                         <li><Link href="/publicacoes">Publicações</Link></li>
                         <li><Link href="/contato">Contato</Link></li>
-                        <li><Link href="/areadoassociado">Área do associado</Link></li>
+                        <li><Link href="/area-do-associado">Área do associado</Link></li>
                     </Ul>
                 </Nav>
             </div>

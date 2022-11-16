@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import React from 'react';
+
 export const BackgroundImage = styled.div`
   position: relative;
   width: 100vw;
@@ -94,13 +94,16 @@ export const BannerArea = styled.div`
   }
 `
 export const LastPosts = styled.section`
-    padding: 36px;
+  padding: 36px;
 
-    h2 {
+  h2 {
     color: ${props => props.theme.colors.secondary};
     font-family: Poppins, sans-serif;
     font-size: 2rem;
-	  
+  }
+
+  @media (max-width: 768px) {
+    padding: 16px;
   }
 `
 
@@ -117,6 +120,10 @@ export const PostGrid = styled.div`
     flex: 1;
     flex-direction: row;
     
+
+    .hidden-desktop {
+      display: none;
+    }
 
     picture {
       display: flex;
@@ -146,7 +153,6 @@ export const PostGrid = styled.div`
       font-family: Poppins, sans-serif;
       font-size: 1rem;
       white-space: now-wrap;
-      
     }
       
     .text-grey {
@@ -187,6 +193,75 @@ export const PostGrid = styled.div`
       border-radius: 99px;
     }
   }
+
+  @media (max-width: 768px) {
+    .post-line {
+      width: 100vw;
+
+      display: flex;
+      flex-direction: column;
+      
+      margin-bottom: 16px;
+
+      picture {
+        display: flex;
+        flex: 1;
+
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+
+      .text-area {
+        display: flex;
+        width: 100%;
+        background: #F5F5F5;
+        padding: 16px 8px;
+        flex-direction: column;
+        align-items: flex-start;    
+      }
+
+      span {
+        color: ${props => props.theme.colors.semiDark};
+        font-family: Poppins, sans-serif;
+        font-size: 0.6rem;
+        white-space: now-wrap;
+      }
+      
+      .text-grey {
+        color: ${props => props.theme.colors.grey};
+      }
+
+      .text-row {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      
+      p {
+        color: ${props => props.theme.colors.darkGrey};
+        font-family: Poppins, sans-serif;
+        font-size: 1rem;
+        font-weight: 800;
+      }
+
+      h6 {
+        color: ${props => props.theme.colors.darkGrey};
+        font-family: Poppins, sans-serif;
+        font-size: 0.6rem;
+        font-weight: 800;
+        cursor: pointer;
+        padding: 8px 0;
+      }
+    }
+  }
+
 `
 
 export const SearchArea = styled.section`
@@ -205,6 +280,15 @@ export const SearchArea = styled.section`
   div {
     display: flex;
     flex-direction: row;
+  }
+  
+  @media (max-width: 768px) {
+    h4 {
+      color: ${props => props.theme.colors.secondary};
+      font-family: Poppins, sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
   }
 
 `
@@ -284,6 +368,7 @@ export const Container = styled.div`
         font-family: Poppins, sans-serif;
         font-size: 1rem;
         font-weight: 400;
+        color: ${props => props.theme.colors.primary};
     }
 
     button {
@@ -300,6 +385,32 @@ export const Container = styled.div`
         font-family: Poppins, sans-serif;
         font-size: 1rem;
         font-weight: 800;
+    }
+  
+    @media (max-width: 768px) {
+      form {
+        margin-top: 16px;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      input, select, button {
+        min-width: 80vw;  
+      }
+
+      label {
+        margin-top: 8px;
+      }
+
+      select {
+        height: 40px;
+      }
+      button{
+        margin-top: 16px;
+      }
+
     }
   
 `
@@ -387,4 +498,19 @@ export const PostsResult = styled.section`
       border-radius: 99px;
     }
   }
+
+  @media (max-width: 768px) {
+    .page-control{
+      width: 100vw;
+      padding: 16px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 3vh;
+      justify-items: center;
+    }
+
+  }
+
 `

@@ -102,6 +102,7 @@ export const PostArea = styled.section`
   h1 {
      font-size: 1.6rem;
   }
+
   h3 {
      font-size: 0.8rem;
   }
@@ -111,4 +112,17 @@ export const PostArea = styled.section`
     text-align: justify;
     font-size: 1rem;
   }
+
+   @media (max-width: 768px) {
+    padding: 16px;
+    
+    h1 {
+      font-size: 1.2rem;
+    }
+    
+    p {
+      font-size: .8rem;
+    }
+   }
+
 `

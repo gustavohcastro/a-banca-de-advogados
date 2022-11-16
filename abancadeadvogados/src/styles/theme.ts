@@ -7,7 +7,8 @@ const theme = {
         dark: "#000",
         semiDark: '#4B4B4B',
         grey: '#6E6E6E',
-        darkGrey: '#313131'
+        darkGrey: '#313131',
+        ocre: '#F5F5F5'
 
     }
 }
