@@ -9,6 +9,9 @@ import HeaderComponent from "../../components/Header";
 import api from "../../services/api";
 import { Post } from "../api/posts/interface";
 import { BackgroundImage, BannerArea, Container, ContainerForm, LastPosts, PostGrid, PostsResult, SearchArea } from "../../styles/pages/Publicacoes";
+import { GetServerSideProps } from "next";
+import moment from "moment";
+import prisma from "../../lib/prismadb"
 
 enum FILTER_FORM_ENUM {
     SUBJECT = 'assunto',
@@ -28,9 +31,31 @@ interface FILTER_FORM_TYPE {
 }
 
 
-const Publicacoes = () => {
+export const getServerSideProps: GetServerSideProps = async () => {
+    const posts = await prisma.post.findMany();
+    const data = posts.map(post => {
+        return {
+            id: post.id,
+            title: post.title,
+            body: post.body,
+            cropped: post.cropped,
+            image: post.image,
+            timeToRead: post.timeToRead,
+            userId: post.userId,
+            date: post.createdAt.toISOString()
+        }
+    })
 
-    const [lasPosts, setLastPosts] = React.useState<Post[]>([])
+    return {
+        props: {
+            posts: data
+        }
+    }
+}
+
+const Publicacoes = ({posts}) => {
+
+    const [lastPosts, setLastPosts] = React.useState<Post[]>([])
 
     const initialValues = {
         [FILTER_FORM_ENUM.SUBJECT]: '',
@@ -84,16 +109,16 @@ const Publicacoes = () => {
                     <h2>Últimas publicações</h2>
                     <br/>
                     <PostGrid>
-                        {lasPosts.map((post) => (
+                        {posts.map((post, index) => (
                             <div className="post-line" key={post.id}>
-                                {post.id % 2 == 1 ? (
+                                {index % 2 == 1 ? (
                                     <picture>
-                                        <img src={'./assets/images/post01.png'} />
+                                        <img src={post.image} />
                                     </picture>
                                 ): null}
                                 <div className="text-area">
                                     <div className="text-row">
-                                        <span>{post.author} · <span className="text-grey">{post.created}</span></span>
+                                        <span>{post.userId} · <span className="text-grey">Publicado em {moment(post.date).format('DD/MM/YYYY')}</span></span>
                                     </div>
                                     <br/>
                                     <div className="text-row">
@@ -101,13 +126,13 @@ const Publicacoes = () => {
                                     </div>
                                     <div>
                                         <span className="text-grey">
-                                            {post.body}
+                                            {post.cropped}
                                         </span>
                                     </div>
                                     <br/>
                                     <div className="text-row">
                                         <span className="text-grey">
-                                            {post.timeToRead}
+                                            {post.timeToRead} minutos de leitura.
                                         </span>
                                         <Link href="/publicacoes/contratos-em-2022">
                                             <h6>Publicação completa -&gt;</h6>
