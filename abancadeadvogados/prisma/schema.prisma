@@ -6,10 +6,24 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
+model User {
+  id String @id @default(uuid())
 
+  name String
+  email String
+  password String
+  observation String
+  isActive Boolean
+
+  Post Post[] 
+  Service Service[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 model Post {
   id String @id @default(uuid())
 
@@ -18,9 +32,34 @@ model Post {
   cropped String
   image String
   timeToRead String
-  userId String
+  isActive Boolean @default(true)
+
+  userId User @relation(fields: [authorId], references: [id])
+  authorId String
+
+  slug String @default("")
+  type String @default("")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
 
+
+
+model Service {
+  id String @id @default(uuid())
+
+  title String
+  body String
+  cropped String
+  image String
+
+  userId  User @relation(fields: [authorId], references: [id])
+  authorId String
+
+  slug String @default("")
+  type String @default("")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

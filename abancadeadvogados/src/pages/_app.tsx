@@ -3,17 +3,19 @@ import React from "react";
 import GlobalStyle from '../styles/global'
 import {ThemeProvider} from "styled-components";
 import theme from "../styles/theme";
-import { SessionProvider } from "next-auth/react"
+import { AuthProvider } from "../contexts/AuthContext";
+import 'tailwindcss/tailwind.css';
+import '../styles/global.css';
 
-const MyApp: React.FC = ({ Component, pageProps: {session, ...pageProps} }: AppProps) => {
+const MyApp: React.FC = ({ Component, pageProps }: AppProps) => {
 
   return (
-    <SessionProvider session={session}>
+    <AuthProvider>
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
         <GlobalStyle/>
       </ThemeProvider>
-    </SessionProvider>
+    </AuthProvider>    
   )
 }
 

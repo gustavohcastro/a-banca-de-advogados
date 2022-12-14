@@ -1,13 +1,28 @@
+
 import Head from 'next/head';
-import React from 'react';
+import Router from 'next/router'
+import React, { useContext, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { FiArrowDownCircle } from 'react-icons/fi';
 import FooterComponent from '../../components/Footer';
 import { Footer } from '../../components/Footer/styles';
 import Header from '../../components/Header';
+import { AuthContext } from '../../contexts/AuthContext';
 import { BackgroundImage, BannerArea } from "../../styles/pages/AreaDoAssociado"
 
 
 const AreaDoAssociado: React.FC = () => {
+    const { register, handleSubmit } = useForm();
+    const {signIn, user, isAuthenticated} = useContext(AuthContext);
+
+    async function handleSignIn(data) {
+        await signIn(data)
+    }
+
+    // useEffect(() => {
+    //     !isAuthenticated && Router.push('/dashboard')
+    // }, [])
+
     return (
         <>
             <Head>
@@ -24,15 +39,20 @@ const AreaDoAssociado: React.FC = () => {
                         </picture>
                         <br/>
                         <br/>
-                        <form>
+                        <form onSubmit={handleSubmit(handleSignIn)}>
                             <label>Usuário</label>
                             <br/>
-                            <input id="fullName" name="fullName" placeholder='exemplo: jdasilva' />
+                            <input 
+                                id="fullName" 
+                                name="fullName" 
+                                placeholder='exemplo: jdasilva' 
+                                {...register('email')}
+                            />
                             <br/>
                             <br/>
                             <label>Senha</label>
                             <br/>
-                            <input id="fullName" name="fullName" placeholder='*******' />
+                            <input type="password" id="fullName" name="fullName" placeholder='*******' {...register('password')}/>
                             <br/>
                             <br/>
                             <button>Entrar</button>          

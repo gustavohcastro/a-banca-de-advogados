@@ -12,6 +12,7 @@ import { BackgroundImage, BannerArea, Container, ContainerForm, LastPosts, PostG
 import { GetServerSideProps } from "next";
 import moment from "moment";
 import prisma from "../../lib/prismadb"
+import { useRouter } from "next/router";
 
 enum FILTER_FORM_ENUM {
     SUBJECT = 'assunto',
@@ -30,9 +31,18 @@ interface FILTER_FORM_TYPE {
     [FILTER_FORM_ENUM.AUTHOR]: string;
 }
 
-
-export const getServerSideProps: GetServerSideProps = async () => {
-    const posts = await prisma.post.findMany();
+async function getPosts() {
+    const posts = await prisma.post.findMany({
+        include : {
+            userId: {
+                select: {
+                    name: true
+                }
+            },
+        },
+        take: 2
+    });
+    
     const data = posts.map(post => {
         return {
             id: post.id,
@@ -41,21 +51,85 @@ export const getServerSideProps: GetServerSideProps = async () => {
             cropped: post.cropped,
             image: post.image,
             timeToRead: post.timeToRead,
-            userId: post.userId,
+            user: post.userId,
             date: post.createdAt.toISOString()
         }
     })
 
+    return data
+}
+
+async function getUsers() {
+    return await prisma.user.findMany({
+        select : {
+            name: true,
+            id: true
+        }
+    })
+}
+
+interface PostFilterProps {
+    assunto?: string;
+    autor?: string;
+}
+async function getAllPosts(filter: PostFilterProps){
+    const {assunto, autor} = filter;
+    const posts = await prisma.post.findMany({
+        where: {
+            title   : {
+                contains: assunto,  
+            },
+            userId: {
+                name: {
+                    equals: autor,
+                }
+            }
+        },
+        include : {
+            userId: {
+                select: {
+                    name: true
+                }
+            },
+        },
+        take: 9
+    });
+    // console.log(posts)
+    const data = posts.map(post => {
+        return {
+            id: post.id,
+            title: post.title,
+            body: post.body,
+            cropped: post.cropped,
+            image: post.image,
+            timeToRead: post.timeToRead,
+            user: post.userId,
+            date: post.createdAt.toISOString()
+        }
+    })
+
+    return data
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const urlParams = (context.query)
+    
+    const posts = await getPosts();
+    const users = await getUsers();
+    const allPosts = await getAllPosts(urlParams);
+
     return {
         props: {
-            posts: data
+            posts,
+            users,
+            allPosts
         }
     }
 }
 
-const Publicacoes = ({posts}) => {
+const Publicacoes = ({posts, users, allPosts}) => {
 
-    const [lastPosts, setLastPosts] = React.useState<Post[]>([])
+    const router = useRouter();
 
     const initialValues = {
         [FILTER_FORM_ENUM.SUBJECT]: '',
@@ -72,22 +146,16 @@ const Publicacoes = ({posts}) => {
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setFormData(initialValues);
+        console.log(formData);
+        let filtro: string[] | string = [];
+        if (formData.autor) filtro.push(`autor=${formData.autor}`)
+        if (formData.assunto) filtro.push(`assunto=${formData.assunto}`)
+        
+        filtro = filtro.join('&');
+        router.push(`/publicacoes?${filtro}`)
+        // setFormData(initialValues);
         // modal.current?.openModal();
     }
-
-    const getPosts = async() => {
-        const res = await api.get('/api/posts/ultimos-posts');
-        if (res.status === 200) {
-            setLastPosts(res.data)
-        }
-
-    }
-
-    React.useEffect(() => {
-        getPosts();
-    },[])
-
 
     return (
         <>
@@ -111,14 +179,14 @@ const Publicacoes = ({posts}) => {
                     <PostGrid>
                         {posts.map((post, index) => (
                             <div className="post-line" key={post.id}>
-                                {index % 2 == 1 ? (
+                                {(index % 2 == 1) ? (
                                     <picture>
                                         <img src={post.image} />
                                     </picture>
                                 ): null}
                                 <div className="text-area">
                                     <div className="text-row">
-                                        <span>{post.userId} · <span className="text-grey">Publicado em {moment(post.date).format('DD/MM/YYYY')}</span></span>
+                                        <span>{post.user.name} · <span className="text-grey">Publicado em {moment(post.date).format('DD/MM/YYYY')}</span></span>
                                     </div>
                                     <br/>
                                     <div className="text-row">
@@ -139,14 +207,13 @@ const Publicacoes = ({posts}) => {
                                         </Link>
                                     </div>
                                 </div>
-                                {post.id % 2 == 0 ? (
+                                {index % 2 == 0 ? (
                                     <picture>
-                                        <img src={'./assets/images/post01.png'} />
+                                        <img src={post.image} />
                                     </picture>
                                 ): null}
                         </div>
-                        ))}
-                        
+                        ))}      
                     </PostGrid>
                 </LastPosts>
                 <SearchArea>
@@ -180,9 +247,9 @@ const Publicacoes = ({posts}) => {
                                                 onChange={onWrite}
                                             >
                                                 <option value={null}></option>
-                                                <option value={AUTHOR_OPTIONS.MELKIS}>Dr. Melkis Cardoso</option>
-                                                <option value={AUTHOR_OPTIONS.FELIPE}>Dr. Felipe André Dani</option>
-                                                <option value={AUTHOR_OPTIONS.JOAO}>Dr. João Pedro Felisberto</option>
+                                                { users.map(user => (
+                                                     <option value={user.name}>Dr. {user.name}</option>
+                                                ))}
                                             </select>
                                         </div>
                                         <button type="submit" className='btn-enviar'>Buscar</button>
@@ -207,78 +274,21 @@ const Publicacoes = ({posts}) => {
                         <FiArrowRightCircle/>
                     </div>
                     <div className="cards">
-                        <div className="card">
-                            <img src={'./assets/images/post02.png'} />
-                            <span>Dr. Felipe André Dani · 1 semana atrás</span>
-                            <h3>Contratos em 2022</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor ligula, dapibus vitae vulputate nec. </p>
-                            <div className="card-row">
-                                <span>12 minutos de leitura.</span>
-                                <Link href='/'>
-                                    <h6>Publicação completa<FiArrowRight/></h6>
-                                </Link>
+                        {allPosts.map(post => (
+                            <div className="card" key={post.id}>
+                                <img src={post.image} />
+                                <span>Dr. {post.user.name} · {moment(post.date).format('DD/MM/YYYY')}</span>
+                                <h3>{post.title}</h3>
+                                <p>{post.cropped}</p>
+                                <div className="card-row">
+                                    <span>{post.timeToRead} minutos de leitura.</span>
+                                    <Link href='/'>
+                                        <h6>Publicação completa<FiArrowRight/></h6>
+                                    </Link>
+                                </div>
                             </div>
-                        </div>
-                          <div className="card">
-                            <img src={'./assets/images/post02.png'} />
-                            <span>Dr. Felipe André Dani · 1 semana atrás</span>
-                            <h3>Contratos em 2022</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor ligula, dapibus vitae vulputate nec. </p>
-                            <div className="card-row">
-                                <span>12 minutos de leitura.</span>
-                                <Link href='/'>
-                                    <h6>Publicação completa<FiArrowRight/></h6>
-                                </Link>
-                            </div>
-                        </div>
-                          <div className="card">
-                            <img src={'./assets/images/post02.png'} />
-                            <span>Dr. Felipe André Dani · 1 semana atrás</span>
-                            <h3>Contratos em 2022</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor ligula, dapibus vitae vulputate nec. </p>
-                            <div className="card-row">
-                                <span>12 minutos de leitura.</span>
-                                <Link href='/'>
-                                    <h6>Publicação completa<FiArrowRight/></h6>
-                                </Link>
-                            </div>
-                        </div>
-                          <div className="card">
-                            <img src={'./assets/images/post02.png'} />
-                            <span>Dr. Felipe André Dani · 1 semana atrás</span>
-                            <h3>Contratos em 2022</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor ligula, dapibus vitae vulputate nec. </p>
-                            <div className="card-row">
-                                <span>12 minutos de leitura.</span>
-                                <Link href='/'>
-                                    <h6>Publicação completa<FiArrowRight/></h6>
-                                </Link>
-                            </div>
-                        </div>
-                          <div className="card">
-                            <img src={'./assets/images/post02.png'} />
-                            <span>Dr. Felipe André Dani · 1 semana atrás</span>
-                            <h3>Contratos em 2022</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor ligula, dapibus vitae vulputate nec. </p>
-                            <div className="card-row">
-                                <span>12 minutos de leitura.</span>
-                                <Link href='/'>
-                                    <h6>Publicação completa<FiArrowRight/></h6>
-                                </Link>
-                            </div>
-                        </div>
-                          <div className="card">
-                            <img src={'./assets/images/post02.png'} />
-                            <span>Dr. Felipe André Dani · 1 semana atrás</span>
-                            <h3>Contratos em 2022</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tortor ligula, dapibus vitae vulputate nec. </p>
-                            <div className="card-row">
-                                <span>12 minutos de leitura.</span>
-                                <Link href='/'>
-                                    <h6>Publicação completa<FiArrowRight/></h6>
-                                </Link>
-                            </div>
-                        </div>
+                        ))}
+                        
                     </div>
                 </PostsResult>
                 <FooterComponent/>
