@@ -282,7 +282,7 @@ export const ServicesHeader = styled.section`
 	align-items: center;
 	
 	div {
-		width: 10vw;
+		width: 15vw;
 	}
 	
 	h4 {
@@ -770,6 +770,7 @@ export const ContactArea = styled.section`
 		color: ${props => props.theme.colors.primary};
 		outline: 0;
 		border: 0;
+    padding: 8;
 	}
 	
 	form textarea {

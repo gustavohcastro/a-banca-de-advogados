@@ -3,8 +3,20 @@ import FooterComponent from "../../components/Footer";
 import HeaderComponent from "../../components/Header";
 import { BackgroundImage, BannerArea, ContactArea } from "../../styles/pages/Contato";
 import React from 'react';
+import { useForm } from "react-hook-form";
 
 const Contato: React.FC = () => {
+     const {handleSubmit, register, getValues} = useForm();
+
+    const handleForm = (data) => {
+        console.log(data);
+    }
+
+    const handleWhatsApp = (data) => {
+        const {fullName, body} = getValues();
+        window.open(`https://wa.me/5547999841175?text=Olá, meu nome é ${fullName}%0A%0A${body}`)
+    }
+    
     return (
         <>
             <Head>
@@ -29,23 +41,23 @@ const Contato: React.FC = () => {
                     </iframe>
                     <div className="contact-form">
                         <h2>Entre em contato ou<br/> nos encontre!</h2>
-                        <form method="POST" action="#">
+                       <form onSubmit={() => handleSubmit(handleForm)}>
                             <label>Nome Completo</label>
                             <br/>
-                            <input id="fullName" name="fullName" />
+                            <input {...register('fullName')} id="fullName" name="fullName" />
                             <br/>
                             <br/>
                             <label>Telefone/Whatsapp</label>
                             <br/>
-                            <input id="fullName" name="fullName" />
+                            <input {...register('telephone')} id="telephone" name="telephone" />
                             <br/>
                             <br/>
                             <label>Mensagem</label>
                             <br/>
-                            <textarea id="fullName" name="fullName" />
+                            <textarea {...register('body')} id="body" name="body" />
                             <br/>
-                            <button>Enviar</button>
-                            <button>Whatsapp</button>
+                            <button type='submit'>Enviar</button>
+                            <button type='button' onClick={handleWhatsApp}>Whatsapp</button>
                         </form>
                     </div>
                 </ContactArea>

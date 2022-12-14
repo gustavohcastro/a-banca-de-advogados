@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Head from 'next/head'
 import {BackgroundImage, BannerArea, AboutCompany, OurOffice, ServicesHeader, ServicesCards, OurTeam, Posts, ProductsHome, ContactArea} from '../styles/pages/Home'
 import {FiArrowDownCircle, FiBox, FiChevronLeft, FiChevronRight, FiMenu, FiX} from "react-icons/fi";
@@ -7,8 +7,87 @@ import theme from "../styles/theme";
 import Link from "next/link";
 import Header from '../components/Header';
 import FooterComponent from '../components/Footer';
+import Router from 'next/router';
+import { GetServerSideProps } from 'next';
+import moment from 'moment';
+import { useForm } from 'react-hook-form';
+import prisma from "../lib/prismadb"
 
-const Home: React.FC = () => {
+async function getAllPosts(){
+
+    const posts = await prisma.post.findMany({
+        include : {
+            userId: {
+                select: {
+                    name: true
+                }
+            },
+        },
+        take: 4
+    });
+    // console.log(posts)
+    const data = posts.map(post => {
+        return {
+            id: post.id,
+            title: post.title,
+            body: post.body,
+            cropped: post.cropped,
+            image: post.image,
+            timeToRead: post.timeToRead,
+            user: post.userId,
+            date: post.createdAt.toISOString()
+        }
+    })
+
+    return data
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+    
+    
+    const allPosts = await getAllPosts();
+
+    return {
+        props: {
+            allPosts
+        }
+    }
+}
+
+interface PostProps {
+    id: string;
+    title: string;
+    body: string;
+    cropped: string;
+    image: string;
+    timeToRead: string;
+    user: string;
+    date: string;
+}
+
+const Home: React.FC = (props: any) => {
+
+    moment.locale('pt-br');
+
+    const [posts, setPosts]= useState<PostProps[]>([]);
+    const [services, setServices] = useState([])
+    
+    const {handleSubmit, register, getValues} = useForm();
+
+    const handleForm = (data) => {
+        console.log(data);
+    }
+
+    const handleWhatsApp = (data) => {
+        const {fullName, body} = getValues();
+        window.open(`https://wa.me/5547999841175?text=Olá, meu nome é ${fullName}%0A%0A${body}`)
+    }
+
+    useEffect(() => {
+        const response: PostProps[] = props.allPosts ? props.allPosts : [];
+        setPosts(response)
+    }, [])
+
   return (
     <>
       <Head>
@@ -52,50 +131,50 @@ const Home: React.FC = () => {
                   <br/>
                   <br/>
                   <br/>
-                  <Link href="/">Ver mais &gt;&gt;</Link>
+                  <Link href="/escritorio">Ver mais &gt;&gt;</Link>
               </div>
           </OurOffice>
           <ServicesHeader>
               <h4>Àreas de atuação,<br/>consultoria e<br/>especialidades.</h4>
               <div>
-                  <p>Lorem Ipsum</p>
-                  <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                  <p>Compromisso</p>
+                  <span>Assumir um compromisso é ser fiel a uma promessa e entregar-se aquilo que se comprometeu a fazer, seja por si ou pelo outro.</span>
               </div>
               <div>
-                  <p>Lorem Ipsum</p>
-                  <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                  <p>Seriedade</p>
+                  <span>A única coisa que importa é colocar em prática, com sinceridade e seriedade, aquilo em que se acredita.</span>
               </div>
           </ServicesHeader>
           <ServicesCards>
               <div>
-                  <p>Direto Empresarial</p>
+                  <p>Direito Empresarial</p>
                   <span>Atuação voltada a prestar assessoria jurídica na área empresarial, societária, estruturação e planejamento de negócios e revisão contratual.</span>
-                  <Link href={""}>Ver mais &gt;&gt;</Link>
+                  <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
               </div>
               <div>
                   <p>Direito Civil</p>
                   <span>O enfoque de atuação da esfera cível é voltado à ações de indenização por dano material e moral, responsabilidade civil, cobranças, execuções, obrigações de fazer e direito imobiliário.</span>
-                  <Link href={""}>Ver mais &gt;&gt;</Link>
+                  <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
               </div>
               <div>
                   <p>Direito do Consumidor</p>
                   <span>Especialidade de atuação em ações de indenização por negativação indevida, ações revisionais por juros abusivos, reparação de danos ao consumidor, golpes sofridos de forma física ou virtual pelo consumidor.</span>
-                  <Link href={""}>Ver mais &gt;&gt;</Link>
+                  <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
               </div>
               <div>
                   <p>Direito Penal</p>
                   <span>Atuação especializada em direito penal econômico, crimes financeiros, tráfico de entorpecentes, tribunal do Júri, acompanhamento da execução penal e revisão criminal.</span>
-                  <Link href={""}>Ver mais &gt;&gt;</Link>
+                  <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
               </div>
               <div>
                   <p>Direito Bancário</p>
                   <span>Enfoque de atuação na revisão de financiamentos, defesas em busca e apreensão de bens, defesas em execuções de título extrajudicial e cobranças.</span>
-                  <Link href={""}>Ver mais &gt;&gt;</Link>
+                  <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
               </div>
               <div>
                   <p>Direito Contratual</p>
                   <span>Especialidade de atuação na elaboração de contratos de prestação de serviços, contratos sociais empresariais, contratos imobiliários, contratos de parceria com influenciadores digitais.</span>
-                  <Link href={""}>Ver mais &gt;&gt;</Link>
+                  <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
               </div>
           </ServicesCards>
           <OurTeam>
@@ -131,72 +210,49 @@ const Home: React.FC = () => {
           <Posts>
               <div className="header-area">
                   <h3>Publicações</h3>
-                  <a href="">
+                  <a href="/publicacoes">
                     <p>{`Ver mais ->`}</p>
                   </a>
               </div>
               <div className="post-row">
-                  <a href="">
+                {posts.map(post => (
+                  <a href={`/publicacoes/${post.id}`} key={post.id}>
                     <div>
                       <picture>
-                          <img src={'./assets/images/post_photo.png'} alt="Sócio Fundador"/>
+                          <img src={post.image} alt="Sócio Fundador"/>
                       </picture>
-                      <h6>Lorem Ipsum</h6>
-                      <p>03 de outubro de 2022.</p>
+                      <h6>{post.title}</h6>
+                      <p>{moment(post.date).format('LL')}</p>
                     </div>
                   </a>
-                  <a href="">
-                      <div>
-                          <picture>
-                              <img src={'./assets/images/post_photo.png'} alt="Sócio Fundador"/>
-                          </picture>
-                          <h6>Lorem Ipsum</h6>
-                          <p>03 de outubro de 2022.</p>
-                      </div>
-                  </a>
-                  <a href="">
-                      <div>
-                          <picture>
-                              <img src={'./assets/images/post_photo.png'} alt="Sócio Fundador"/>
-                          </picture>
-                          <h6>Lorem Ipsum</h6>
-                          <p>03 de outubro de 2022.</p>
-                      </div>
-                  </a>
-                  <a href="">
-                      <div>
-                          <picture>
-                              <img src={'./assets/images/post_photo.png'} alt="Sócio Fundador"/>
-                          </picture>
-                          <h6>Lorem Ipsum</h6>
-                          <p>03 de outubro de 2022.</p>
-                      </div>
-                  </a>
+                 ))}
               </div>
           </Posts>
-          <ProductsHome>
-              <div>
-                <button>
-                    <FiChevronLeft style={{width: 48, height:48}} color={theme.colors.dark}/>
-                </button>
-                <div className="product-area">
-                    <picture>
-                        <img className="product-photo" src={'./assets/images/post_photo.png'} alt="Product"/>
-                    </picture>
-                    <div className="product-text">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
-                        <h6>Produtos e Serviços</h6>
-                        <p>Autor: Lorem Ipsum</p>
-                        <button>
-                            Ver detalhes
-                        </button>
+          {services.length > 0 && services.map(service => (
+            <ProductsHome>
+                <div>
+                    <button>
+                        <FiChevronLeft style={{width: 48, height:48}} color={theme.colors.dark}/>
+                    </button>
+                    <div className="product-area">
+                        <picture>
+                            <img className="product-photo" src={'./assets/images/post_photo.png'} alt="Product"/>
+                        </picture>
+                        <div className="product-text">
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
+                            <h6>Produtos e Serviços</h6>
+                            <p>Autor: Lorem Ipsum</p>
+                            <button onClick={() => Router.push('/publicacoes')}>
+                                Ver detalhes
+                            </button>
+                        </div>
                     </div>
+                    <button>
+                        <FiChevronRight style={{width: 48, height:48}} color={theme.colors.dark}/>
+                    </button>
                 </div>
-                <button>
-                    <FiChevronRight style={{width: 48, height:48}} color={theme.colors.dark}/>
-                </button>
-              </div>
-          </ProductsHome>
+            </ProductsHome>
+          ))}
           <ContactArea>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3555.6331428726303!2d-48.641913984960105!3d-26.978514502449656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94d8ca026da50edf%3A0x59a8fe191106b64e!2sR.%201301%2C%20471%20-%20Centro%2C%20Balne%C3%A1rio%20Cambori%C3%BA%20-%20SC%2C%2088330-795!5e0!3m2!1sen!2sbr!4v1667580921825!5m2!1sen!2sbr"
@@ -205,23 +261,23 @@ const Home: React.FC = () => {
               </iframe>
               <div className="contact-form">
                   <h2>Entre em contato ou<br/> nos encontre!</h2>
-                  <form method="POST" action="#">
+                  <form onSubmit={() => handleSubmit(handleForm)}>
                       <label>Nome Completo</label>
                       <br/>
-                      <input id="fullName" name="fullName" />
+                      <input {...register('fullName')} id="fullName" name="fullName" />
                       <br/>
                       <br/>
                       <label>Telefone/Whatsapp</label>
                       <br/>
-                      <input id="fullName" name="fullName" />
+                      <input {...register('telephone')} id="telephone" name="telephone" />
                       <br/>
                       <br/>
                       <label>Mensagem</label>
                       <br/>
-                      <textarea id="fullName" name="fullName" />
+                      <textarea {...register('body')} id="body" name="body" />
                       <br/>
-                      <button>Enviar</button>
-                      <button>Whatsapp</button>
+                      <button type='submit'>Enviar</button>
+                      <button type='button' onClick={handleWhatsApp}>Whatsapp</button>
                   </form>
               </div>
           </ContactArea>

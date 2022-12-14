@@ -102,7 +102,7 @@ export const ServicesHeader = styled.section`
 	align-items: center;
 	margin-top: 50px;
 	div {
-		width: 10vw;
+		width: 15vw;
 	}
 	
 	h4 {

@@ -68,7 +68,7 @@ async function getUsers() {
     })
 }
 
-interface PostFilterProps {
+export interface PostFilterProps {
     assunto?: string;
     autor?: string;
 }

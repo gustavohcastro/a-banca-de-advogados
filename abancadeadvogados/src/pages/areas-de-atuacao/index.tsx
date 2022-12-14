@@ -25,12 +25,12 @@ const AreasDeAtuacao: React.FC = () => {
                 <ServicesHeader>
                     <h4>Àreas de atuação,<br/>consultoria e<br/>especialidades.</h4>
                     <div>
-                        <p>Lorem Ipsum</p>
-                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                        <p>Compromisso</p>
+                        <span>Assumir um compromisso é ser fiel a uma promessa e entregar-se aquilo que se comprometeu a fazer, seja por si ou pelo outro.</span>
                     </div>
                     <div>
-                        <p>Lorem Ipsum</p>
-                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                        <p>Seriedade</p>
+                        <span>A única coisa que importa é colocar em prática, com sinceridade e seriedade, aquilo em que se acredita.</span>
                     </div>
                 </ServicesHeader>
                 <ServicesCards>
