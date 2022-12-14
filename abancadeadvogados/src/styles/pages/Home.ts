@@ -44,6 +44,10 @@ export const BannerArea = styled.div`
     background-color: transparent;
     align-self: center;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    
     p {
       margin-bottom: 16px;
       color: ${props => props.theme.colors.secondary};
@@ -59,6 +63,7 @@ export const BannerArea = styled.div`
     height: 48px;
     transition: 0.5s;
     transform: rotate(360deg);
+
   }
  
   @keyframes bounceIn {
