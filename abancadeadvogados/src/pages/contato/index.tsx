@@ -6,7 +6,7 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 
 const Contato: React.FC = () => {
-     const {handleSubmit, register, getValues} = useForm();
+    const {handleSubmit, register, getValues} = useForm();
 
     const handleForm = (data) => {
         console.log(data);
@@ -66,6 +66,5 @@ const Contato: React.FC = () => {
         </>
     )
 }
-
 
 export default Contato;
