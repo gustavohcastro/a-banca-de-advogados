@@ -32,40 +32,51 @@ interface FILTER_FORM_TYPE {
 }
 
 async function getPosts() {
-    const posts = await prisma.post.findMany({
-        include : {
-            userId: {
-                select: {
-                    name: true
-                }
+    try {
+        const posts = await prisma.post.findMany({
+            include : {
+                userId: {
+                    select: {
+                        name: true
+                    }
+                },
             },
-        },
-        take: 2
-    });
-    
-    const data = posts.map(post => {
-        return {
-            id: post.id,
-            title: post.title,
-            body: post.body,
-            cropped: post.cropped,
-            image: post.image,
-            timeToRead: post.timeToRead,
-            user: post.userId,
-            date: post.createdAt.toISOString()
-        }
-    })
+            take: 2
+        });
+        
+        const data = posts.map(post => {
+            return {
+                id: post.id,
+                title: post.title,
+                body: post.body,
+                cropped: post.cropped,
+                image: post.image,
+                timeToRead: post.timeToRead,
+                user: post.userId,
+                date: post.createdAt.toISOString()
+            }
+        })
 
-    return data
+        return data
+    }
+    catch (e) {
+        return []
+    }
 }
 
 async function getUsers() {
-    return await prisma.user.findMany({
-        select : {
-            name: true,
-            id: true
-        }
-    })
+    try {
+        return await prisma.user.findMany({
+            select : {
+                name: true,
+                id: true
+            }
+        })
+    }
+    catch(e) {
+        return []
+    }
+
 }
 
 export interface PostFilterProps {
@@ -73,42 +84,48 @@ export interface PostFilterProps {
     autor?: string;
 }
 async function getAllPosts(filter: PostFilterProps){
-    const {assunto, autor} = filter;
-    const posts = await prisma.post.findMany({
-        where: {
-            title   : {
-                contains: assunto,  
-            },
-            userId: {
-                name: {
-                    equals: autor,
-                }
-            }
-        },
-        include : {
-            userId: {
-                select: {
-                    name: true
-                }
-            },
-        },
-        take: 9
-    });
-    // console.log(posts)
-    const data = posts.map(post => {
-        return {
-            id: post.id,
-            title: post.title,
-            body: post.body,
-            cropped: post.cropped,
-            image: post.image,
-            timeToRead: post.timeToRead,
-            user: post.userId,
-            date: post.createdAt.toISOString()
-        }
-    })
+    try {
 
-    return data
+        const {assunto, autor} = filter;
+        const posts = await prisma.post.findMany({
+            where: {
+                title   : {
+                    contains: assunto,  
+                },
+                userId: {
+                    name: {
+                        equals: autor,
+                    }
+                }
+            },
+            include : {
+                userId: {
+                    select: {
+                        name: true
+                    }
+                },
+            },
+            take: 9
+        });
+        // console.log(posts)
+        const data = posts.map(post => {
+            return {
+                id: post.id,
+                title: post.title,
+                body: post.body,
+                cropped: post.cropped,
+                image: post.image,
+                timeToRead: post.timeToRead,
+                user: post.userId,
+                date: post.createdAt.toISOString()
+            }
+        })
+
+        return data
+    }
+    catch(e){
+        return []
+    }  
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

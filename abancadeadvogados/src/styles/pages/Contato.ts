@@ -5,7 +5,8 @@ export const BackgroundImage = styled.div`
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-image: url("./assets/images/background_image.png");
+  background-image: url("./assets/images/3.jpg");
+  background-position: 15% 55%;
   background-size: cover;
   background-repeat: no-repeat;
   margin-top: -16px;
@@ -18,16 +19,17 @@ export const BannerArea = styled.div`
   display: flex;
   flex-direction: column;
 
-	
   h2 {
     color: ${props => props.theme.colors.secondary};
     font-family: Abhaya Libre, sans-serif;
     font-size: 7rem;
+    
 	  
   }
 
   h3 {
     font-size: 3rem;
+    text-shadow: 2px 2px ${props => props.theme.colors.primary};
   }
 	
   p {

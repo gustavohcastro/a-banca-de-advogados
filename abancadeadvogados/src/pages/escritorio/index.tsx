@@ -60,17 +60,22 @@ const Escritorio: React.FC = () => {
                         <ul data-slides>
                             <li className="slide" data-active>
                                 <Picture>
-                                    <img src={'./assets/images/escritorio1.png'} alt="Foto do escritório #1"/>
+                                    <img src={'./assets/images/4.png'} alt="Foto do escritório #1"/>
                                 </Picture>
                             </li>
                             <li className="slide">
                                 <Picture>
-                                    <img src={'./assets/images/escritorio2.png'} alt="Foto do escritório #2"/>
+                                    <img src={'./assets/images/6.png'} alt="Foto do escritório #2"/>
                                 </Picture>
                             </li>
                             <li className="slide">
                                 <Picture>
-                                    <img src={'./assets/images/escritorio3.png'} alt="Foto do escritório #3"/>
+                                    <img src={'./assets/images/5.png'} alt="Foto do escritório #4"/>
+                                </Picture>
+                            </li>
+                            <li className="slide">
+                                <Picture>
+                                    <img src={'./assets/images/7.png'} alt="Foto do escritório #4"/>
                                 </Picture>
                             </li>
                         </ul>

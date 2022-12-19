@@ -129,7 +129,7 @@ export const CarouselArea = styled.section `
 
     .carousel {
       width: 100%;
-      height: 50vh;
+      height: 60vh;
       position: relative;
       
     }

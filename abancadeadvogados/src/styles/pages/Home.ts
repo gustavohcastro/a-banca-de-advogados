@@ -8,9 +8,10 @@ export const BackgroundImage = styled.div`
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-image: url("./assets/images/background_image.png");
+  background-image: url("./assets/images/3.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: 15% 55%;;
   margin-top: -16px;
   padding-top: 16px;
 `
@@ -26,15 +27,17 @@ export const BannerArea = styled.div`
     color: ${props => props.theme.colors.secondary};
     font-family: Abhaya Libre, sans-serif;
     font-size: 7rem;
-	  
+	  text-shadow: 2px 2px ${props => props.theme.colors.darkSecondary};
   }
 
   h3 {
     font-size: 3rem;
+    text-shadow: 2px 2px ${props => props.theme.colors.grey};
   }
 	
   p {
     width: 40vw;
+    text-shadow: 2px 2px ${props => props.theme.colors.grey};
   }
   
   button {

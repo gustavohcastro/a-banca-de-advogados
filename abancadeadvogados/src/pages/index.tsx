@@ -14,43 +14,51 @@ import { useForm } from 'react-hook-form';
 import prisma from "../lib/prismadb"
 
 async function getAllPosts(){
-
-    const posts = await prisma.post.findMany({
-        include : {
-            userId: {
-                select: {
-                    name: true
-                }
+    try {
+        const posts = await prisma.post.findMany({
+            include : {
+                userId: {
+                    select: {
+                        name: true
+                    }
+                },
             },
-        },
-        take: 4
-    });
-    // console.log(posts)
-    const data = posts.map(post => {
-        return {
-            id: post.id,
-            title: post.title,
-            body: post.body,
-            cropped: post.cropped,
-            image: post.image,
-            timeToRead: post.timeToRead,
-            user: post.userId,
-            date: post.createdAt.toISOString()
-        }
-    })
+            take: 4
+        });
+        // console.log(posts)
+        const data = posts.map(post => {
+            return {
+                id: post.id,
+                title: post.title,
+                body: post.body,
+                cropped: post.cropped,
+                image: post.image,
+                timeToRead: post.timeToRead,
+                user: post.userId,
+                date: post.createdAt.toISOString()
+            }
+        })
 
-    return data
+        return data
+    }
+    catch(e) {
+        return []
+    }
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
     
-    
+    try {
     const allPosts = await getAllPosts();
 
     return {
         props: {
             allPosts
         }
+    }
+    }
+    catch(e) {
+        console.error(e)
     }
 }
 
@@ -122,7 +130,7 @@ const Home: React.FC = (props: any) => {
           </AboutCompany>
           <OurOffice>
               <picture>
-                  <img src={'./assets/images/ouroffice.png'} className='logo' alt="Nosso escritório"/>
+                  <img src={'./assets/images/4.png'} className='logo' alt="Nosso escritório"/>
               </picture>
               <div>
                   <p>Nosso escritório</p>
@@ -207,6 +215,7 @@ const Home: React.FC = (props: any) => {
                 </div>
             </div>
           </OurTeam>
+          {posts.length > 0 ? (
           <Posts>
               <div className="header-area">
                   <h3>Publicações</h3>
@@ -228,6 +237,7 @@ const Home: React.FC = (props: any) => {
                  ))}
               </div>
           </Posts>
+          ): null}
           {services.length > 0 && services.map(service => (
             <ProductsHome>
                 <div>
