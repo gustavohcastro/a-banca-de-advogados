@@ -67,4 +67,5 @@ const Contato: React.FC = () => {
     )
 }
 
+
 export default Contato;
