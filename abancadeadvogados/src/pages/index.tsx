@@ -42,6 +42,7 @@ async function getAllPosts(){
         return data
     }
     catch(e) {
+        console.log(e)
         return []
     }
 }
@@ -49,13 +50,14 @@ async function getAllPosts(){
 export const getServerSideProps: GetServerSideProps = async () => {
     
     try {
-    const allPosts = await getAllPosts();
-
-    return {
-        props: {
-            allPosts
+        console.log('ciomecou')
+        const allPosts = await getAllPosts();
+        console.log(allPosts)
+        return {
+            props: {
+                allPosts
+            }
         }
-    }
     }
     catch(e) {
         console.error(e)
