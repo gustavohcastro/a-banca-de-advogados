@@ -8,7 +8,7 @@ export const BackgroundImage = styled.div`
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-image: url("./assets/images/3.jpg");
+  background-image: url("./assets/images/bg.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 15% 55%;;
@@ -32,12 +32,12 @@ export const BannerArea = styled.div`
 
   h3 {
     font-size: 3rem;
-    text-shadow: 2px 2px ${props => props.theme.colors.grey};
+    
   }
 	
   p {
     width: 40vw;
-    text-shadow: 2px 2px ${props => props.theme.colors.grey};
+    font-size: 1.2rem;
   }
   
   button {

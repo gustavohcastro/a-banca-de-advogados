@@ -53,6 +53,10 @@ const Escritorio: React.FC = () => {
                         <br/>
                     </BannerArea>
                 </BackgroundImage>
+                 <OfficeDescription>
+                    <h2>Nosso escritório</h2>
+                    <p>Localizada no centro de Balneário Camboriú, nossa nova sede foi inaugurada em 2022, com viés totalmente corporativo e voltada aos negócios, trazendo conforto e praticidade aos clientes e parceiros.</p>
+                </OfficeDescription>
                 <CarouselArea>
                     <div className="carousel" data-carousel>
                         <button className="carousel-button prev" data-carousel-button="prev"><FiChevronLeft/> </button>
@@ -81,10 +85,7 @@ const Escritorio: React.FC = () => {
                         </ul>
                     </div>
                 </CarouselArea>
-                <OfficeDescription>
-                    <h2>Nosso escritório</h2>
-                    <p>Localizada no centro de Balneário Camboriú, nossa nova sede foi inaugurada em 2022, com viés totalmente corporativo e voltada aos negócios, trazendo conforto e praticidade aos clientes e parceiros.</p>
-                </OfficeDescription>
+               
                 <FooterComponent/>
             </main>
         </>    

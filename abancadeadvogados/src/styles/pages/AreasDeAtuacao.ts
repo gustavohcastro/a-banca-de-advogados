@@ -4,7 +4,7 @@ export const BackgroundImage = styled.div`
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-image: url("./assets/images/3.jpg");
+  background-image: url("./assets/images/bg.png");
   background-position: 15% 55%;
   background-size: cover;
   background-repeat: no-repeat;
