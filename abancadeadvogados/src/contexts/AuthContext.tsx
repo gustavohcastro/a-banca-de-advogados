@@ -2,11 +2,14 @@ import { createContext, useEffect, useState } from "react";
 import { setCookie, parseCookies } from 'nookies'
 import Router from 'next/router'
 import api from "../services/api";
+import Notiflix from "notiflix";
+import jwtDecode from "jwt-decode";
 
 type User = {
   name: string;
   email: string;
   avatar_url: string;
+  id: string;
 }
 
 type SignInData = {
@@ -27,14 +30,26 @@ export function AuthProvider({ children }) {
 
   const isAuthenticated = !!user;
 
-  useEffect(() => {
-    const { 'nextauth.token': token } = parseCookies()
+  const recoverUser = async () => {
+    let { 'abancadeadvogados.token': token } = parseCookies()
 
     if (token) {
-    //   recoverUserInformation().then(response => {
-    //     setUser(response.user)
-    //   })
+      const value = token.substring(6, token.length);
+      const decoded: any = await jwtDecode(value);
+      if (decoded) {
+        setUser({
+          name: decoded.name,
+          email: decoded.email,
+          avatar_url: '',
+          id: decoded.id
+        })
+      }
     }
+  }
+  
+
+  useEffect(() => {
+    recoverUser()
   }, [])
 
   async function signIn({ email, password }: SignInData) {
@@ -53,9 +68,13 @@ export function AuthProvider({ children }) {
         Router.push('/dashboard');
 
       })
+      .catch(err => {
+        Notiflix.Notify.failure('Ocorreu um erro desconhecido, tente novamente!');
+      })
+
     }
     catch (error) {
-      console.log(error)
+      Notiflix.Notify.failure('Qui timide rogat docet negare');
     }
   }
 

@@ -81,53 +81,64 @@ export const BannerArea = styled.div`
     }
 
     @media (max-width: 768px) {
-    flex-direction: column;
 
-    iframe {
+        div {
+            width: 100%;
+        }
+
+        .login-form {
+            width: 100%;
+        }
+    
+        flex-direction: column;
+
+    
+        iframe {
             min-height: 300px;
         }
 
-    .contact-form {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        padding: 16px;
-    }
+    
+        .contact-form {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            padding: 16px;
+        }
 
-    h2 {
-        font-family: Poppins, sans-serif;
-        font-size: 1.4rem;
-        font-weight: 800;
-    }
+        h2 {
+            font-family: Poppins, sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
 
-    form label {
-        font-family: Poppins, sans-serif;
-        font-size: 0.8rem;
-        font-weight: 400;
-    }
+        form label {
+            font-family: Poppins, sans-serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+        }
 
-    form input, textarea {
-        background: #D9D9D95E;
-        width: 100vw;
-        height: 40px;
-        color: ${props => props.theme.colors.primary};
-        outline: 0;
-        border: 0;
-    }
+        form input, textarea {
+            background: #D9D9D95E;
+            width: 100vw;
+            height: 40px;
+            color: ${props => props.theme.colors.primary};
+            outline: 0;
+            border: 0;
+        }
 
-    form button {
-        width: 100%;
-        height: 40px;
-        background: ${props => props.theme.colors.dark};
-        
-        outline: 0;
-        border: 0;
-        
-        font-family: Poppins, sans-serif;
-        font-size: 0.8rem;
-        font-weight: 400;
-        color: ${props => props.theme.colors.secondary};
-        margin-top: 24px;
-    }
+        form button {
+            width: 100%;
+            height: 40px;
+            background: ${props => props.theme.colors.dark};
+            
+            outline: 0;
+            border: 0;
+            
+            font-family: Poppins, sans-serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: ${props => props.theme.colors.secondary};
+            margin-top: 24px;
+        }
     }
 `

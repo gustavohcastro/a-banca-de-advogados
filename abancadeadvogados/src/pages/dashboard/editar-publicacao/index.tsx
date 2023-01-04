@@ -1,5 +1,5 @@
 import Head from "next/head"
-import React, { useContext } from "react"// import dynamic from 'next/dynamic'
+import React, { useContext, useEffect } from "react"// import dynamic from 'next/dynamic'
 import { GetServerSideProps } from "next";
 import { parseCookies } from "nookies";
 import { getAPIClient } from "../../../services/axios";
@@ -9,40 +9,54 @@ import api from "../../../services/api";
 import { useSession, getSession } from "next-auth/react"
 import { AuthContext } from "../../../contexts/AuthContext";
 import Notiflix from "notiflix";
+import Router from 'next/router';
 
 
-const DashboardNovaPublicacao = () => {
-    const { register, handleSubmit, reset } = useForm();
-    const {user} = useContext(AuthContext)
-    
-    const handleForm = async (data) => {
-      try {
-        data.user = user.id;
+const DashboardEditarPublicacao = (props: any) => {
+
+  const { register, handleSubmit, reset, setValue } = useForm();
+  const {user} = useContext(AuthContext)
+  
+  const handleForm = async (data) => {
+    try {
+      data.id = props.post.id;
+
+      api.post('api/posts/edit-post', data)
+      .then(response => {
         
-        api.post('api/posts/new-post', data)
-        .then(response => {
-          
-          if (response.data) {
-            Notiflix.Notify.success('Publicação criada com sucesso');
-          }
-          reset()
-          
+        if (response.data) {
+          Notiflix.Notify.success('Publicação salva com sucesso');
+        }
+        Router.push('/dashboard/publicacoes')
+        
 
-        })
-        .catch(e => {
-          Notiflix.Notify.failure(e.message);
-        }) 
-
-      }
-      catch(e){
+      })
+      .catch(e => {
         Notiflix.Notify.failure(e.message);
-      }
+      }) 
+
     }
+    catch(e){
+      Notiflix.Notify.failure(e.message);
+    }
+  }
+
+  useEffect(() => {
+    
+    if (props.post) {
+      const {post} = props;
+      setValue('title',  post.title)
+      setValue('slug',  post.slug)
+      setValue('timeToRead',  post.timeToRead)
+      setValue('body',  post.body)
+    }
+
+  },[props.post])
 
   return (
    <>
       <Head>
-        <title>Nova Publicação</title>
+        <title>Editar Publicação</title>
       </Head>
       <div className="flex min-w-full h-full bg-white" >
         <DashboardMenu/>
@@ -50,7 +64,7 @@ const DashboardNovaPublicacao = () => {
          <div className="w-full h-full overflow-y-scroll px-4 py-3">
 
           <h3 className="text-xl text-gray-900 font-bold py-2">
-            Nova Publicação
+            Editar Publicação
           </h3>
 
           <form onSubmit={handleSubmit(handleForm)}>
@@ -101,10 +115,12 @@ const DashboardNovaPublicacao = () => {
   )
 }
 
-export default DashboardNovaPublicacao;
+export default DashboardEditarPublicacao;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const apiClient = getAPIClient(ctx);
+  const urlParams: any = (ctx.query)
+  console.log(urlParams)
   const { ['abancadeadvogados.token']: token } = parseCookies(ctx)
 
   if (!token) {
@@ -115,9 +131,32 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       }
     }
   }
+  
+  const post = await getPost(urlParams.post);
+
   return {
     props : {
-
+      post
     }
   }
+}
+
+async function getPost(id: string){
+    try {
+        const post = await prisma.post.findUnique({
+            where: { id: id }            
+        });
+        
+        return {
+          id: post.id,
+          title: post.title,
+          body: post.body,
+          timeToRead: post.timeToRead,
+          slug: post.slug
+        }
+    }
+    catch(e) {
+        console.log(e)
+        return []
+    }
 }

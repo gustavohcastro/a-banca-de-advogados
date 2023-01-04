@@ -9,6 +9,7 @@ import { Footer } from '../../components/Footer/styles';
 import Header from '../../components/Header';
 import { AuthContext } from '../../contexts/AuthContext';
 import { BackgroundImage, BannerArea } from "../../styles/pages/AreaDoAssociado"
+import Notiflix from 'notiflix';
 
 
 const AreaDoAssociado: React.FC = () => {
@@ -16,7 +17,7 @@ const AreaDoAssociado: React.FC = () => {
     const {signIn, user, isAuthenticated} = useContext(AuthContext);
 
     async function handleSignIn(data) {
-        await signIn(data)
+            await signIn(data)
     }
 
     // useEffect(() => {
@@ -39,7 +40,7 @@ const AreaDoAssociado: React.FC = () => {
                         </picture>
                         <br/>
                         <br/>
-                        <form onSubmit={handleSubmit(handleSignIn)}>
+                        <form className='login-form' onSubmit={handleSubmit(handleSignIn)}>
                             <label>Usuário</label>
                             <br/>
                             <input 

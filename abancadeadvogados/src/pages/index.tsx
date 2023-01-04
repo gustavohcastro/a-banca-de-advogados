@@ -50,9 +50,7 @@ async function getAllPosts(){
 export const getServerSideProps: GetServerSideProps = async () => {
     
     try {
-        console.log('ciomecou')
         const allPosts = await getAllPosts();
-        console.log(allPosts)
         return {
             props: {
                 allPosts

@@ -32,7 +32,7 @@ model Post {
   cropped String
   image String
   timeToRead String
-  isActive Boolean @default(true)
+  isActive Int @default(1)
 
   userId User @relation(fields: [authorId], references: [id])
   authorId String
