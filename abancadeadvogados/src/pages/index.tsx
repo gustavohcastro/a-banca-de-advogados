@@ -106,11 +106,11 @@ const Home: React.FC = (props: any) => {
           <BackgroundImage>
           <Header/>
           <BannerArea>
-            <h2>A banca de <br/>advogados</h2>
+            <h2>A Banca de <br/>Advogados</h2>
             <br/>
             <h3>Cardoso, Dani e Felisberto.</h3>
             <br/>
-            <p>A união de forças distintas, mas ao mesmo tempo complementares, é o que determina o sucesso de um projeto de longo prazo. Nasce, assim, a banca de advogados.</p>
+            <p>A união de forças distintas, mas ao mesmo tempo complementares, é o que determina o sucesso de um projeto de longo prazo. Nasce, assim, A Banca de Advogados.</p>
             <br/>
             <button onClick={() => document.getElementById('home-about-company').scrollIntoView()}>
                 <p>Toque e descubra mais sobre nós.</p>

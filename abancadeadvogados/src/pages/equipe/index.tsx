@@ -13,18 +13,19 @@ const Equipe: React.FC = () => {
                 <link rel="icon" type="image/x-icon" href={"./assets/images/favicon.png"}/>
             </Head>
             <main>
-                <BackgroundImage style={{height: '70vh'}}>
-                    <HeaderComponent/>
+                <HeaderComponent/>
+                {/* <BackgroundImage style={{height: '70vh'}}>
+                    
                     <BannerArea>
                         <h2>Equipe</h2>
                         <br/>
                         <p>Localizada no centro de Balneário Camboriú, nossa nova sede foi inaugurada em 2022, com viés totalmente corporativo e voltada aos negócios, trazendo conforto e praticidade aos clientes e parceiros.</p>
                         <br/>
                     </BannerArea>
-                </BackgroundImage>
+                </BackgroundImage> */}
                 <OurTeam>
                     <h4>Nosso time</h4>
-                    <p>Equipe formada pelos sócios fundadores e demais contribuintes.</p>
+                    <p>Equipe formada pelos sócios fundadores e demais colaboradores.</p>
                     <div className="partner-row">
                         <div>
                             <picture>

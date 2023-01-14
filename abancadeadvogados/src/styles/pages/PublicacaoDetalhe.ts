@@ -21,7 +21,7 @@ export const BannerArea = styled.div`
 	
   h2 {
     color: ${props => props.theme.colors.secondary};
-    font-family: Abhaya Libre, sans-serif;
+    font-family: 'Noto Serif', serif;
     font-size: 7rem;
 	  
   }

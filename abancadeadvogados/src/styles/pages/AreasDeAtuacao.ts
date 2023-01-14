@@ -21,7 +21,7 @@ export const BannerArea = styled.div`
 	
   h2 {
     color: ${props => props.theme.colors.secondary};
-    font-family: Abhaya Libre, sans-serif;
+    font-family: 'Noto Serif', serif;
     font-size: 7rem;
 	  
   }
@@ -102,21 +102,22 @@ export const ServicesHeader = styled.section`
 	justify-content: space-evenly;
 	align-items: center;
 	margin-top: 50px;
+
 	div {
 		width: 15vw;
 	}
 	
 	h4 {
-		width: 20vw;
-		font-family: Abhaya Libre, sans-serif;
-        font-size: 2rem;
-        font-weight: 400;       
+		/* width: 20vw; */
+		font-family: 'Noto Serif', serif;
+      font-size: 2rem;
+      font-weight: 400;       
 		color: ${props => props.theme.colors.secondary};
 		border-right: 3px solid ${props => props.theme.colors.primary};
 	}
 	
 	p {
-		font-family: Abhaya Libre, sans-serif;
+		font-family: 'Noto Serif', serif;
         font-size: 1.5rem;
         font-weight: 400;  
 		color: ${props => props.theme.colors.secondary};
@@ -146,7 +147,7 @@ export const ServicesHeader = styled.section`
       h4 {
         width: 100vw;
         text-align: center;
-        font-family: Abhaya Libre, sans-serif;
+        font-family: 'Noto Serif', serif;
         font-size: 2rem;
         font-weight: 800;
         color: ${props => props.theme.colors.secondary};
@@ -154,7 +155,7 @@ export const ServicesHeader = styled.section`
       }
 
       p {
-        font-family: Abhaya Libre, sans-serif;
+        font-family: 'Noto Serif', serif;
         font-size: 1.5rem;
         font-weight: 400;
         color: ${props => props.theme.colors.secondary};
@@ -177,16 +178,26 @@ export const ServicesCards = styled.section`
   width: 90%;
   margin-left: 5%;
       
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2vw;
+  row-gap: 2vh;
+  margin-bottom: 90px;
+
+  /* margin-top: -60px;
+  display: grid;
+  width: 90%;
+  margin-left: 5%;
+      
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   column-gap: 2vw;
   row-gap: 1vh;
-  margin-bottom: 90px;
+  margin-bottom: 90px; */
 
   
   div {
     display: flex;
     flex-direction: column;
-    height: 160px;
+    height: 260px;
     padding: 8px 16px;
     justify-content: center;
   

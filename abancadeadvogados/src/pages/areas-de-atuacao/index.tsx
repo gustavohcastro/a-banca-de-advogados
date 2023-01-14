@@ -13,25 +13,26 @@ const AreasDeAtuacao: React.FC = () => {
                 <link rel="icon" type="image/x-icon" href={"./assets/images/favicon.png"}/>
             </Head>
             <main>
-                <BackgroundImage style={{height: '70vh'}}>
-                    <HeaderComponent/>
+                <HeaderComponent/>
+                {/* <BackgroundImage style={{height: '70vh'}}>
+                    
                     <BannerArea>
                         <h2>Áreas de atuação</h2>
                         <br/>
                         <p>Localizada no centro de Balneário Camboriú, nossa nova sede foi inaugurada em 2022, com viés totalmente corporativo e voltada aos negócios, trazendo conforto e praticidade aos clientes e parceiros.</p>
                         <br/>
                     </BannerArea>
-                </BackgroundImage>
+                </BackgroundImage> */}
                 <ServicesHeader>
-                    <h4>Àreas de atuação,<br/>consultoria e<br/>especialidades.</h4>
-                    <div>
+                    <h4>Àreas de atuação, consultoria e especialidades.</h4>
+                    {/* <div>
                         <p>Compromisso</p>
                         <span>Assumir um compromisso é ser fiel a uma promessa e entregar-se aquilo que se comprometeu a fazer, seja por si ou pelo outro.</span>
                     </div>
                     <div>
                         <p>Seriedade</p>
                         <span>A única coisa que importa é colocar em prática, com sinceridade e seriedade, aquilo em que se acredita.</span>
-                    </div>
+                    </div> */}
                 </ServicesHeader>
                 <ServicesCards>
                     <div>

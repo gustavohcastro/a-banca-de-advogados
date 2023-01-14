@@ -20,7 +20,7 @@ export const BannerArea = styled.div`
 	
   h2 {
     color: ${props => props.theme.colors.secondary};
-    font-family: Abhaya Libre, sans-serif;
+    font-family: 'Noto Serif', serif;
     font-size: 7rem;
 	  
   }
@@ -98,7 +98,7 @@ export const OfficeDescription = styled.section`
 
     h2 {
         color: ${props => props.theme.colors.secondary};
-        font-family: Abhaya Libre, sans-serif;
+        font-family: 'Noto Serif', serif;
         font-weight: 800;
         font-size: 3rem;
     }

@@ -8,7 +8,7 @@ export const BackgroundImage = styled.div`
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-image: url("./assets/images/bg.png");
+  background-image: url("./assets/images/bg_home_grad.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 15% 55%;;
@@ -24,20 +24,19 @@ export const BannerArea = styled.div`
 
 	
   h2 {
-    color: ${props => props.theme.colors.secondary};
-    font-family: Abhaya Libre, sans-serif;
-    font-size: 7rem;
-	  text-shadow: 2px 2px ${props => props.theme.colors.darkSecondary};
+    color: ${props => props.theme.colors.text};
+    font-family: 'Noto Serif', serif;
+    font-size: 6rem;
+	  text-shadow: 2px 2px ${props => props.theme.colors.grey};
   }
 
   h3 {
-    font-size: 3rem;
-    
+    font-size: 2.4rem;
   }
 	
   p {
     width: 40vw;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   
   button {
@@ -128,7 +127,7 @@ export const AboutCompany = styled.section`
 
   div p {
     color: ${props => props.theme.colors.secondary};
-    font-family: Abhaya Libre, sans-serif;
+    font-family: 'Noto Serif', serif;
     font-size: 3rem;
     font-weight: 800;
   }
@@ -143,7 +142,7 @@ export const AboutCompany = styled.section`
   }
 
   div a p {
-    font: 800 24px Abhaya Libre, sans-serif;
+    font: 800 24px 'Noto Serif', serif;
   }
 
   @media (max-width: 768px) {
@@ -209,7 +208,7 @@ export const OurOffice = styled.section`
 
   div p {
     color: ${props => props.theme.colors.secondary};
-    font: 800 48px Abhaya Libre, sans-serif;
+    font: 800 48px 'Noto Serif', serif;
   }
 
   div span {
@@ -220,7 +219,7 @@ export const OurOffice = styled.section`
   div a {
     text-decoration: none;
     padding: 12px;
-    font-family: Abhaya Libre, sans-serif;
+    font-family: 'Noto Serif', serif;
     font-weight: 800;
     font-size: 1.4rem;
     color: ${props => props.theme.colors.secondary};
@@ -232,7 +231,7 @@ export const OurOffice = styled.section`
   }
 
   div a p {
-    font: 800 24px Abhaya Libre, sans-serif;
+    font: 800 24px 'Noto Serif', serif;
   }
 
   @media (max-width: 768px) {
@@ -290,13 +289,13 @@ export const ServicesHeader = styled.section`
 	
 	h4 {
 		width: 20vw;
-		font: 800 40px Abhaya Libre, sans-serif;
+		font: 800 40px 'Noto Serif', serif;
 		color: ${props => props.theme.colors.secondary};
 		border-right: 3px solid ${props => props.theme.colors.primary};
 	}
 	
 	p {
-		font: 400 24px Abhaya Libre, sans-serif;
+		font: 400 24px 'Noto Serif', serif;
 		color: ${props => props.theme.colors.secondary};
 	}
 	
@@ -321,7 +320,7 @@ export const ServicesHeader = styled.section`
       h4 {
         width: 100vw;
         text-align: center;
-        font-family: Abhaya Libre, sans-serif;
+        font-family: 'Noto Serif', serif;
         font-size: 2rem;
         font-weight: 800;
         color: ${props => props.theme.colors.secondary};
@@ -329,7 +328,7 @@ export const ServicesHeader = styled.section`
       }
 
       p {
-        font-family: Abhaya Libre, sans-serif;
+        font-family: 'Noto Serif', serif;
         font-size: 1.5rem;
         font-weight: 400;
         color: ${props => props.theme.colors.secondary};
@@ -417,7 +416,7 @@ export const OurTeam = styled.section`
   width: 100vw;
 	
 	h4 {
-    font-family: Abhaya Libre, sans-serif;
+    font-family: 'Noto Serif', serif;
     font-size: 3rem;
     font-weight: 800;
     color: ${props => props.theme.colors.secondary};
