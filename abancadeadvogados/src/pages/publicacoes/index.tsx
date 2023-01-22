@@ -41,7 +41,12 @@ async function getPosts() {
                     }
                 },
             },
-            take: 2
+            orderBy: [
+                {
+                createdAt: 'desc',
+                },
+            ],
+            take: 3
         });
         
         const data = posts.map(post => {
@@ -105,6 +110,11 @@ async function getAllPosts(filter: PostFilterProps){
                     }
                 },
             },
+            orderBy: [
+                {
+                createdAt: 'desc',
+                },
+            ],
             take: 9
         });
         // console.log(posts)
@@ -181,57 +191,36 @@ const Publicacoes = ({posts, users, allPosts}) => {
                 <link rel="icon" type="image/x-icon" href={"./assets/images/favicon.png"}/>
             </Head>
             <main>
-                <BackgroundImage style={{height: '70vh'}}>
+                <BackgroundImage style={{height: '50vh'}}>
                     <HeaderComponent/>
                     <BannerArea>
                         <h2>Publicações</h2>
-                        <br/>
-                        <p>Localizada no centro de Balneário Camboriú, nossa nova sede foi inaugurada em 2022, com viés totalmente corporativo e voltada aos negócios, trazendo conforto e praticidade aos clientes e parceiros.</p>
-                        <br/>
+                        {/* <br/> */}
+                        {/* <p>Localizada no centro de Balneário Camboriú, nossa nova sede foi inaugurada em 2022, com viés totalmente corporativo e voltada aos negócios, trazendo conforto e praticidade aos clientes e parceiros.</p> */}
+                        {/* <br/> */}
                     </BannerArea>
                 </BackgroundImage>
                 <LastPosts>
                     <h2>Últimas publicações</h2>
                     <br/>
-                    <PostGrid>
-                        {posts.map((post, index) => (
-                            <div className="post-line" key={post.id}>
-                                {(index % 2 == 1) ? (
-                                    <picture>
-                                        <img src={post.image} />
-                                    </picture>
-                                ): null}
-                                <div className="text-area">
-                                    <div className="text-row">
-                                        <span>{post.user.name} · <span className="text-grey">Publicado em {moment(post.date).format('DD/MM/YYYY')}</span></span>
-                                    </div>
-                                    <br/>
-                                    <div className="text-row">
-                                        <p>{post.title}</p>
-                                    </div>
-                                    <div>
-                                        <span className="text-grey">
-                                            {post.cropped}
-                                        </span>
-                                    </div>
-                                    <br/>
-                                    <div className="text-row">
-                                        <span className="text-grey">
-                                            {post.timeToRead} minutos de leitura.
-                                        </span>
-                                        <Link href="/publicacoes/contratos-em-2022">
-                                            <h6>Publicação completa -&gt;</h6>
+                    <PostsResult>
+                        <div className="cards">
+                            {posts.map(post => (
+                                <div className="card" key={post.id}>
+                                    <img src={post.image} />
+                                    <span>Dr. {post.user.name} · {moment(post.date).format('DD/MM/YYYY')}</span>
+                                    <h3>{post.title}</h3>
+                                    <p>{post.cropped}</p>
+                                    <div className="card-row">
+                                        <span>{post.timeToRead} minutos de leitura.</span>
+                                        <Link href='/'>
+                                            <h6>Publicação completa<FiArrowRight/></h6>
                                         </Link>
                                     </div>
                                 </div>
-                                {index % 2 == 0 ? (
-                                    <picture>
-                                        <img src={post.image} />
-                                    </picture>
-                                ): null}
+                            ))}
                         </div>
-                        ))}      
-                    </PostGrid>
+                    </PostsResult>
                 </LastPosts>
                 <SearchArea>
                     <h4>Todas as publicações</h4>

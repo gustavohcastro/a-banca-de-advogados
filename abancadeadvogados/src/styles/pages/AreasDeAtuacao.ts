@@ -182,17 +182,6 @@ export const ServicesCards = styled.section`
   column-gap: 2vw;
   row-gap: 2vh;
   margin-bottom: 90px;
-
-  /* margin-top: -60px;
-  display: grid;
-  width: 90%;
-  margin-left: 5%;
-      
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  column-gap: 2vw;
-  row-gap: 1vh;
-  margin-bottom: 90px; */
-
   
   div {
     display: flex;
@@ -241,6 +230,10 @@ export const ServicesCards = styled.section`
     grid-template-columns: 1fr;
     column-gap: 2vw;
     row-gap: 1vh;
+
+    div {
+      height: 160px;
+    }
    
     div p {
         font-family: Poppins, sans-serif;
@@ -251,7 +244,7 @@ export const ServicesCards = styled.section`
     }
 
     div span{
-        padding: 16px 0;
+        padding: 8px 0;
         font-family: Poppins, sans-serif;
         font-weight: 400;
         font-size: 0.7rem;
