@@ -16,7 +16,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 id: data.postId,
             },
             data: {
-                isActive: 0,
+                isActive: false,
             },
         })
 

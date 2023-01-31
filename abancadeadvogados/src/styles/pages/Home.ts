@@ -11,9 +11,14 @@ export const BackgroundImage = styled.div`
   background-image: url("./assets/images/bg_home_grad.png");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 15% 55%;;
+  background-position: 15% 55%;
   margin-top: -16px;
   padding-top: 16px;
+
+   @media (max-width: 768px) {
+      background-position: 100% 15%;
+
+   }
 `
 
 export const BannerArea = styled.div`
@@ -89,14 +94,15 @@ export const BannerArea = styled.div`
     width: 100vw;
 	  
 	  h2 {
-		  font-size: 4rem;
-      color: ${props => props.theme.colors.secondary};
+		  font-size: 3rem;
+      color: ${props => props.theme.colors.text};
 	  }
 	  h3 {
-		  font-size: 2rem;
+		  font-size: 1.4rem;
 	  }
 	  p {
 		  width: 80vw;
+      font-size: 0.8rem;
 	  }
     button {
       margin-top: 10vh;
@@ -305,42 +311,20 @@ export const ServicesHeader = styled.section`
 	}
 
   @media (max-width: 768px) {
+
+    height: 270px;
     display: flex;
     flex-direction: column;
 
-      div {
-        width: 100vw;
-        padding: 0 24px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-    
-      h4 {
-        width: 100vw;
-        text-align: center;
-        font-family: 'Noto Serif', serif;
-        font-size: 2rem;
-        font-weight: 800;
-        color: ${props => props.theme.colors.secondary};
-        border-right: 3px solid ${props => props.theme.colors.primary};
-      }
-
-      p {
-        font-family: 'Noto Serif', serif;
-        font-size: 1.5rem;
-        font-weight: 400;
-        color: ${props => props.theme.colors.secondary};
-      }
-      
-      span {
-        font-family: Poppins, sans-serif;
-        font-size: 0.8rem;
-        font-weight: 400;
-        color: ${props => props.theme.colors.text};
-      }
-      
+    h4 {
+      width: 100vw;
+      text-align: center;
+      font-family: 'Noto Serif', serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: ${props => props.theme.colors.secondary};
+      border-right: 3px solid ${props => props.theme.colors.primary};
+    }
   }
 
 `
@@ -590,7 +574,7 @@ export const Posts = styled.section`
     
     div h6 {
       font-family: Poppins, sans-serif;
-      font-size: 1rem;
+      font-size: 0.7rem;
       font-weight: 800;
       color: ${props => props.theme.colors.secondary};
     }

@@ -9,8 +9,8 @@ export const Footer = styled.footer`
 	.footer-logo-area {
 		display: flex;
 		flex: 1;
-    width: 100%;
-    background: rgba(255,255,255,0.1);
+		width: 100%;
+		background: rgba(255,255,255,0.1);
 		align-items: center;
 		justify-content: center;
 		padding: 40px;
@@ -22,7 +22,7 @@ export const Footer = styled.footer`
 	}
 	
 	.footer-info {
-    display: flex;
+		display: flex;
 		flex: 1;
 		align-items: center;
 		justify-content: center;
@@ -31,15 +31,15 @@ export const Footer = styled.footer`
 
   @media (max-width: 768px) {
     .footer-logo-area {
-		  padding: 16px;
-	  }
+		padding: 16px;
+	}
     .logo-footer {
-		  width: 60vw;
-	  }
+		width: 60vw;
+	}
     .footer-info {
       padding: 8px;
       font-family: Poppins, sans-serif;
-      font-size: 0.3rem;
+      font-size: 0.25rem;
       font-weight: 400;
     }
   }

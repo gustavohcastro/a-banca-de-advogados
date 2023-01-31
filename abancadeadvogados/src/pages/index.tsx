@@ -143,15 +143,8 @@ const Home: React.FC = (props: any) => {
               </div>
           </OurOffice>
           <ServicesHeader>
-              <h4>Àreas de atuação,<br/>consultoria e<br/>especialidades.</h4>
-              <div>
-                  <p>Compromisso</p>
-                  <span>Assumir um compromisso é ser fiel a uma promessa e entregar-se aquilo que se comprometeu a fazer, seja por si ou pelo outro.</span>
-              </div>
-              <div>
-                  <p>Seriedade</p>
-                  <span>A única coisa que importa é colocar em prática, com sinceridade e seriedade, aquilo em que se acredita.</span>
-              </div>
+              <h4>Àreas de atuação, consultoria e especialidades.</h4>
+             
           </ServicesHeader>
           <ServicesCards>
               <div>
@@ -187,7 +180,7 @@ const Home: React.FC = (props: any) => {
           </ServicesCards>
           <OurTeam>
             <h4>Equipe</h4>
-            <p>Equipe formada pelos sócios fundadores e demais contribuintes.</p>
+            <p>Equipe formada pelos sócios fundadores e demais colaboradores.</p>
             <div className="partner-row">
                 <div>
                     <picture>

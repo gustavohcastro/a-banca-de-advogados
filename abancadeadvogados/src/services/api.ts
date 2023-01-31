@@ -17,8 +17,8 @@ api.interceptors.response.use(
       error.response?.data?.message === 'Expired token'
     ) {
       Notiflix.Notify.info('Sessão Expirada...');
-      localStorage.removeItem('@FG-Acelera-user');
-      localStorage.removeItem('@FG-Acelera-JWT');
+      // localStorage.removeItem('@FG-Acelera-user');
+      // localStorage.removeItem('@FG-Acelera-JWT');
     }
     return Promise.reject(error);
   },

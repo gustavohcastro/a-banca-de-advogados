@@ -9,35 +9,66 @@ import api from "../../../services/api";
 import { useSession, getSession } from "next-auth/react"
 import { AuthContext } from "../../../contexts/AuthContext";
 import Notiflix from "notiflix";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import storage from "../../../services/firebase";
 
 
 const DashboardNovaPublicacao = () => {
     const { register, handleSubmit, reset } = useForm();
     const {user} = useContext(AuthContext)
     
-    const handleForm = async (data) => {
-      try {
-        data.user = user.id;
+    async function handleUpload(data) {
+      try { 
+        const storageRef = ref(storage,`/postsbanca/${data.file[0].name}`)
+        const uploadTask = uploadBytesResumable(storageRef, data.file[0]);
         
-        api.post('api/posts/new-post', data)
-        .then(response => {
-          
-          if (response.data) {
-            Notiflix.Notify.success('Publicação criada com sucesso');
+        await uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const percent = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            console.log(percent);
+          },
+          (err) => console.log(err),
+          () => {
+              getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                console.log(user)
+                const payload = {
+                  title: data.title,
+                  slug: data.slug,
+                  timeToRead: data.timeToRead,
+                  image: url,
+                  body: data.body,
+                  isActive: true,
+                  authorId: user.id,
+                  cropped: data.body.substring(0,30)
+                }
+
+                api.post('api/posts/new-post', payload)
+                  .then(response => {
+                    
+                    if (response.data) {
+                      Notiflix.Notify.success('Publicação criada com sucesso');
+                    }
+                    reset()
+                  })
+                  .catch(e => {
+                    console.log(e)
+                    Notiflix.Notify.failure(e.message);
+                  }) 
+              });
           }
-          reset()
-          
-
-        })
-        .catch(e => {
-          Notiflix.Notify.failure(e.message);
-        }) 
-
-      }
+        );
+        
+       
+      } 
       catch(e){
         Notiflix.Notify.failure(e.message);
       }
+      
     }
+
 
   return (
    <>
@@ -53,7 +84,7 @@ const DashboardNovaPublicacao = () => {
             Nova Publicação
           </h3>
 
-          <form onSubmit={handleSubmit(handleForm)}>
+          <form onSubmit={handleSubmit(handleUpload)}>
             
             <div className="flex flex-row">
 
