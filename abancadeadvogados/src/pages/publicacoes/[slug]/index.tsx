@@ -26,12 +26,7 @@ async function getPost(filter: PostFilterProps){
                     }
                 }
 
-            },
-            orderBy: [
-                {
-                createdAt: 'desc',
-                },
-            ]
+            }
         });
         
         return {
@@ -47,7 +42,7 @@ async function getPost(filter: PostFilterProps){
         }
     }
     catch(e){
-        return []
+        return  null
     }  
 }
 
@@ -55,6 +50,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const urlParams = (context.query)
     
     const post = await getPost(urlParams);
+
+    if (post === null) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            }
+        }
+    }
 
     return {
         props: {
