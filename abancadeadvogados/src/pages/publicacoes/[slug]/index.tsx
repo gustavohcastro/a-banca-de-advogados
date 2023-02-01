@@ -69,20 +69,20 @@ const Post: React.FC = ({post}:any) => {
     return (
         <>
             <Head>
-                <title>{post.title}</title>
+                <title>{post?.title}</title>
                 <link rel="icon" type="image/x-icon" href={"./assets/images/favicon.png"}/>
             </Head>
             <main>
                 <BackgroundImage style={{height: '70vh'}}>
                     <HeaderComponent/>
                     <BannerArea>
-                        <h2>{post.title}</h2>
+                        <h2>{post?.title}</h2>
                     </BannerArea>
                 </BackgroundImage>
                 <PostArea>
-                    <h1>Autor: Dr. {post.user.name}</h1>
-                    <h3>Data: {moment(post.date).format('DD/MM/YYYY')}</h3>
-                    <p>{post.body}</p>
+                    <h1>Autor: Dr. {post?.user.name}</h1>
+                    <h3>Data: {moment(post?.date).format('DD/MM/YYYY')}</h3>
+                    <p>{post?.body}</p>
                 </PostArea>
                 <FooterComponent/>
                 </main>
