@@ -1,11 +1,13 @@
 import styled from "styled-components"
 
-
-export const BackgroundImage = styled.div`
+interface BackgroundImageProps {
+  url?: string;
+}
+export const BackgroundImage = styled.div<BackgroundImageProps>`
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-image: url("../assets/images/background_image.png");
+  background-image: url(${props => props.url ? props.url: "../assets/images/background_image.png" });
   background-size: cover;
   background-repeat: no-repeat;
   margin-top: -16px;

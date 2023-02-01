@@ -15,7 +15,9 @@ import storage from "../../../services/firebase";
 
 const DashboardNovaPublicacao = () => {
     const { register, handleSubmit, reset } = useForm();
-    const {user} = useContext(AuthContext)
+    const {user} = useContext(AuthContext);
+
+    console.log(storage)
     
     async function handleUpload(data) {
       try { 

@@ -449,6 +449,14 @@ export const PostsResult = styled.section`
     
     background-color: white;
     max-width : 400px;
+    width: 100%;
+    height : 420px;
+
+    img {
+      height: 220px;
+      width: 100%;
+      resize: auto;
+    }
 
     span {
       padding: 8px 12px;
@@ -510,6 +518,14 @@ export const PostsResult = styled.section`
       grid-template-columns: 1fr;
       row-gap: 3vh;
       justify-items: center;
+    }
+
+    .cards .card {
+       img {
+        height: 220px;
+        width: 100%;
+        resize: auto;
+      }
     }
 
   }

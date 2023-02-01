@@ -32,6 +32,7 @@ async function getAllPosts(){
                 title: post.title,
                 body: post.body,
                 cropped: post.cropped,
+                slug: post.slug,
                 image: post.image,
                 timeToRead: post.timeToRead,
                 user: post.userId,
@@ -71,6 +72,7 @@ interface PostProps {
     timeToRead: string;
     user: string;
     date: string;
+    slug: string;
 }
 
 const Home: React.FC = (props: any) => {
@@ -218,7 +220,7 @@ const Home: React.FC = (props: any) => {
               </div>
               <div className="post-row">
                 {posts.map(post => (
-                  <a href={`/publicacoes/${post.id}`} key={post.id}>
+                  <a href={`/publicacoes/${post.slug}`} key={post.id}>
                     <div>
                       <picture>
                           <img src={post.image} alt="Sócio Fundador"/>

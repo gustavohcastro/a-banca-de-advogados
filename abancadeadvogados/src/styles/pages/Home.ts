@@ -294,7 +294,8 @@ export const ServicesHeader = styled.section`
 	}
 	
 	h4 {
-		width: 20vw;
+		width: 100vw;
+    text-align: center;
 		font: 800 40px 'Noto Serif', serif;
 		color: ${props => props.theme.colors.secondary};
 		border-right: 3px solid ${props => props.theme.colors.primary};

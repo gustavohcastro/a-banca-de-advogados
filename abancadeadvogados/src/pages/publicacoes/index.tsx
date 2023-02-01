@@ -57,6 +57,7 @@ async function getPosts() {
                 cropped: post.cropped,
                 image: post.image,
                 timeToRead: post.timeToRead,
+                slug: post.slug,
                 user: post.userId,
                 date: post.createdAt.toISOString()
             }
@@ -94,7 +95,7 @@ async function getAllPosts(filter: PostFilterProps){
         const {assunto, autor} = filter;
         const posts = await prisma.post.findMany({
             where: {
-                title   : {
+                title : {
                     contains: assunto,  
                 },
                 userId: {
@@ -108,7 +109,8 @@ async function getAllPosts(filter: PostFilterProps){
                     select: {
                         name: true
                     }
-                },
+                }
+
             },
             orderBy: [
                 {
@@ -117,7 +119,7 @@ async function getAllPosts(filter: PostFilterProps){
             ],
             take: 9
         });
-        // console.log(posts)
+        
         const data = posts.map(post => {
             return {
                 id: post.id,
@@ -126,6 +128,7 @@ async function getAllPosts(filter: PostFilterProps){
                 cropped: post.cropped,
                 image: post.image,
                 timeToRead: post.timeToRead,
+                slug: post.slug,
                 user: post.userId,
                 date: post.createdAt.toISOString()
             }
@@ -155,6 +158,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 }
 
 const Publicacoes = ({posts, users, allPosts}) => {
+
 
     const router = useRouter();
 
@@ -213,7 +217,7 @@ const Publicacoes = ({posts, users, allPosts}) => {
                                     <p>{post.cropped}</p>
                                     <div className="card-row">
                                         <span>{post.timeToRead} minutos de leitura.</span>
-                                        <Link href='/'>
+                                        <Link href={`/publicacoes/${post.slug}`}>
                                             <h6>Publicação completa<FiArrowRight/></h6>
                                         </Link>
                                     </div>
@@ -288,7 +292,7 @@ const Publicacoes = ({posts, users, allPosts}) => {
                                 <p>{post.cropped}</p>
                                 <div className="card-row">
                                     <span>{post.timeToRead} minutos de leitura.</span>
-                                    <Link href='/'>
+                                    <Link href={`/publicacoes/${post.slug}`}>
                                         <h6>Publicação completa<FiArrowRight/></h6>
                                     </Link>
                                 </div>

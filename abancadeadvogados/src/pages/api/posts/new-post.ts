@@ -1,10 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import prisma from "../../../lib/prismadb"
-import app from '../../../services/firebase';
-import storage from '../../../services/firebase';
-import {getDownloadURL, ref, uploadBytesResumable, getStorage} from "firebase/storage"
-import formidable from 'formidable';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {  
