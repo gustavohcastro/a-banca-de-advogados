@@ -16,7 +16,7 @@ async function getPost(filter: PostFilterProps){
         const posts = await prisma.post.findMany({
             where: {
                 slug : {
-                    equals: 'direito-em-2023',  
+                    equals: slug,  
                 },
             },
             include : {
@@ -43,7 +43,7 @@ async function getPost(filter: PostFilterProps){
             cropped: post.cropped,
             image: post.image,
             timeToRead: post.timeToRead,
-            slug: slug ?? 'direito-em-2023',
+            slug: post.slug,
             user: post.userId,
             date: post.createdAt.toISOString()
         }
@@ -55,7 +55,11 @@ async function getPost(filter: PostFilterProps){
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const urlParams = (context.query)
-    
+    return {
+        props: {
+            urlParams
+        }
+    }
     const post = await getPost(urlParams);
 
     if (post === null) {
