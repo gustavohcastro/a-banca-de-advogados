@@ -16,7 +16,7 @@ async function getPost(filter: PostFilterProps){
         const posts = await prisma.post.findMany({
             where: {
                 slug : {
-                    equals: slug,  
+                    equals: 'direito-em-2023',  
                 },
             },
             include : {
@@ -43,7 +43,7 @@ async function getPost(filter: PostFilterProps){
             cropped: post.cropped,
             image: post.image,
             timeToRead: post.timeToRead,
-            slug: post.slug,
+            slug: slug ?? 'direito-em-2023',
             user: post.userId,
             date: post.createdAt.toISOString()
         }
