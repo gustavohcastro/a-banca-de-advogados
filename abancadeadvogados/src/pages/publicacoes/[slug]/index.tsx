@@ -10,10 +10,10 @@ export interface PostFilterProps {
     slug?: string;
 }
 async function getPost(filter: PostFilterProps){
-    // try {
+    try {
         
         const {slug} = filter;
-        const post = await prisma.post.findFirst({
+        const posts = await prisma.post.findMany({
             where: {
                 slug : {
                     equals: slug,  
@@ -27,7 +27,14 @@ async function getPost(filter: PostFilterProps){
                 }
 
             }
+            ,take: 1
         });
+
+        if (posts.length < 1) {
+            return null;
+        }
+
+        const post = posts[0];
         
         return {
             id: post.id,
@@ -40,10 +47,10 @@ async function getPost(filter: PostFilterProps){
             user: post.userId,
             date: post.createdAt.toISOString()
         }
-    // }
-    // catch(e){
-    //     return  null
-    // }  
+    }
+    catch(e){
+        return  null
+    }  
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
