@@ -70,7 +70,7 @@ const Post: React.FC = ({post}:any) => {
         <>
             <Head>
                 <title>{post.title}</title>
-                <link rel="icon" type="image/x-icon" href={"../assets/images/favicon.png"}/>
+                <link rel="icon" type="image/x-icon" href={"./assets/images/favicon.png"}/>
             </Head>
             <main>
                 <BackgroundImage style={{height: '70vh'}}>
