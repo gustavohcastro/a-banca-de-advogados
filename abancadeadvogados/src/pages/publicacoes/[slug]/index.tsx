@@ -10,7 +10,7 @@ export interface PostFilterProps {
     slug?: string;
 }
 async function getPost(filter: PostFilterProps){
-    try {
+    // try {
         
         const {slug} = filter;
         const post = await prisma.post.findFirst({
@@ -40,10 +40,10 @@ async function getPost(filter: PostFilterProps){
             user: post.userId,
             date: post.createdAt.toISOString()
         }
-    }
-    catch(e){
-        return  null
-    }  
+    // }
+    // catch(e){
+    //     return  null
+    // }  
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
