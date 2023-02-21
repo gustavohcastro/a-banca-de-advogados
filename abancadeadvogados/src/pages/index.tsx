@@ -90,7 +90,7 @@ const Home: React.FC = (props: any) => {
 
     const handleWhatsApp = (data) => {
         const {fullName, body} = getValues();
-        window.open(`https://wa.me/5547999841175?text=Olá, meu nome é ${fullName}%0A%0A${body}`)
+        window.open(`https://wa.me/5547999413831?text=Olá, meu nome é ${fullName}%0A%0A${body}`)
     }
 
     useEffect(() => {
@@ -103,14 +103,26 @@ const Home: React.FC = (props: any) => {
       <Head>
         <title>A Banca de Advogados</title>
         <link rel="icon" type="image/x-icon" href={"./assets/images/favicon.png"}/>
+        <meta name="description" content="A união de forças distintas, mas ao mesmo tempo complementares, é o que determina o sucesso de um projeto de longo prazo. Nasce, assim, A Banca de Advogados."/>
+        <meta property="og:locale" content="pt_BR"/>
+        <meta property="og:type" content="website"></meta>
+        <meta property="og:title" content="A Banca de advogados"></meta>
+        <meta property="og:description" content="A união de forças distintas, mas ao mesmo tempo complementares, é o que determina o sucesso de um projeto de longo prazo. Nasce, assim, A Banca de Advogados."></meta>
+        <meta property="og:url" content="https://www.bancadeadvogados.adv.br/"></meta>
+        <meta property="og:site_name" content="A Banca de advogados"></meta>
+        <meta property="article:modified_time" content="2023-02-03T16:49:47+00:00"></meta>
       </Head>
       <main>
           <BackgroundImage>
           <Header/>
           <BannerArea>
-            <h2>A Banca de <br/>Advogados</h2>
+            <br/><br/>
+            <picture>
+             <img src={'../assets/images/logo.svg'} className='logo' alt="Logo"/>
+            </picture>
             <br/>
-            <h3>Cardoso, Dani e Felisberto.</h3>
+            <br/>
+            <br/>
             <br/>
             <p>A união de forças distintas, mas ao mesmo tempo complementares, é o que determina o sucesso de um projeto de longo prazo. Nasce, assim, A Banca de Advogados.</p>
             <br/>

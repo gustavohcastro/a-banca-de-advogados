@@ -27,6 +27,10 @@ export const BannerArea = styled.div`
   display: flex;
   flex-direction: column;
 
+  picture .logo {
+  width: 600px;
+}
+
 	
   h2 {
     color: ${props => props.theme.colors.text};
@@ -103,6 +107,7 @@ export const BannerArea = styled.div`
 	  p {
 		  width: 80vw;
       font-size: 0.8rem;
+      text-align: justify;
 	  }
     button {
       margin-top: 10vh;

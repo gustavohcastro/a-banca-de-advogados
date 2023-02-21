@@ -11,6 +11,14 @@ const Equipe: React.FC = () => {
             <Head>
                 <title>Equipe</title>
                 <link rel="icon" type="image/x-icon" href={"./assets/images/favicon.png"}/>
+                <meta name="description" content="A união de forças distintas, mas ao mesmo tempo complementares, é o que determina o sucesso de um projeto de longo prazo. Nasce, assim, A Banca de Advogados."/>
+                <meta property="og:locale" content="pt_BR"/>
+                <meta property="og:type" content="website"></meta>
+                <meta property="og:title" content="A Banca de advogados"></meta>
+                <meta property="og:description" content="A união de forças distintas, mas ao mesmo tempo complementares, é o que determina o sucesso de um projeto de longo prazo. Nasce, assim, A Banca de Advogados."></meta>
+                <meta property="og:url" content="https://www.bancadeadvogados.adv.br/"></meta>
+                <meta property="og:site_name" content="A Banca de advogados"></meta>
+                <meta property="article:modified_time" content="2023-02-03T16:49:47+00:00"></meta>
             </Head>
             <main>
                 <HeaderComponent/>
@@ -52,6 +60,35 @@ const Equipe: React.FC = () => {
                             <h6>João Pedro Felisberto</h6>
                             <p>Sócio Fundador</p>
                             <span>Advogado inscrito na OAB/SC sob nº 61.001. Graduado em Direito pela Universidade do Vale do Itajaí - UNIVALI e Pós-Graduando em Direito Digital e Compliance pela Damásio Educacional. Técnico em Informática pelo Instituto Federal Catarinense. Possui atuação nas áreas de Direito Digital e segurança na Internet, vazamento de dados, Crimes Virtuais, Compliance Digital Empresarial, Direito do Consumidor, Responsabilidade Civil, Contratos e Cobranças Judiciais/Execuções; Membro da Comissão de Direito Digital da OAB - Subseção Balneário Camboriú/SC.</span>
+                        </div>
+                    </div>
+
+                    <div className="partner-row">
+                        <div>
+                            <picture>
+                                <img src={'./assets/images/TOMAZI.png'} alt="Sócio Fundador"/>
+                            </picture>
+                            <div className="partner-text">
+                                <h6>Jamilli Amabilli Tomazi</h6>
+                                
+                                <span>Advogada inscrita na OAB/SC sob nº 67.362 com atuação na área de Direito Penal. Graduada em Direito pela Universidade Avantis – UNIAVAN. Cursou Perícia Criminal – Investigação em cenas de crime pelo Instituto Biomédico de Aprimoramento Profissional (IBAP). Ex-presidente da Comissão de Acadêmicos de Direito da OAB – Subseção Vale do Rio Tijucas/SC. Membro da Comissão da Jovem Advocacia da OAB – Subseção Vale do Rio Tijucas/SC. Possui cursos de extensão na Lei Geral de Proteção de Dados (LGPD) e Marketing Jurídico.</span>
+                            </div>
+                        </div>
+                        <div>
+                            <picture>
+                                <img src={'./assets/images/PAIANO.png'} alt="Sócio Fundador"/>
+                            </picture>
+                            <h6>Manuela Paiano</h6>
+                            
+                            <span>Graduada em Direito pela Universidade Avantis – UNIAVAN. Vice-presidente da Comissão de Acadêmicos de Direito da OAB – Subseção Vale do Rio Tijucas/SC. Experiência de atuação junto ao à Vara de Estadual Direito Bancário do Tribunal de Justiça de Santa Catarina e 3ª Promotoria de Justiça do Ministério Público de Santa Catarina. Atuação voltada para o direito do consumidor e direito civil, em especial os processos de execução e ações de responsabilidade civil.</span>
+                        </div>
+                        <div>
+                            <picture>
+                                <img src={'./assets/images/COMPANHONI.png'} alt="Sócio Fundador"/>
+                            </picture>
+                            <h6>Vinicius Becker Companhoni</h6>
+
+                            <span>Advogado inscrito na OAB/SC sob nº 66.151 com atuação na área  de Direito Cível e Contratos. Graduado em direito pela Universidade do Vale do Itajaí - UNIVALI. Pós graduando em direito imobiliário e notarial.</span>
                         </div>
                     </div>
                 </OurTeam>

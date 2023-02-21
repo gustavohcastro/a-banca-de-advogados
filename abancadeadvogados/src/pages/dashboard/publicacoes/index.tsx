@@ -13,10 +13,10 @@ import api from "../../../services/api";
 import Notiflix from "notiflix";
 
 async function getAllPosts(){
-    //ATTENTION: sempre trocar para 1 quando subir
+    
     const posts = await prisma.post.findMany({
       where:{
-        isActive : 1
+        isActive : true
       },
       include : {
           userId: {
@@ -30,7 +30,6 @@ async function getAllPosts(){
       }
     });
     // console.log(posts)
-    //ATTENTION: sempre trocar para 1 quando subir
     const data = posts.map(post => {
         return {
             id: post.id,

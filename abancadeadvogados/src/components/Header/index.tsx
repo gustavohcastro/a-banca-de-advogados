@@ -1,18 +1,34 @@
 import Link from "next/link";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FiMenu, FiX } from "react-icons/fi";
 import { Header, StyledBurger, Nav, Ul } from './styles';
 
 const HeaderComponent: React.FC = () => {
+
     const [open, setOpen] = useState(false);
+    const [isNotHomePage, setIsNotHomePage] = useState(false);
+    
+    useEffect(() => {
+        const path = window.location.pathname; 
+        if (typeof window !== "undefined") {
+            setIsNotHomePage(path !== '/');
+        }
+    },[])
+
     return (
         <Header>
             <div className="main-menu">
-                <Link href="/">
-                    <picture>
-                        <img src={'../assets/images/logo.svg'} className='logo' alt="Logo"/>
-                    </picture>
-                </Link>
+                { isNotHomePage ? (                
+                    <Link href="/">
+                        <picture>
+                            <img src={'../assets/images/logo.svg'} className='logo' alt="Logo"/>
+                        </picture>
+                    </Link>
+                ): 
+                (
+                    <div></div>
+                )
+                }
                 <StyledBurger open={open} onClick={() => setOpen(!open)}>
                     {open ? <FiX color="#fff"/> : <FiMenu color="#fff"/>}
                 </StyledBurger>

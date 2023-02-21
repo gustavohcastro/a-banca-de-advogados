@@ -140,6 +140,7 @@ export const OurTeam = styled.section`
 		
 		div h6 {
       font: 800 24px Poppins, sans-serif;
+      padding: 4px 0;
       color: ${props => props.theme.colors.secondary};
 		}
 		
