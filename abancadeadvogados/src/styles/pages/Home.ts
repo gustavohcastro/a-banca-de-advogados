@@ -357,6 +357,21 @@ export const ServicesCards = styled.section`
     background: #D9D9D9;
   }
   
+  div section {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    justify-content: space-between;
+  }
+
+  div section picture img {
+    width: 50px;
+    height: 50px;
+  }
+  
   div p {
     font: 400 20px Poppins, sans-serif;
     color: ${props => props.theme.colors.dark};
