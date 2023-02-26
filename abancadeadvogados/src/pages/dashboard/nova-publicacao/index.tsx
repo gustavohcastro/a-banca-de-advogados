@@ -51,7 +51,7 @@ const DashboardNovaPublicacao = ({users}) => {
                   timeToRead: data.timeToRead,
                   image: url,
                   body: data.body,
-                  isActive: true,
+                  isActive: 1,
                   authorId: data.author,
                   cropped: data.body.substring(0,30)
                 }
