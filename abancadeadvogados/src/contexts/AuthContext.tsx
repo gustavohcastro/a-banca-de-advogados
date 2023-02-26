@@ -55,7 +55,12 @@ export function AuthProvider({ children }) {
   async function signIn({ email, password }: SignInData) {
     try {
 
-      api.post('/api/auth', {email, password}).then(response => {
+      api.post('/api/auth', {email, password}, {
+        headers: {
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        }
+      }).then(response => {
         
         const {token} = response.data;
 

@@ -17,7 +17,7 @@ const AreaDoAssociado: React.FC = () => {
     const {signIn, user, isAuthenticated} = useContext(AuthContext);
 
     async function handleSignIn(data) {
-            await signIn(data)
+        await signIn(data)
     }
 
     // useEffect(() => {
@@ -61,7 +61,7 @@ const AreaDoAssociado: React.FC = () => {
                             <br/>
                             <label>Senha</label>
                             <br/>
-                            <input type="password" id="fullName" name="fullName" placeholder='*******' {...register('password')}/>
+                            <input type="password" id="password" name="password" placeholder='*******' {...register('password')}/>
                             <br/>
                             <br/>
                             <button>Entrar</button>          
