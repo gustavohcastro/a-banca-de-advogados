@@ -12,13 +12,21 @@ import Notiflix from "notiflix";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "../../../services/firebase";
 
+async function getUsers(){
+    return await prisma.user.findMany({
+      select: {
+        name: true,
+        id: true
+      }
+    });
+}
 
-const DashboardNovaPublicacao = () => {
+
+const DashboardNovaPublicacao = ({users}) => {
     const { register, handleSubmit, reset } = useForm();
     const {user} = useContext(AuthContext);
+    const listOfUsers: {name: string, id: string}[] = users;
 
-    console.log(storage)
-    
     async function handleUpload(data) {
       try { 
         const storageRef = ref(storage,`/postsbanca/${data.file[0].name}`)
@@ -43,7 +51,7 @@ const DashboardNovaPublicacao = () => {
                   image: url,
                   body: data.body,
                   isActive: true,
-                  authorId: user.id,
+                  authorId: data.author,
                   cropped: data.body.substring(0,30)
                 }
 
@@ -77,7 +85,7 @@ const DashboardNovaPublicacao = () => {
       <Head>
         <title>Nova Publicação</title>
       </Head>
-      <div className="flex min-w-full h-full bg-white" >
+      <div className="flex min-w-full h-full bg-white dark:bg-gray-900" >
         <DashboardMenu/>
         {/* Form Area/ */}
          <div className="w-full h-full overflow-y-scroll px-4 py-3">
@@ -100,11 +108,23 @@ const DashboardNovaPublicacao = () => {
                   <input {...register('slug')} type="text" id="slug" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="contratos-em-2022" required/>
               </div>
 
+            </div>
+
+            <div className="flex flex-row">
               <div className="mb-6 flex-1  ml-2">
-                  <label htmlFor="timeToRead" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tempo de leitura</label>
-                  <input {...register('timeToRead')} type="number" id="timeToRead" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ex: 12" required/>
+                  <label htmlFor="author" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Autor</label>
+                  {/* <input {...register('slug')} type="text" id="slug" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="contratos-em-2022" required/> */}
+                  <select {...register('author')}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    {listOfUsers.map((item) => (
+                      <option key={item.id} value={item.id}>{item.name}</option> 
+                    ))}
+                  </select>
               </div>
-                
+              <div className="mb-6 flex-1  ml-2">
+                <label htmlFor="timeToRead" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tempo de leitura</label>
+                <input {...register('timeToRead')} type="number" id="timeToRead" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ex: 12" required/>
+              </div>
+
             </div>
                    
             <div className="mb-6 max-w-none">
@@ -148,9 +168,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       }
     }
   }
+   const users = await getUsers();
   return {
     props : {
-
+      users
     }
   }
 }

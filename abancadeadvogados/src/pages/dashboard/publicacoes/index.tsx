@@ -16,7 +16,7 @@ async function getAllPosts(){
     
     const posts = await prisma.post.findMany({
       where:{
-        isActive : 1
+        isActive : true
       },
       include : {
           userId: {
