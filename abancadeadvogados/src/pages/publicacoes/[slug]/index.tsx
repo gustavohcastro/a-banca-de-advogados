@@ -5,6 +5,7 @@ import { BackgroundImage, BannerArea, PostArea } from "../../../styles/pages/Pub
 import React from 'react';
 import { GetServerSideProps } from "next";
 import moment from "moment";
+import prisma from "../../../lib/prismadb"
 
 export interface PostFilterProps {
     slug?: string;

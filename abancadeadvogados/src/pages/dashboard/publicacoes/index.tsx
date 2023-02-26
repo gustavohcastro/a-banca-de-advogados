@@ -15,9 +15,6 @@ import Notiflix from "notiflix";
 async function getAllPosts(){
     
     const posts = await prisma.post.findMany({
-      where:{
-        isActive : 0
-      },
       include : {
           userId: {
               select: {
