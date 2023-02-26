@@ -66,7 +66,7 @@ const Equipe: React.FC = () => {
                     <div className="partner-row">
                         <div>
                             <picture>
-                                <img src={'./assets/images/TOMAZI.png'} alt="Sócio Fundador"/>
+                                <img src={'./assets/images/TOMAZI.png'} alt="Colaboradora"/>
                             </picture>
                             <div className="partner-text">
                                 <h6>Jamilli Amabilli Tomazi</h6>
@@ -76,15 +76,15 @@ const Equipe: React.FC = () => {
                         </div>
                         <div>
                             <picture>
-                                <img src={'./assets/images/PAIANO.png'} alt="Sócio Fundador"/>
+                                <img src={'./assets/images/PAIANO.png'} alt="Colaboradora"/>
                             </picture>
                             <h6>Manuela Paiano</h6>
                             
-                            <span>Graduada em Direito pela Universidade Avantis – UNIAVAN. Vice-presidente da Comissão de Acadêmicos de Direito da OAB – Subseção Vale do Rio Tijucas/SC. Experiência de atuação junto ao à Vara de Estadual Direito Bancário do Tribunal de Justiça de Santa Catarina e 3ª Promotoria de Justiça do Ministério Público de Santa Catarina. Atuação voltada para o direito do consumidor e direito civil, em especial os processos de execução e ações de responsabilidade civil.</span>
+                            <span>Graduada em Direito pela Universidade Avantis – UNIAVAN. Vice-presidente da Comissão de Acadêmicos de Direito da OAB – Subseção Vale do Rio Tijucas/SC. Experiência de atuação junto à Vara Estadual de Direito Bancário do Tribunal de Justiça de Santa Catarina e 3ª Promotoria de Justiça do Ministério Público de Santa Catarina. Atuação voltada para o direito do consumidor e direito civil, em especial os processos de execução e ações de responsabilidade civil.</span>
                         </div>
                         <div>
                             <picture>
-                                <img src={'./assets/images/COMPANHONI.png'} alt="Sócio Fundador"/>
+                                <img src={'./assets/images/COMPANHONI.png'} alt="Colaborador"/>
                             </picture>
                             <h6>Vinicius Becker Companhoni</h6>
 

@@ -28,7 +28,7 @@ export const BannerArea = styled.div`
   flex-direction: column;
 
   picture .logo {
-  width: 600px;
+  width: 500px;
 }
 
 	

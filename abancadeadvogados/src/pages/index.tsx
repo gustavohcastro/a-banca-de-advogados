@@ -161,36 +161,46 @@ const Home: React.FC = (props: any) => {
              
           </ServicesHeader>
           <ServicesCards>
-              <div>
-                  <p>Direito Empresarial</p>
-                  <span>Atuação voltada a prestar assessoria jurídica na área empresarial, societária, estruturação e planejamento de negócios e revisão contratual.</span>
-                  <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
-              </div>
-              <div>
-                  <p>Direito Civil</p>
-                  <span>O enfoque de atuação da esfera cível é voltado à ações de indenização por dano material e moral, responsabilidade civil, cobranças, execuções, obrigações de fazer e direito imobiliário.</span>
-                  <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
-              </div>
-              <div>
-                  <p>Direito do Consumidor</p>
-                  <span>Especialidade de atuação em ações de indenização por negativação indevida, ações revisionais por juros abusivos, reparação de danos ao consumidor, golpes sofridos de forma física ou virtual pelo consumidor.</span>
-                  <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
-              </div>
-              <div>
-                  <p>Direito Penal</p>
-                  <span>Atuação especializada em direito penal econômico, crimes financeiros, tráfico de entorpecentes, tribunal do Júri, acompanhamento da execução penal e revisão criminal.</span>
-                  <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
-              </div>
-              <div>
-                  <p>Direito Bancário</p>
-                  <span>Enfoque de atuação na revisão de financiamentos, defesas em busca e apreensão de bens, defesas em execuções de título extrajudicial e cobranças.</span>
-                  <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
-              </div>
-              <div>
-                  <p>Direito Contratual</p>
-                  <span>Especialidade de atuação na elaboração de contratos de prestação de serviços, contratos sociais empresariais, contratos imobiliários, contratos de parceria com influenciadores digitais.</span>
-                  <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
-              </div>
+            <div>
+                <p>Direito Empresarial</p>
+                <span>Atuação voltada a prestar assessoria jurídica na área empresarial, societária, estruturação e planejamento de negócios e revisão contratual.</span>
+                <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
+            </div>
+            <div>
+                <p>Direito Civil</p>
+                <span>O enfoque de atuação da esfera cível é voltado à ações de indenização por dano material e moral, responsabilidade civil, cobranças, execuções, obrigações de fazer e direito imobiliário.</span>
+                <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
+            </div>
+            <div>
+                <p>Direito do Consumidor</p>
+                <span>Especialidade de atuação em ações de indenização por negativação indevida, ações revisionais por juros abusivos, reparação de danos ao consumidor, golpes sofridos de forma física ou virtual pelo consumidor.</span>
+                <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
+            </div>
+             <div>
+                <p>Direito do Trabalho</p>
+                <span>Especialidade de atuação voltada para a parte judicial trabalhista, com o ingresso de ações trabalhistas ou defesa das mesmas, bem como o compliance trabalhista para prevenir ações e prejuízos financeiros decorrentes das relações entre empregado e empregador.</span>
+                <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
+            </div>
+            <div>
+                <p>Direito Penal</p>
+                <span>Atuação especializada em direito penal econômico, crimes financeiros, tráfico de entorpecentes, tribunal do Júri, acompanhamento da execução penal e revisão criminal.</span>
+                <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
+            </div>
+            <div>
+                <p>Direito Bancário</p>
+                <span>Enfoque de atuação na revisão de financiamentos, defesas em busca e apreensão de bens, defesas em execuções de título extrajudicial e cobranças.</span>
+                <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
+            </div>
+            <div>
+                <p>Direito Contratual</p>
+                <span>Especialidade de atuação na elaboração de contratos de prestação de serviços, contratos sociais empresariais, contratos imobiliários, contratos de parceria com influenciadores digitais.</span>
+                <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
+            </div>
+            <div>
+                <p>Direito Imobiliário</p>s
+                <span>Atuação voltada para operações imobiliárias, contratos de compra e venda, permuta, locação, intermediação de negociações, ações possessórias, usucapião e assessoria para regularização imobiliária.</span>
+                <Link href={"/areas-de-atuacao"}>Ver mais &gt;&gt;</Link>
+            </div>
           </ServicesCards>
           <OurTeam>
             <h4>Equipe</h4>

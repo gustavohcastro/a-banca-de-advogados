@@ -178,7 +178,7 @@ export const ServicesCards = styled.section`
   width: 90%;
   margin-left: 5%;
       
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   column-gap: 2vw;
   row-gap: 2vh;
   margin-bottom: 90px;
@@ -186,11 +186,27 @@ export const ServicesCards = styled.section`
   div {
     display: flex;
     flex-direction: column;
-    height: 260px;
+    height: 280px;
     padding: 8px 16px;
     justify-content: center;
+    
   
     background: #D9D9D9;
+  }
+
+  div section {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    justify-content: space-between;
+  }
+
+  div section picture img {
+    width: 50px;
+    height: 50px;
   }
   
   div p {
@@ -232,7 +248,7 @@ export const ServicesCards = styled.section`
     row-gap: 1vh;
 
     div {
-      height: 160px;
+      height: 240px;
     }
    
     div p {
