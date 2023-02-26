@@ -11,6 +11,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import Notiflix from "notiflix";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "../../../services/firebase";
+import prisma from "../../../lib/prismadb";
 
 async function getUsers(){
     return await prisma.user.findMany({
