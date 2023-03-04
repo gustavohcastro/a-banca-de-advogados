@@ -7,6 +7,7 @@ import DashboardMenu from "../../components/DashboardMenu";
 import { FiEye, FiFile, FiUser } from "react-icons/fi"
 import moment from "moment";
 import Link from "next/link";
+import prisma from "../../lib/prismadb";
 
 async function getPostsPerUsers() {
   try {
