@@ -10,18 +10,18 @@ import prisma from "../../../lib/prismadb"
 export interface PostFilterProps {
     slug?: string;
 }
-async function getPost(filter: PostFilterProps){
+async function getPost(filter: PostFilterProps) {
     try {
-        
-        const {slug} = filter;
-        
+
+        const { slug } = filter;
+
         const posts = await prisma.post.findMany({
             where: {
-                slug : {
-                    contains: slug,  
+                slug: {
+                    contains: slug,
                 },
             },
-            include : {
+            include: {
                 userId: {
                     select: {
                         name: true
@@ -37,7 +37,7 @@ async function getPost(filter: PostFilterProps){
         }
 
         const post = posts[0];
-        
+
         return {
             id: post.id,
             title: post.title,
@@ -50,15 +50,15 @@ async function getPost(filter: PostFilterProps){
             date: post.createdAt.toISOString()
         }
     }
-    catch(e){
-        return  null
-    }  
+    catch (e) {
+        return null
+    }
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const urlParams = (context.query)
-    
-    const post = await getPost({slug: urlParams.slug.toString()});
+
+    const post = await getPost({ slug: urlParams.slug.toString() });
 
     if (post === null) {
         return {
@@ -77,17 +77,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 }
 
 
-const Post: React.FC = ({post}:any) => {
-    
+const Post: React.FC = ({ post }: any) => {
+    console.log(post)
     return (
         <>
             <Head>
                 <title>{post?.title}</title>
-                <link rel="icon" type="image/x-icon" href={"./assets/images/favicon.png"}/>
+                <link rel="icon" type="image/x-icon" href={"./assets/images/favicon.png"} />
             </Head>
             <main>
-                <BackgroundImage style={{height: '70vh'}}>
-                    <HeaderComponent/>
+                <BackgroundImage url={post.image} style={{ height: '50vh' }}>
+                    <HeaderComponent />
                     <BannerArea>
                         <h2>{post?.title}</h2>
                     </BannerArea>
@@ -97,8 +97,8 @@ const Post: React.FC = ({post}:any) => {
                     <h3>Data: {moment(post?.date).format('DD/MM/YYYY')}</h3>
                     <p>{post?.body}</p>
                 </PostArea>
-                <FooterComponent/>
-                </main>
+                <FooterComponent />
+            </main>
         </>
     )
 }

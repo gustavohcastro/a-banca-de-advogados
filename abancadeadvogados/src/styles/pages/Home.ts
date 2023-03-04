@@ -549,6 +549,7 @@ export const Posts = styled.section`
 
     div img {
       width: 15vw;
+      height: 160px;
     }
 
     div h6 {

@@ -78,13 +78,10 @@ async function getPosts() {
 
 
 export default function Dashboard({ postsPerUsers, posts }) {
-  console.log(posts)
   const totalPostsCount = postsPerUsers.reduce(
     (accumulator, currentValue) => accumulator + currentValue.totalPosts,
     0
   );
-
-
   return (
     <>
       <Head>
