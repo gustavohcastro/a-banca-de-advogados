@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from "../../../lib/prismadb"
-// import bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Cors from 'cors'
 
@@ -43,13 +43,18 @@ export default async(req: NextApiRequest, res: NextApiResponse) => {
 
         const user = await prisma.user.findFirst({
             where: {
-                email: email,
-                password: password
+                email: email
             }
         })
 
+       await bcrypt.compare(password, user.password, function(err, res) {
+            if (!res) {
+              return res.status(500).json({message: 'Usuário ou senha não conferem'})
+            }
+        });
+
         if (!user) {
-        return res.status(500).json({message: 'Usuário ou senha não conferem'})
+          return res.status(500).json({message: 'Usuário ou senha não conferem'})
         }
 
         const payload = {

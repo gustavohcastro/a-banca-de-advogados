@@ -51,13 +51,52 @@ async function getAllPosts() {
     }
 }
 
+async function getAllServices() {
+    try {
+        const services = await prisma.service.findMany({
+            include: {
+                userId: {
+                    select: {
+                        name: true
+                    }
+                },
+            },
+            orderBy: {
+                createdAt: 'desc'
+            },
+            take: 4
+        });
+        // console.log(services);
+        const data = services.map(post => {
+            return {
+                id: post.id,
+                title: post.title,
+                body: post.body,
+                cropped: post.cropped,
+                slug: post.slug,
+                image: post.image,
+                user: post.userId,
+                date: post.createdAt.toISOString()
+            }
+        })
+
+        return data
+    }
+    catch (e) {
+        console.log(e)
+        return []
+    }
+}
+
 export const getServerSideProps: GetServerSideProps = async () => {
 
     try {
         const allPosts = await getAllPosts();
+        const allServices = await getAllServices();
         return {
             props: {
-                allPosts
+                allPosts,
+                allServices
             }
         }
     }
@@ -72,8 +111,8 @@ interface PostProps {
     body: string;
     cropped: string;
     image: string;
-    timeToRead: string;
-    user: string;
+    timeToRead?: string;
+    user: { name: string };
     date: string;
     slug: string;
 }
@@ -83,7 +122,7 @@ const Home: React.FC = (props: any) => {
     moment.locale('pt-br');
 
     const [posts, setPosts] = useState<PostProps[]>([]);
-    const [services, setServices] = useState([])
+    const [services, setServices] = useState<PostProps[]>([])
 
     const { handleSubmit, register, getValues } = useForm();
 
@@ -96,10 +135,15 @@ const Home: React.FC = (props: any) => {
         window.open(`https://wa.me/5547999413831?text=Olá, meu nome é ${fullName}%0A%0A${body}`)
     }
 
+    const handleService = (service: PostProps) => {
+        window.open(`https://wa.me/5547999413831?text=Olá, estava no seu site e gostaria de mais detalhes sobre ${service.title} de ${service.user.name}.`)
+    }
+
     useEffect(() => {
         const response: PostProps[] = props.allPosts ? props.allPosts : [];
         setPosts(response)
-        console.log(response)
+        const allServices: PostProps[] = props.allServices ? props.allServices : [];
+        setServices(allServices);
     }, [])
 
     return (
@@ -307,14 +351,15 @@ const Home: React.FC = (props: any) => {
                             </button>
                             <div className="product-area">
                                 <picture>
-                                    <img className="product-photo" src={'./assets/images/post_photo.png'} alt="Product" />
+                                    <img className="product-photo" src={service.image} alt="Product" />
                                 </picture>
                                 <div className="product-text">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
                                     <h6>Produtos e Serviços</h6>
-                                    <p>Autor: Lorem Ipsum</p>
-                                    <button onClick={() => Router.push('/publicacoes')}>
-                                        Ver detalhes
+                                    <h6>{service.title}</h6>
+                                    <p>{service.body}</p>
+                                    <p>Autor: Dr. {service.user.name}</p>
+                                    <button onClick={() => handleService(service)}>
+                                        Solicitar detalhes
                                     </button>
                                 </div>
                             </div>

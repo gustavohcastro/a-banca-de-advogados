@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Post } from './interface'
+import { Post } from '../posts/interface'
 import prisma from "../../../lib/prismadb";
 import Cors from 'cors'
 
@@ -30,23 +30,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const data = req.body;
         
         if (!data.postId) {
-            return res.status(500).json({ message: 'Publicação não informada'})
+            return res.status(500).json({ message: 'Serviço não informada'})
         }
 
-        const result = await prisma.post.delete({
+        const result = await prisma.service.delete({
           where: {
             id: data.postId
           }
         })
 
-        // const result = await prisma.post.update({
-        //     where: {
-        //         id: data.postId,
-        //     },
-        //     data: {
-        //         isActive: 0,
-        //     },
-        // })
 
         res.status(200).json(result)
 

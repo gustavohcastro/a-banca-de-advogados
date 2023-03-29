@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Post } from './interface'
 import prisma from "../../../lib/prismadb";
 import Cors from 'cors'
+import { hash } from 'bcryptjs';
 
 const cors = Cors({
   methods: ['POST', 'GET', 'HEAD'],
@@ -29,26 +29,27 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         await runMiddleware(req, res, cors);
         const data = req.body;
         
-        if (!data.postId) {
-            return res.status(500).json({ message: 'Publicação não informada'})
+        if (!data.userId) {
+            return res.status(500).json({ message: 'Usuário não informado'})
         }
 
-        const result = await prisma.post.delete({
-          where: {
-            id: data.postId
-          }
+        const user = await prisma.user.findUnique({
+            where: {
+                id: data.userId
+            },
         })
 
-        // const result = await prisma.post.update({
-        //     where: {
-        //         id: data.postId,
-        //     },
-        //     data: {
-        //         isActive: 0,
-        //     },
-        // })
+        if (!user) {
+            return res.status(500).json({ message: 'Usuário não encontrado'})
+        }
+        const hashedPassword = await hash(data.newpassword, 10);
 
-        res.status(200).json(result)
+        const result = await prisma.user.update({
+            where: { id: data.userId },
+            data: { password: hashedPassword },
+        });
+
+        res.status(200).json({post: result.id})
 
     }
     catch(e) {

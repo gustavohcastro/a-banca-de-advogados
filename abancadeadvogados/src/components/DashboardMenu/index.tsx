@@ -61,14 +61,14 @@ const DashboardMenu = () => {
               <span className="text-[15px] ml-4 text-gray-200">Publicações</span>
             </div>
 
-            <div className="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer  hover:bg-blue-600">
+            <div onClick={() => handleNavigation('/dashboard/servicos')} className="p-2.5 mt-2 flex items-center rounded-md px-4 duration-300 cursor-pointer  hover:bg-blue-600">
               <i className="bi bi-envelope-fill"></i>
               <span className="text-[15px] ml-4 text-gray-200">Serviços</span>
             </div>
 
             <hr className="my-4 text-gray-600"></hr>
 
-            <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer  hover:bg-blue-600">
+            <div onClick={() => handleNavigation('/dashboard/alterar-senha')} className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer  hover:bg-blue-600">
               <i className="bi bi-box-arrow-in-right"></i>
               <span className="text-[15px] ml-4 text-gray-200">Alterar Senha</span>
             </div>

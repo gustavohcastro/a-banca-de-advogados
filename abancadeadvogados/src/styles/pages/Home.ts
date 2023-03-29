@@ -700,6 +700,7 @@ export const ProductsHome = styled.section`
 	
 	.product-photo {
 		width: 30vw;
+    height: 500px;
     z-index: 10;
 	}
   
@@ -716,6 +717,9 @@ export const ProductsHome = styled.section`
       .product-text {
         width: 100%;
         margin-top: 16px;
+
+       
+
         p {
           font-family: Poppins, sans-serif;
           font-size: 0.6rem;
@@ -729,6 +733,7 @@ export const ProductsHome = styled.section`
           font-weight: 800;
           color: ${props => props.theme.colors.primary};
           margin-top: 8px;
+          margin-bottom: 8px;
         }	
         button {
           align-self: center;
