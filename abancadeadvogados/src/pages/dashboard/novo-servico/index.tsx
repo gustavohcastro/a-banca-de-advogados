@@ -30,7 +30,7 @@ const DashboardNewService = ({ users }) => {
 
     async function handleUpload(data) {
         try {
-            const storageRef = ref(storage, `/postbanca/${data.file[0].name}`)
+            const storageRef = ref(storage, `/postsbanca/${data.file[0].name}`)
             const uploadTask = uploadBytesResumable(storageRef, data.file[0]);
 
             await uploadTask.on(
