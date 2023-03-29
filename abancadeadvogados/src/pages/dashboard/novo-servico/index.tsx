@@ -52,7 +52,6 @@ const DashboardNewService = ({ users }) => {
                             slug: data.slug,
                             image: url,
                             body: data.body,
-                            isActive: 1,
                             authorId: data.author,
                             cropped: data.body.substring(0, 30)
                         }
