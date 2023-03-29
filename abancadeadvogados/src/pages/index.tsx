@@ -123,6 +123,7 @@ const Home: React.FC = (props: any) => {
 
     const [posts, setPosts] = useState<PostProps[]>([]);
     const [services, setServices] = useState<PostProps[]>([])
+    const [actualService, setActualService] = useState<number>(0)
 
     const { handleSubmit, register, getValues } = useForm();
 
@@ -139,10 +140,25 @@ const Home: React.FC = (props: any) => {
         window.open(`https://wa.me/5547999413831?text=Olá, estava no seu site e gostaria de mais detalhes sobre ${service.title} de ${service.user.name}.`)
     }
 
+    const handleServiceNavigation = (side: 'left' | 'right') => {
+
+        if (side === 'left' && actualService > 0) {
+            setActualService(actualService - 1);
+        }
+        else if (side === 'right' && actualService < services.length - 1) {
+            setActualService(actualService + 1);
+        }
+    }
+
+    useEffect(() => {
+        console.log(actualService)
+    }, [actualService])
+
     useEffect(() => {
         const response: PostProps[] = props.allPosts ? props.allPosts : [];
         setPosts(response)
         const allServices: PostProps[] = props.allServices ? props.allServices : [];
+        console.log(allServices)
         setServices(allServices);
     }, [])
 
@@ -343,32 +359,32 @@ const Home: React.FC = (props: any) => {
                         </div>
                     </Posts>
                 ) : null}
-                {services.length > 0 && services.map(service => (
+                {services.length > 0 ? (
                     <ProductsHome>
                         <div>
-                            <button>
+                            <button onClick={() => handleServiceNavigation('left')} >
                                 <FiChevronLeft style={{ width: 48, height: 48 }} color={theme.colors.dark} />
                             </button>
                             <div className="product-area">
                                 <picture>
-                                    <img className="product-photo" src={service.image} alt="Product" />
+                                    <img className="product-photo" src={services[actualService].image} alt="Product" />
                                 </picture>
                                 <div className="product-text">
                                     <h6>Produtos e Serviços</h6>
-                                    <h6>{service.title}</h6>
-                                    <p>{service.body}</p>
-                                    <p>Autor: Dr. {service.user.name}</p>
-                                    <button onClick={() => handleService(service)}>
+                                    <h6>{services[actualService].title}</h6>
+                                    <p>{services[actualService].body}</p>
+                                    <p>Autor: Dr. {services[actualService].user.name}</p>
+                                    <button onClick={() => handleService(services[actualService])}>
                                         Solicitar detalhes
                                     </button>
                                 </div>
                             </div>
-                            <button>
+                            <button onClick={() => handleServiceNavigation('right')}>
                                 <FiChevronRight style={{ width: 48, height: 48 }} color={theme.colors.dark} />
                             </button>
                         </div>
                     </ProductsHome>
-                ))}
+                ) : null}
                 <ContactArea>
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3555.6331428726303!2d-48.641913984960105!3d-26.978514502449656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94d8ca026da50edf%3A0x59a8fe191106b64e!2sR.%201301%2C%20471%20-%20Centro%2C%20Balne%C3%A1rio%20Cambori%C3%BA%20-%20SC%2C%2088330-795!5e0!3m2!1sen!2sbr!4v1667580921825!5m2!1sen!2sbr"
