@@ -95,10 +95,14 @@ const Post: React.FC = ({ post }: any) => {
                 <PostArea>
                     <h1>Autor: Dr. {post?.user.name}</h1>
                     <h3>Data: {moment(post?.date).format('DD/MM/YYYY')}</h3>
-                    <p>{post?.body}</p>
+                    {/* <p>{`${post?.body}`}</p> */}
+                    {/* <p>{`${post?.body}`}</p> */}
+                    <div dangerouslySetInnerHTML={{
+                        __html: post.body,
+                    }}></div>
                 </PostArea>
                 <FooterComponent />
-            </main>
+            </main >
         </>
     )
 }
