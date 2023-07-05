@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 enum FILTER_FORM_ENUM {
     SUBJECT = 'assunto',
     AUTHOR = 'autor',
-    
+
 }
 
 enum AUTHOR_OPTIONS {
@@ -34,7 +34,7 @@ interface FILTER_FORM_TYPE {
 async function getPosts() {
     try {
         const posts = await prisma.post.findMany({
-            include : {
+            include: {
                 userId: {
                     select: {
                         name: true
@@ -43,12 +43,12 @@ async function getPosts() {
             },
             orderBy: [
                 {
-                createdAt: 'desc',
+                    createdAt: 'desc',
                 },
             ],
             take: 3
         });
-        
+
         const data = posts.map(post => {
             return {
                 id: post.id,
@@ -73,13 +73,13 @@ async function getPosts() {
 async function getUsers() {
     try {
         return await prisma.user.findMany({
-            select : {
+            select: {
                 name: true,
                 id: true
             }
         })
     }
-    catch(e) {
+    catch (e) {
         return []
     }
 
@@ -89,14 +89,14 @@ export interface PostFilterProps {
     assunto?: string;
     autor?: string;
 }
-async function getAllPosts(filter: PostFilterProps){
+async function getAllPosts(filter: PostFilterProps) {
     try {
 
-        const {assunto, autor} = filter;
+        const { assunto, autor } = filter;
         const posts = await prisma.post.findMany({
             where: {
-                title : {
-                    contains: assunto,  
+                title: {
+                    contains: assunto,
                 },
                 userId: {
                     name: {
@@ -104,7 +104,7 @@ async function getAllPosts(filter: PostFilterProps){
                     }
                 }
             },
-            include : {
+            include: {
                 userId: {
                     select: {
                         name: true
@@ -114,12 +114,12 @@ async function getAllPosts(filter: PostFilterProps){
             },
             orderBy: [
                 {
-                createdAt: 'desc',
+                    createdAt: 'desc',
                 },
             ],
             take: 9
         });
-        
+
         const data = posts.map(post => {
             return {
                 id: post.id,
@@ -136,14 +136,14 @@ async function getAllPosts(filter: PostFilterProps){
 
         return data
     }
-    catch(e){
+    catch (e) {
         return []
-    }  
+    }
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const urlParams = (context.query)
-    
+
     const posts = await getPosts();
     const users = await getUsers();
     const allPosts = await getAllPosts(urlParams);
@@ -157,7 +157,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-const Publicacoes = ({posts, users, allPosts}) => {
+const Publicacoes = ({ posts, users, allPosts }) => {
 
 
     const router = useRouter();
@@ -165,14 +165,14 @@ const Publicacoes = ({posts, users, allPosts}) => {
     const initialValues = {
         [FILTER_FORM_ENUM.SUBJECT]: '',
         [FILTER_FORM_ENUM.AUTHOR]: '',
-        
+
     }
     const [formData, setFormData] = useState<FILTER_FORM_TYPE>(initialValues as FILTER_FORM_TYPE);
     // const modal = useRef<ModalHandles | null>(null);
 
     const onWrite = (e: any) => {
-        const {name, value} = e.target;
-        setFormData({...formData, [name]: value});
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     }
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -181,7 +181,7 @@ const Publicacoes = ({posts, users, allPosts}) => {
         let filtro: string[] | string = [];
         if (formData.autor) filtro.push(`autor=${formData.autor}`)
         if (formData.assunto) filtro.push(`assunto=${formData.assunto}`)
-        
+
         filtro = filtro.join('&');
         router.push(`/publicacoes?${filtro}`)
         // setFormData(initialValues);
@@ -192,9 +192,9 @@ const Publicacoes = ({posts, users, allPosts}) => {
         <>
             <Head>
                 <title>Publicações</title>
-                <link rel="icon" type="image/x-icon" href={"./assets/images/favicon.png"}/>
-                <meta name="description" content="A união de forças distintas, mas ao mesmo tempo complementares, é o que determina o sucesso de um projeto de longo prazo. Nasce, assim, A Banca de Advogados."/>
-                <meta property="og:locale" content="pt_BR"/>
+                <link rel="icon" type="image/x-icon" href={"./assets/images/favicon.png"} />
+                <meta name="description" content="A união de forças distintas, mas ao mesmo tempo complementares, é o que determina o sucesso de um projeto de longo prazo. Nasce, assim, A Banca de Advogados." />
+                <meta property="og:locale" content="pt_BR" />
                 <meta property="og:type" content="website"></meta>
                 <meta property="og:title" content="A Banca de advogados"></meta>
                 <meta property="og:description" content="A união de forças distintas, mas ao mesmo tempo complementares, é o que determina o sucesso de um projeto de longo prazo. Nasce, assim, A Banca de Advogados."></meta>
@@ -203,8 +203,8 @@ const Publicacoes = ({posts, users, allPosts}) => {
                 <meta property="article:modified_time" content="2023-02-03T16:49:47+00:00"></meta>
             </Head>
             <main>
-                <BackgroundImage style={{height: '50vh'}}>
-                    <HeaderComponent/>
+                <BackgroundImage style={{ height: '50vh' }}>
+                    <HeaderComponent />
                     <BannerArea>
                         <h2>Publicações</h2>
                         {/* <br/> */}
@@ -214,7 +214,7 @@ const Publicacoes = ({posts, users, allPosts}) => {
                 </BackgroundImage>
                 <LastPosts>
                     <h2>Últimas publicações</h2>
-                    <br/>
+                    <br />
                     <PostsResult>
                         <div className="cards">
                             {posts.map(post => (
@@ -222,11 +222,13 @@ const Publicacoes = ({posts, users, allPosts}) => {
                                     <img src={post.image} />
                                     <span>Dr. {post.user.name} · {moment(post.date).format('DD/MM/YYYY')}</span>
                                     <h3>{post.title}</h3>
-                                    <p>{post.cropped}</p>
+                                    <div dangerouslySetInnerHTML={{
+                                        __html: post.cropped,
+                                    }}></div>
                                     <div className="card-row">
                                         <span>{post.timeToRead} minutos de leitura.</span>
                                         <Link href={`/publicacoes/${post.slug}`}>
-                                            <h6>Publicação completa<FiArrowRight/></h6>
+                                            <h6>Publicação completa<FiArrowRight /></h6>
                                         </Link>
                                     </div>
                                 </div>
@@ -252,7 +254,7 @@ const Publicacoes = ({posts, users, allPosts}) => {
                                                 value={formData[FILTER_FORM_ENUM.SUBJECT]}
                                                 onChange={onWrite}
                                                 type="text"
-                                                // required
+                                            // required
                                             />
                                         </div>
                                         <div className='field-wrapper'>
@@ -265,8 +267,8 @@ const Publicacoes = ({posts, users, allPosts}) => {
                                                 onChange={onWrite}
                                             >
                                                 <option value={null}></option>
-                                                { users.map(user => (
-                                                     <option value={user.name}>Dr. {user.name}</option>
+                                                {users.map(user => (
+                                                    <option value={user.name}>Dr. {user.name}</option>
                                                 ))}
                                             </select>
                                         </div>
@@ -288,8 +290,8 @@ const Publicacoes = ({posts, users, allPosts}) => {
                 </SearchArea>
                 <PostsResult>
                     <div className="page-control">
-                        <FiArrowLeftCircle/>
-                        <FiArrowRightCircle/>
+                        <FiArrowLeftCircle />
+                        <FiArrowRightCircle />
                     </div>
                     <div className="cards">
                         {allPosts.map(post => (
@@ -297,21 +299,23 @@ const Publicacoes = ({posts, users, allPosts}) => {
                                 <img src={post.image} />
                                 <span>Dr. {post.user.name} · {moment(post.date).format('DD/MM/YYYY')}</span>
                                 <h3>{post.title}</h3>
-                                <p>{post.cropped}</p>
+                                <div dangerouslySetInnerHTML={{
+                                    __html: post.cropped,
+                                }}></div>
                                 <div className="card-row">
                                     <span>{post.timeToRead} minutos de leitura.</span>
                                     <Link href={`/publicacoes/${post.slug}`}>
-                                        <h6>Publicação completa<FiArrowRight/></h6>
+                                        <h6>Publicação completa<FiArrowRight /></h6>
                                     </Link>
                                 </div>
                             </div>
                         ))}
-                        
+
                     </div>
                 </PostsResult>
-                <FooterComponent/>
-                </main>
-            </>
+                <FooterComponent />
+            </main>
+        </>
     )
 }
 
