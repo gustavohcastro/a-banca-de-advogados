@@ -120,7 +120,7 @@ export default DashboardEditarPublicacao;
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const apiClient = getAPIClient(ctx);
   const urlParams: any = (ctx.query)
-  console.log(urlParams)
+
   const { ['abancadeadvogados.token']: token } = parseCookies(ctx)
 
   if (!token) {
@@ -146,7 +146,7 @@ async function getPost(id: string) {
     const post = await prisma.post.findUnique({
       where: { id: id }
     });
-    console.log(post)
+
     return {
       id: post.id,
       title: post.title,
@@ -156,7 +156,6 @@ async function getPost(id: string) {
     }
   }
   catch (e) {
-    console.log(e)
-    return []
+    return e
   }
 }
