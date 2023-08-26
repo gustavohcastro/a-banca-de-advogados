@@ -1,5 +1,5 @@
 import Head from "next/head"
-import React, { useContext, useEffect } from "react"// import dynamic from 'next/dynamic'
+import React, { useContext, useEffect, useState } from "react"// import dynamic from 'next/dynamic'
 import { GetServerSideProps } from "next";
 import { parseCookies } from "nookies";
 import { getAPIClient } from "../../../services/axios";
@@ -10,17 +10,45 @@ import { useSession, getSession } from "next-auth/react"
 import { AuthContext } from "../../../contexts/AuthContext";
 import Notiflix from "notiflix";
 import Router from 'next/router';
+import 'react-quill/dist/quill.snow.css';
+import dynamic from "next/dynamic";
+
+const QuillNoSSRWrapper = dynamic(import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+})
+
+const modules = {
+  toolbar: [
+    [{ header: '1' }, { header: '2' }, { header: '3' }, { font: [] }],
+    [{ size: [] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' },
+    ],
+    ['link', 'image', 'video'],
+    ['clean'],
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  },
+}
 
 
 const DashboardEditarPublicacao = (props: any) => {
 
   const { register, handleSubmit, reset, setValue } = useForm();
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
+  const [body, setBody] = useState<string | null>(null);
 
   const handleForm = async (data) => {
     try {
       data.id = props.post.id;
-
+      data.body = body;
       api.post('api/posts/edit-post', data)
         .then(response => {
 
@@ -45,10 +73,12 @@ const DashboardEditarPublicacao = (props: any) => {
 
     if (props.post) {
       const { post } = props;
+      console.log(post.body)
       setValue('title', post.title)
       setValue('slug', post.slug)
       setValue('timeToRead', post.timeToRead)
-      setValue('body', post.body)
+      // setValue('body', post.body)
+      setBody(post.body)
     }
 
   }, [props])
@@ -93,9 +123,11 @@ const DashboardEditarPublicacao = (props: any) => {
               <input {...register('file')} className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file" />
             </div>
 
-            <div className="mb-6 max-w-none">
-              <label htmlFor="body" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto</label>
-              <textarea {...register('body')} id="body" rows={20} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Conteúdo da publicação"></textarea>
+            <div className="mb-6 max-w-none bg-gray-50 flex-1">
+              {/* <label htmlFor="body" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto</label> */}
+              {/* <textarea {...register('body')} id="body" rows={20} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Conteúdo da publicação"></textarea> */}
+              <QuillNoSSRWrapper modules={modules} value={body} onChange={setBody} theme="snow" className="h-96 text-gray-900" />
+
             </div>
 
 

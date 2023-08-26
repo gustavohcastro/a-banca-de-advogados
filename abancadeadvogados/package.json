@@ -34,6 +34,7 @@
     "react-hook-form": "^7.40.0",
     "react-icons": "^4.6.0",
     "react-photo-view": "^1.2.3",
+    "react-quill": "^2.0.0",
     "remask": "^0.1.0-alpha.5",
     "styled-components": "^5.3.6",
     "swiper": "^8.4.4"

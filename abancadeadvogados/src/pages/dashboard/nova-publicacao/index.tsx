@@ -1,5 +1,5 @@
 import Head from "next/head"
-import React, { useContext } from "react"// import dynamic from 'next/dynamic'
+import React, { useContext, useEffect, useState } from "react"// import dynamic from 'next/dynamic'
 import { GetServerSideProps } from "next";
 import { parseCookies } from "nookies";
 import { getAPIClient } from "../../../services/axios";
@@ -13,6 +13,9 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "../../../services/firebase";
 import prisma from "../../../lib/prismadb";
 
+import 'react-quill/dist/quill.snow.css';
+import dynamic from "next/dynamic";
+
 async function getUsers() {
   return await prisma.user.findMany({
     select: {
@@ -22,16 +25,49 @@ async function getUsers() {
   });
 }
 
+const QuillNoSSRWrapper = dynamic(import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+})
+
+const modules = {
+  toolbar: [
+    [{ header: '1' }, { header: '2' }, { header: '3' }, { font: [] }],
+    [{ size: [] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' },
+    ],
+    ['link', 'image', 'video'],
+    ['clean'],
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  },
+}
 
 const DashboardNovaPublicacao = ({ users }) => {
   const { register, handleSubmit, reset } = useForm();
   const { user } = useContext(AuthContext);
+
   const listOfUsers: { name: string, id: string }[] = users;
+  const [body, setBody] = useState<string | null>(null);
 
   async function handleUpload(data) {
     try {
+
+      if (body === "") {
+        Notiflix.Notify.failure("Texto é obrigatório!");
+        throw new Error("Texto é obrigatório!");
+      }
+
       const storageRef = ref(storage, `/postsbanca/${data.file[0].name}`)
       const uploadTask = uploadBytesResumable(storageRef, data.file[0]);
+
 
       await uploadTask.on(
         "state_changed",
@@ -44,16 +80,16 @@ const DashboardNovaPublicacao = ({ users }) => {
         (err) => console.log(err),
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            console.log(user)
+            // console.log(user)
             const payload = {
               title: data.title,
               slug: data.slug,
               timeToRead: data.timeToRead,
               image: url,
-              body: data.body,
+              body: body,
               isActive: 1,
               authorId: data.author,
-              cropped: data.body.substring(0, 30)
+              cropped: data.cropped
             }
 
             api.post('api/posts/new-post', payload)
@@ -79,6 +115,10 @@ const DashboardNovaPublicacao = ({ users }) => {
     }
 
   }
+
+  useEffect(() => {
+    console.log(body)
+  }, [body])
 
 
   return (
@@ -112,7 +152,16 @@ const DashboardNovaPublicacao = ({ users }) => {
             </div>
 
             <div className="flex flex-row">
-              <div className="mb-6 flex-1  ml-2">
+
+              <div className="mb-6 flex-1">
+                <label htmlFor="cropped" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subtítulo</label>
+                <input {...register('cropped')} type="text" id="cropped" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ex: Contratos em 2022" required />
+              </div>
+
+            </div>
+
+            <div className="flex flex-row">
+              <div className="mb-6e flx-1  ml-2">
                 <label htmlFor="author" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Autor</label>
                 {/* <input {...register('slug')} type="text" id="slug" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="contratos-em-2022" required/> */}
                 <select {...register('author')} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -133,9 +182,11 @@ const DashboardNovaPublicacao = ({ users }) => {
               <input {...register('file')} className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file" />
             </div>
 
-            <div className="mb-6 max-w-none">
-              <label htmlFor="body" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto</label>
-              <textarea {...register('body')} id="body" rows={20} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Conteúdo da publicação"></textarea>
+            <div className="mb-6 max-w-none bg-gray-50 flex-1">
+              {/* <label htmlFor="body" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Texto</label> */}
+              {/* <textarea {...register('body')} id="body" rows={20} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Conteúdo da publicação"></textarea> */}
+              <QuillNoSSRWrapper modules={modules} onChange={setBody} theme="snow" className="h-96 text-gray-900" />
+
             </div>
 
 
