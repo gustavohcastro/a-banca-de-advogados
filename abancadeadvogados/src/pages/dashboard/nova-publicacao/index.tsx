@@ -60,9 +60,15 @@ const DashboardNovaPublicacao = ({ users }) => {
   async function handleUpload(data) {
     try {
 
+
       if (body === "") {
         Notiflix.Notify.failure("Texto é obrigatório!");
         throw new Error("Texto é obrigatório!");
+      }
+
+      if (data.file.length < 1) {
+        Notiflix.Notify.failure("Imagem é obrigatório!");
+        throw new Error("Imagem é obrigatório!");
       }
 
       const storageRef = ref(storage, `/postsbanca/${data.file[0].name}`)
