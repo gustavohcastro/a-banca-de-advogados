@@ -15,7 +15,7 @@ export const BackgroundImage = styled.div<BackgroundImageProps>`
 `
 
 export const BannerArea = styled.div`
-  padding: 36px;
+  padding: 36px 10%;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -80,10 +80,12 @@ export const BannerArea = styled.div`
 
   @media (max-width: 768px) {
     width: 100vw;
-	  
+	  padding: 12px;
+
 	  h2 {
-		  font-size: 4rem;
-            color: ${props => props.theme.colors.secondary};
+		  font-size: 2rem;
+      color: ${props => props.theme.colors.secondary};
+      text-align: center;
 	  }
 	  h3 {
 		  font-size: 2rem;
@@ -99,20 +101,24 @@ export const BannerArea = styled.div`
 
 export const PostArea = styled.section`
   width: 100vw;
-  padding: 36px;
+  padding: 36px 10%;
+  background-color: ${props => props.theme.colors.ocre};;
 
   h1 {
-     font-size: 1.6rem;
+    font-size: 1.6rem;
+    color: ${props => props.theme.colors.semiDark};
   }
 
   h3 {
      font-size: 0.8rem;
+     color: ${props => props.theme.colors.semiDark};
   }
 
   p {
     margin-top: 36px;
     text-align: justify;
     font-size: 1rem;
+    color: ${props => props.theme.colors.semiDark};
   }
 
    @media (max-width: 768px) {
