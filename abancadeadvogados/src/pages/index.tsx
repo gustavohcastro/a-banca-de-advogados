@@ -133,11 +133,11 @@ const Home: React.FC = (props: any) => {
 
     const handleWhatsApp = (data) => {
         const { fullName, body } = getValues();
-        window.open(`https://wa.me/5547999413831?text=Olá, meu nome é ${fullName}%0A%0A${body}`)
+        window.open(`https://wa.me/554733112483?text=Olá, meu nome é ${fullName}%0A%0A${body}`)
     }
 
     const handleService = (service: PostProps) => {
-        window.open(`https://wa.me/5547999413831?text=Olá, estava no seu site e gostaria de mais detalhes sobre ${service.title} de ${service.user.name}.`)
+        window.open(`https://wa.me/554733112483?text=Olá, estava no seu site e gostaria de mais detalhes sobre ${service.title} de ${service.user.name}.`)
     }
 
     const handleServiceNavigation = (side: 'left' | 'right') => {
