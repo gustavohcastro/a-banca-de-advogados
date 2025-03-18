@@ -791,9 +791,9 @@ export const ContactArea = styled.section`
 	}
 	
 	form button {
-    width: 10vw;
+    width: 20vw;
     height: 40px;
-		background: ${props => props.theme.colors.dark};
+		background: ${props => props.theme.colors.primary};
 		
 		outline: 0;
 		border: 0;
@@ -841,9 +841,9 @@ export const ContactArea = styled.section`
 	}
 
     form button {
-      width: 30vw;
+      width: 100%;
       height: 40px;
-      background: ${props => props.theme.colors.dark};
+      background: ${props => props.theme.colors.primary};
       
       outline: 0;
       border: 0;

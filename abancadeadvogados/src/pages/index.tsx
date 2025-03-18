@@ -131,10 +131,23 @@ const Home: React.FC = (props: any) => {
         console.log(data);
     }
 
-    const handleWhatsApp = (data) => {
-        const { fullName, body } = getValues();
-        window.open(`https://wa.me/554733112483?text=Olá, meu nome é ${fullName}%0A%0A${body}`)
-    }
+    // Função para abrir o WhatsApp com os dados do formulário
+    const handleWhatsApp = () => {
+        const { fullName, telephone, email, body } = getValues();
+
+        let message = `Olá, meu nome é ${fullName || 'Nome não informado'}.%0A`;
+        message += `Vim através do seu site e gostaria de mais informações.%0A%0A`;
+
+        message += `*Meus dados:*%0A`;
+        if (telephone) message += `Telefone: ${telephone}%0A`;
+        if (email) message += `E-mail: ${email}%0A`;
+
+        message += `%0A*Mensagem:*%0A${body || 'Nenhuma mensagem informada.'}`;
+
+        // Abre o WhatsApp com a mensagem formatada
+        window.open(`https://wa.me/554733112483?text=${message}`);
+    };
+
 
     const handleService = (service: PostProps) => {
         window.open(`https://wa.me/554733112483?text=Olá, estava no seu site e gostaria de mais detalhes sobre ${service.title} de ${service.user.name}.`)
@@ -150,9 +163,6 @@ const Home: React.FC = (props: any) => {
         }
     }
 
-    useEffect(() => {
-        console.log(actualService)
-    }, [actualService])
 
     useEffect(() => {
         const response: PostProps[] = props.allPosts ? props.allPosts : [];
@@ -402,14 +412,19 @@ const Home: React.FC = (props: any) => {
                             <label>Telefone/Whatsapp</label>
                             <br />
                             <input {...register('telephone')} id="telephone" name="telephone" />
+                            <label>E-mail</label>
+                            <br />
+                            <input {...register('email')} id="email" name="email" type="email" />
+                            <br />
+                            <br />
                             <br />
                             <br />
                             <label>Mensagem</label>
                             <br />
                             <textarea {...register('body')} id="body" name="body" />
                             <br />
-                            <button type='submit'>Enviar</button>
-                            <button type='button' onClick={handleWhatsApp}>Whatsapp</button>
+                            {/* <button type='submit'>Enviar</button> */}
+                            <button type='button' onClick={handleWhatsApp}>Fale conosco pelo WhatsApp</button>
                         </form>
                     </div>
                 </ContactArea>

@@ -139,9 +139,9 @@ export const ContactArea = styled.section`
 	}
 	
 	form button {
-    width: 10vw;
+    width: 20vw;
     height: 40px;
-		background: ${props => props.theme.colors.dark};
+		background: ${props => props.theme.colors.primary};
 		
 		outline: 0;
 		border: 0;
@@ -189,18 +189,20 @@ export const ContactArea = styled.section`
 	}
 
     form button {
-      width: 30vw;
+      width: 100%;
       height: 40px;
-      background: ${props => props.theme.colors.dark};
+      background: ${props => props.theme.colors.primary};
       
       outline: 0;
       border: 0;
       
       font-family: Poppins, sans-serif;
       font-size: 0.8rem;
+      text-align: center;
       font-weight: 400;
       color: ${props => props.theme.colors.secondary};
       margin-top: 24px;
+      margin-right: 0px;
     }
   }
 `
