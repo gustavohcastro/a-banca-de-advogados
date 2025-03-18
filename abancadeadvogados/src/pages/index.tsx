@@ -412,11 +412,11 @@ const Home: React.FC = (props: any) => {
                             <label>Telefone/Whatsapp</label>
                             <br />
                             <input {...register('telephone')} id="telephone" name="telephone" />
+                            <br />
+                            <br />
                             <label>E-mail</label>
                             <br />
                             <input {...register('email')} id="email" name="email" type="email" />
-                            <br />
-                            <br />
                             <br />
                             <br />
                             <label>Mensagem</label>
